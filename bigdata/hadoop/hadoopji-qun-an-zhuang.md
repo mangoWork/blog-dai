@@ -4,28 +4,16 @@
 
 > 以四台机器为例搭建Hadoop集群，各个机器的职责如下（包括了NameNode的HA以及ResourceManager的HA）：
 
-
 | 服务名 | master | slave1 | slave2 | slave3 |
-
 | --- | --- | --- | --- | --- |
-
 | NameNode | Y | Y | N | N |
-
 | DataNode | N | Y | Y | Y |
-
 | JuornalNode | Y | Y | Y | N |
-
 | Zookeeper | N | Y | Y | Y |
-
 | zkfc | Y | Y | N | N |
-
 | ResourceManager | Y | Y | N | N |
-
 | NodeManager | N | Y | Y | Y |
-
 | HistoryServer | N | Y | N | N |
-
-
 
 ### 2. 安装之前的准备
 
