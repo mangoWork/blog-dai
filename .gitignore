@@ -1,0 +1,9 @@
+.idea/
+*.iml
+*/pom.xml
+pom.xml
+node_modules/
+_book/*
+pom.xml
+*/node_moudles/
+*/_book/*

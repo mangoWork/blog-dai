@@ -1,0 +1,22 @@
+{
+    "title" : "mango学技术",
+    "author" : "mango",
+    "description" : "记录IT技术的知识点",
+    "language" : "zh-hans",
+    "links" : {
+        "sidebar" : {
+            "Home" : "http://mangowork.cn"
+        }
+    },
+    "plugins": ["splitter", "search-pro", "tbfed-pagefooter", "theme-default", "toggle-chapters", "back-to-top-button"],
+    "pluginsConfig": {
+        "tbfed-pagefooter": {
+            "copyright":"Copyright &copy dai.mangowork.cn 2018",
+            "modify_label": "文档修改时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "theme-default": {
+            "showLevel": true
+        }        
+    }
+}
