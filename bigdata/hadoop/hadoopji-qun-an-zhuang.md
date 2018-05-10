@@ -65,7 +65,7 @@
 
 * step7 验证是否成功
 
-  > 分别在hadoop1，hadoop2，hadoop3上执行zkServer.sh start ,用jps命令查看进程QuorumPeerMain是否启动
+  > 分别在slave1，slave2，slave3上执行zkServer.sh start ,用jps命令查看进程QuorumPeerMain是否启动
 
 #### 3.2 NameNode HA配置
 
@@ -312,7 +312,7 @@
 
     > 在master上执行hdfs  zkfc  -formatZK
 
-  * 对hadoop1节点进行格式化和启动
+  * 对master节点进行格式化和启动
 
     > hdfs  namenode  -format
 
@@ -324,7 +324,7 @@
 
     > hadoop-daemon.sh  start  namenode
 
-  * 在hadoop1和hadoop2上启动zkfc服务
+  * 在master和slave1上启动zkfc服务
 
     > hadoop-daemon.sh   start   zkfc
 
@@ -332,11 +332,11 @@
 
   * 启动datanode
 
-    > 在hadoop1上执行命令hadoop-daemons.sh   start   datanode
+    > 在master上执行命令hadoop-daemons.sh   start   datanode
 
   * 验证是否成功
 
-    > 打开浏览器，访问 hadoop1:50070 以及 hadoop2:50070，你将会看到两个namenode一个是active而另一个是standby。
+    > 打开浏览器，访问 master:50070 以及 slave1:50070，你将会看到两个namenode一个是active而另一个是standby。
 
 #### 3.3 ResourceManager HA配置
 
@@ -507,7 +507,7 @@
 
          <property>
              <name>yarn.resourcemanager.scheduler.address.rm1</name>
-             <value>hadoop1:23130</value>
+             <value>master:23130</value>
          </property>
 
          <property>
@@ -646,7 +646,7 @@
 
 * step6 启动
 
-    > 在master上启动: sbin/start-yarn.sh(此脚本将会启动hadoop1上的resourcemanager及所有的nodemanager)
+    > 在master上启动: sbin/start-yarn.sh(此脚本将会启动master上的resourcemanager及所有的nodemanager)
 
     > 在slave1上启动resourcemanager：yarn-daemon.sh start resourcemanager
 
@@ -655,4 +655,4 @@
 
 *  step7 验证是否成功
 
-  > 打开浏览器，访问hadoop1:23188或者hadoop2:23188，然后kill掉active的resourcemanager另一个将会变为active的，说明resourcemanager HA是成功的。
+  > 打开浏览器，访问master:23188或者hadoop2:23188，然后kill掉active的resourcemanager另一个将会变为active的，说明resourcemanager HA是成功的。
