@@ -9,7 +9,7 @@
 | NameNode | Y | Y | N | N |
 | DataNode | N | Y | Y | Y |
 | JuornalNode | Y | Y | Y | N |
-| Zookeeper | N | Y | Y | Y |
+| Zookeeper | N | Y | Y | N |
 | zkfc | Y | Y | N | N |
 | ResourceManager | Y | Y | N | N |
 | NodeManager | N | Y | Y | Y |
