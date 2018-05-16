@@ -61,5 +61,7 @@
   * 每一个分片的优先计算位置比如HDFS的Block所在的位置应该是优先计算的位置
 * 分区策略
   * 描述分区模式和数据存放的位置，键-值(key-value)的RDD根据Hash进行分区，类似于MapReduce的Partioner接口，根据key来决定分配的位置。
+  
+#### RDD依赖
 
 
