@@ -95,6 +95,7 @@
     * [Hadoop中的概念](bigdata/hadoop/Hadoop_de_gai_nian.md)
   * [Storm](./bigdata/storm/README.md)
   * [Spark](./bigdata/spark/README.md)
+    * [Spakr基础知识](bigdata/spark/spakrji-chu-zhi-shi.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
