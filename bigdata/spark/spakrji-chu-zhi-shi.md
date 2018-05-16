@@ -13,5 +13,7 @@
 #### Spark MLib和ML
     * MLib是Spark对常用机器学习算法的实现库。MLib支持4种最常见的机器学习问题：二元分类、回归、聚类和协同过滤以及一个底层的梯度下降优化基础算法。MLib也是基于RDD的。
     * Spark的ML库基于DataFrame提供API
+#### GraphX
+    * GraphX是用于图和并行计算的新API。从上层来看，GraphX通过引入弹性分布式属性图扩展了Spark RDD。
 
 ![spakr结构图](../img/spark_arch.png)
