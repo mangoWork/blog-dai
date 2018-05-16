@@ -24,4 +24,4 @@
 。
 ### 2. Spark特点
 * 快速
-    * Spark的执行速度是MapReduce的100倍，
+    * Spark有先进的DAG执行引擎，支持循环数据流和内存计算；Spark的执行速度是MapReduce的100倍，在磁盘上的运行速度是MapRedice的10倍。
