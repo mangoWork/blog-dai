@@ -25,3 +25,7 @@
 ### 2. Spark特点
 * 快速
     * Spark有先进的DAG执行引擎，支持循环数据流和内存计算；Spark的执行速度是MapReduce的100倍，在磁盘上的运行速度是MapRedice的10倍。
+* 易用
+    * Spark支持使用Java、Scala、Python等等
+* 通用
+    * Spark可以与SQL、Streaming以及复杂的分析良好结合。基于Spark，有一系列高级工具，包括Spark SQL、MLib(机器学习库)、GraphX和Spark Streaming，支持在一个应用中同时使用这些架构。
