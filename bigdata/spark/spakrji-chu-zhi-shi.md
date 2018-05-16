@@ -1,19 +1,51 @@
 ### Spark的重要扩展
-    > Spark的基础平台扩展了5个主要的Spark库，包括支持结构化数据的Spark SQL、处理实时数据的Spark Streaming、用于机器学习的MLib、用于图形计算的GraphX、用于统计分析的SparkR，各种程序库与Spark核心API高度整合在一起，并在不断改进。
+
+> Spark的基础平台扩展了5个主要的Spark库，包括支持结构化数据的Spark SQL、处理实时数据的Spark Streaming、用于机器学习的MLib、用于图形计算的GraphX、用于统计分析的SparkR，各种程序库与Spark核心API高度整合在一起，并在不断改进。如下所示：  
+>     ![spakr结构图](../img/spark_arch.png)
 
 #### Spark SQL和DataFrame
-    * Spark SQL是Spark的一个处理结构化数据的模块，提供一个DataFrame编写抽象。它可以看作是一个分布式SQL查询引擎，主要由Catalys优化、Spark SQL内核、Hive支持三部分组成。
-    * DataFrame是以指定列组织的分布式数据集合，在Spark SQL中，相当于关系数据库的一个表，或R/Python的一个数据框架。
-    * DataFrames支持多种数据源构建，如下图所示：
-    ![DataFrames支持多种数据源构建](../img/dataframes_data.png)
+
+* Spark SQL是Spark的一个处理结构化数据的模块，提供一个DataFrame编写抽象。它可以看作是一个分布式SQL查询引擎，主要由Catalys优化、Spark SQL内核、Hive支持三部分组成。
+* DataFrame是以指定列组织的分布式数据集合，在Spark SQL中，相当于关系数据库的一个表，或R/Python的一个数据框架。
+* DataFrames支持多种数据源构建，如下图所示：
+  ![DataFrames支持多种数据源构建](../img/dataframes_data.png)
 
 #### Spark Streaming
-    * Spark Streaming属于核心Spark 的扩展，支持，高吞吐量和容错的实时流数据处理，它可以接受来自Kafka、Flume、Twitter、ZeroMQ或TCP SOcket的数据源，使用复杂的算法和高级功能来进行处理，如Map、Reduce、Join、Window等，处理的结果数据能够存入文件系统、数据库。
+
+* Spark Streaming属于核心Spark 的扩展，支持，高吞吐量和容错的实时流数据处理，它可以接受来自Kafka、Flume、Twitter、ZeroMQ或TCP SOcket的数据源，使用复杂的算法和高级功能来进行处理，如Map、Reduce、Join、Window等，处理的结果数据能够存入文件系统、数据库。
 
 #### Spark MLib和ML
-    * MLib是Spark对常用机器学习算法的实现库。MLib支持4种最常见的机器学习问题：二元分类、回归、聚类和协同过滤以及一个底层的梯度下降优化基础算法。MLib也是基于RDD的。
-    * Spark的ML库基于DataFrame提供API
-#### GraphX
-    * GraphX是用于图和并行计算的新API。从上层来看，GraphX通过引入弹性分布式属性图扩展了Spark RDD。
 
-![spakr结构图](../img/spark_arch.png)
+* MLib是Spark对常用机器学习算法的实现库。MLib支持4种最常见的机器学习问题：二元分类、回归、聚类和协同过滤以及一个底层的梯度下降优化基础算法。MLib也是基于RDD的。
+* Spark的ML库基于DataFrame提供API
+  #### GraphX
+* GraphX是用于图和并行计算的新API。从上层来看，GraphX通过引入弹性分布式属性图扩展了Spark RDD。
+
+#### SparkR
+
+* SparkR是AMPLab发布的一个R开发包，为Spark提供了一个轻量的前端。SparkR提供了Spark中弹性分布式数据级\(RDD\)的API，用户可以在集群上通过R Shell交互运行job。
+
+### Spark的基础概念
+
+| 概念 | 说明 |
+| :---: | :--- |
+| Application | 建立在Spark上的用户应用程序，由一个Driver程序和集群上的Executor组成 |
+| Application jar | 一个包含用户Spark应用程序的jar包。在某些情况下，包含应用程序的依赖包\(不包含运行是的Spark和Hadoop库\) |
+| Driver program | 驱动程序，运行main函数并创建SparkContext的进程 |
+| Cluster Manager | 管理集群资源的外部服务\(独立模式、Mesos、YARN\) |
+| Deploy mode | 决定何处运行Driver进程的部署模式，分为Cluster和client两种模式 |
+| Worker node | 集群中应用程序节点 |
+| Executor | 应用程序在Worker节点上启动的进程，该进程执行任务并保持数据在内存或磁盘中 |
+| Task | 被发送到某个Executor的一个工作单元 |
+| Job | 作业，一个Job包含多个RDD及作用于相应RDD上的各种operation |
+| Stage | 阶段，每个Job都会被分解为多个相互依赖的任务集合 |
+| RDD | 弹性分布式数据集 |
+| operation | 作用于RDD的各种操作，分为Transformation和Action |
+| Partion | 数据分区，一个RDD中的数据可以被分为多个不同的分区 |
+| DAG | 有向无环图，反映RDD之间的依赖关系 |
+| Narrow dependency | 窄依赖 |
+| Wide dependency | 宽依赖，子RDD对父RDD中的所有数据分区都有依赖 |
+| Caching Management | 缓存管理，对RDD的中间结果进行缓存管理，以加快整体的处理速度 |
+
+
+
