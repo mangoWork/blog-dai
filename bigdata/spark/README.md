@@ -29,3 +29,6 @@
     * Spark支持使用Java、Scala、Python等等
 * 通用
     * Spark可以与SQL、Streaming以及复杂的分析良好结合。基于Spark，有一系列高级工具，包括Spark SQL、MLib(机器学习库)、GraphX和Spark Streaming，支持在一个应用中同时使用这些架构。
+* 有效集成Hadoop
+    * Spark可以制定Hadoop、YARN的版本编译出合适的发行版本
+    
