@@ -11,6 +11,7 @@
     * Spark Streaming属于核心Spark 的扩展，支持，高吞吐量和容错的实时流数据处理，它可以接受来自Kafka、Flume、Twitter、ZeroMQ或TCP SOcket的数据源，使用复杂的算法和高级功能来进行处理，如Map、Reduce、Join、Window等，处理的结果数据能够存入文件系统、数据库。
 
 #### Spark MLib和ML
-    * MLib是Spark对常用机器学习算法的实现库。MLib支持4种最常见的机器学习问题：二元分类、回归、聚类和协同过滤以及一个底层的梯度下降优化基础算法。
+    * MLib是Spark对常用机器学习算法的实现库。MLib支持4种最常见的机器学习问题：二元分类、回归、聚类和协同过滤以及一个底层的梯度下降优化基础算法。MLib也是基于RDD的。
+    * Spark的ML库基于DataFrame提供API
 
 ![spakr结构图](../img/spark_arch.png)
