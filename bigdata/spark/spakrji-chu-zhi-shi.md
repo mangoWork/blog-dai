@@ -94,6 +94,8 @@
     ![](../img/spark_transformation_action.png)
   
   3. 每一个Job计算完成，其内部的所有RDD都会被清除，如果在下一个Job中有用到其他Job中的RDD，会引发该RDD的再次计算（为了避免这种情况，可以使用Persist(默认是Cache)方法“持久化”一个RDD到内存中，Spark也支持持久化到磁盘中，或者复制RDD到各个节点）
+
+##### 控制操作
   
    
     
