@@ -98,6 +98,7 @@
     * [Spakr基础知识](bigdata/spark/spakrji-chu-zhi-shi.md)
     * [Spark编程](bigdata/spark/spark.md)
   * [大数据算法](bigdata/algorithm/README.md)
+    * [文本相似算法](bigdata/algorithm/wen-ben-xiang-si-suan-fa.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
