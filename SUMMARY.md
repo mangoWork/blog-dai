@@ -100,6 +100,7 @@
   * [大数据算法](bigdata/algorithm/README.md)
     * [文本相似算法](bigdata/algorithm/txt_algorithm/README.md)
       * [余玄相似度算法](bigdata/algorithm/txt_algorithm/yu-xuan-xiang-si-du-suan-fa.md)
+    * [几何图形算法](bigdata/algorithm/graphic_algorithm/README.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
