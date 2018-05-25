@@ -21,6 +21,7 @@
     * [多线程队列](./java/multi_thread/thread_queue.md)
   * [集合](./java/collection.md)
   * [Java虚拟机](java/jvm/README.md)
+    * [JVM调参](java/jvm/jvmdiao-can.md)
   * [其他](java/other/README.md)
     * [日志](java/other/ri-zhi.md)
 * [Java Web](./javaweb/README.md)
