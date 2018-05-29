@@ -20,8 +20,8 @@ $$
   
 * 向量a和向量b的夹角 的余弦计算如下：
   $$
-  \cos(\theta) = \frac{ a \times b }{ ||a|| \times ||sb||  }\\
-                = \frac{(x_1, y_1)\times(x_2 , y_2)}{\sqrt{x_1^2 + y_1^2}\times\sqrt{x_2^2 + y_2^2}}\\
+  \cos(\theta) = \frac{ a \times b }{ ||a|| \times ||b||  } \\
+                = \frac{(x_1, y_1)\times(x_2 , y_2)}{\sqrt{x_1^2 + y_1^2}\times\sqrt{x_2^2 + y_2^2}} \\
                 = \frac{x_1\times yx_2 + y_1\times y_2}{\sqrt{x_1^2 + y_1^2}\times\sqrt{x_2^2 + y_2^2}}
   $$
   
