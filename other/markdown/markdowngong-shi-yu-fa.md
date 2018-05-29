@@ -96,9 +96,9 @@
 
 | 名称 | 数学表达式 | markdown公式 |
 | :--- | :--- | :--- |
-| 不等于 | $$\ne$$ | $\not=$ |
-| 不小于 | $$ \not&lt; $$ | $\not&lt;$ |
-| 不包含 | $$ \not\supset $$ | $\not\supset$ |
+| 不等于 | $$\ne$$ | $\ne$ |
+| 不小于 | $$ \nless $$ | $\nless$ |
+| 不包含 | $$ \varsubsetneqq $$ | $\varsubsetneqq$ |
 
 ## 对数运算符 {#对数运算符}
 
