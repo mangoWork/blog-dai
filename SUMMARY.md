@@ -121,4 +121,6 @@
 * [其他](./other/README.md)
   * [开源协议](./other/agreement.md)
   * [Token介绍](./other/token.md)
+  * [markdown编辑语法说明](other/markdown/README.md)
+    * [markdown公式语法](other/markdown/markdowngong-shi-yu-fa.md)
 
