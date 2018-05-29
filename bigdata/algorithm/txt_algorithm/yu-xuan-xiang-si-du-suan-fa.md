@@ -20,14 +20,13 @@ $$
   
 * 向量a和向量b的夹角 的余弦计算如下：
   $$
-  \cos(\theta) = \frac{ a \times b }{ ||a|| \times ||b||  } \\
-                = \frac{(x_1, y_1)\times(x_2 , y_2)}{\sqrt{x_1^2 + y_1^2}\times\sqrt{x_2^2 + y_2^2}} \\
+  \cos(\theta) = \frac{ a \times b }{ ||a|| \times ||b||  }  = \frac{(x_1, y_1)\times(x_2 , y_2)}{\sqrt{x_1^2 + y_1^2}\times\sqrt{x_2^2 + y_2^2}} 
                 = \frac{x_1\times yx_2 + y_1\times y_2}{\sqrt{x_1^2 + y_1^2}\times\sqrt{x_2^2 + y_2^2}}
   $$
   
 * 扩展，如果向量a和b不是二维而是n维，上述余弦的计算法仍然正确。假定a和b是两个n维向量，a是  ，b是  ，则a与b的夹角 的余弦等于：
 $$
-  \cos(\theta) = \frac{ \sum_{i=1}^n{x_i \times y_i}}{\sqrt[2]{\sum_{i=1}^n{x_i^2}} \times \sqrt[2]{\sum_{i=1}^n{y_i^2}}}\\
+  \cos(\theta) = \frac{ \sum_{i=1}^n{x_i \times y_i}}{\sqrt[2]{\sum_{i=1}^n{x_i^2}} \times \sqrt[2]{\sum_{i=1}^n{y_i^2}}}
   = \frac{a \times b}{||a|| \times ||b||}
 $$
 
@@ -58,6 +57,6 @@ $$
   > 和句子B：(1，1，1，0，1，1，1，1，1)的向量余弦值来确定两个句子的相似度。
   
 $$
-  \cos(\theta) = \frac{1 \times 1 + 1 \times 1 +2 \times 1 + 1 \times 0 +1 \times 1 + 1 \times 1 +0 \times 1 + 0 \times 1 +0 \times 1 }{\sqrt{1^2+1^2+2^2+1^2+1^2+1^2+0^2+0^2+0^2} \times \sqrt{1^2+1^2+1^2+0^2+1^2+1^2+1^2+1^2+1^2}}\\
+  \cos(\theta) = \frac{1 \times 1 + 1 \times 1 +2 \times 1 + 1 \times 0 +1 \times 1 + 1 \times 1 +0 \times 1 + 0 \times 1 +0 \times 1 }{\sqrt{1^2+1^2+2^2+1^2+1^2+1^2+0^2+0^2+0^2} \times \sqrt{1^2+1^2+1^2+0^2+1^2+1^2+1^2+1^2+1^2}}
   = 0.81
 $$
