@@ -58,6 +58,6 @@ $$
   > 和句子B：(1，1，1，0，1，1，1，1，1)的向量余弦值来确定两个句子的相似度。
   
 $$
-  \cos(\theta) = \frac{1 \times 1 + 1 \times 1 +2 \times 1 + 1 \times 0 +1 \times 1 + 1 \times 1 +0 \times 1 + 0 \times 1 +0 \times 1 }{\sqrt{1^2+1^2+2^2+1^2+1^2+1^2+0^2+0^2+0^2}\times\sqrt{1^2+1^2+1^2+0^2+1^2+1^2+1^2+1^2+1^2}}\\
+  \cos(\theta) = \frac{1 \times 1 + 1 \times 1 +2 \times 1 + 1 \times 0 +1 \times 1 + 1 \times 1 +0 \times 1 + 0 \times 1 +0 \times 1 }{\sqrt{1^2+1^2+2^2+1^2+1^2+1^2+0^2+0^2+0^2} \times \sqrt{1^2+1^2+1^2+0^2+1^2+1^2+1^2+1^2+1^2}}\\
   = 0.81
 $$
