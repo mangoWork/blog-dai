@@ -8,7 +8,7 @@
             "Home" : "http://mangowork.cn"
         }
     },
-    "plugins": ["splitter", "search-pro", "tbfed-pagefooter", "theme-default", "toggle-chapters", "back-to-top-button"],
+    "plugins": ["splitter", "search-pro", "tbfed-pagefooter", "theme-default", "toggle-chapters", "back-to-top-button", "katex"],
     "pluginsConfig": {
         "tbfed-pagefooter": {
             "copyright":"Copyright &copy dai.mangowork.cn 2018",
