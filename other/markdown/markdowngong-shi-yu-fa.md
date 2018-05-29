@@ -8,7 +8,7 @@
 | 名称 | 数学表达式 | markdown公式 |
 | :--- | :--- | :--- |
 | 上标 | $$ a^b $$ | $a^b$ |
-| 下标 | $$ a_b $$| $a\_b$ |
+| 下标 | $$ a_b $$ | $a\_b$ |
 
 ## 分数 {#分数}
 
@@ -26,7 +26,7 @@
 
 | 名称 | 数学表达式 | markdown公式 |
 | :--- | :--- | :--- |
-| 求和号 | 	$$ \sum{3x^n} $$ | $\sum{3x^n}$ |
+| 求和号 | $$ \sum{3x^n} $$ | $\sum{3x^n}$ |
 | 带范围求和 | $$ \sum_{n=1}^N{3x^n} $$ | $\sum\_{n=1}^N{3x^n}$ |
 
 ## 累乘 {#累乘}
@@ -46,7 +46,7 @@
 
 | 名称 | 数学表达式 | markdown公式 |
 | :--- | :--- | :--- |
-| 开方号 | $$ \sqrt[5]{100} $$ | $\sqrt[5]{100}$ |
+| 开方号 | $$ \sqrt[5]{100} $$ | $\sqrt\[5\]{100}$ |
 
 ## 积分 {#积分}
 
@@ -56,7 +56,7 @@
 | :--- | :--- | :--- |
 | 积分 | $$ \int^5_1{f(x)}{\rm d}x $$ | $\int^5\_1{f\(x\)}{\rm d}x$ |
 | 二重积分 | $$ \iint^5_1{f(x)}{\rm d}x $$ | $\iint^5\_1{f\(x\)}{\rm d}x$ |
-| 三重积分 | $$ \iiint^5_1{f(x)}{\rm d}x $$  | $\iiint^5\_1{f\(x\)}{\rm d}x$ |
+| 三重积分 | $$ \iiint^5_1{f(x)}{\rm d}x $$ | $\iiint^5\_1{f\(x\)}{\rm d}x$ |
 
 ## 正无穷、负无穷 {#正无穷负无穷}
 
@@ -71,14 +71,14 @@
 
 | 名称 | 数学表达式 | markdown公式 |
 | :--- | :--- | :--- |
-| 左箭头 | $$ \lim\_{n\rightarrow+\infty} n$$ | $\lim\_{n\rightarrow+\infty} n$ |
+| 左箭头 | $$ \lim_{n\rightarrow+\infty} n$$ | $\lim\_{n\rightarrow+\infty} n$ |
 
 ## 关系运算符 {#关系运算符}
 
 | 名称 | 数学表达式 | markdown公式 |
 | :--- | :--- | :--- |
 | 大于等于 | $$ \geq$$ | $\geq$ |
-| 小于等于 |$$ \leq$$ | $\leq$ |
+| 小于等于 | $$ \leq$$ | $\leq$ |
 | 包含于 | $$ \subset$$ | $\subset$ |
 | 包含 | $$ \supset$$ | $\supset$ |
 | 属于 | $$ \in$$ | $\in$ |
@@ -97,7 +97,7 @@
 | 名称 | 数学表达式 | markdown公式 |
 | :--- | :--- | :--- |
 | 不等于 | $$ \not= $$ | $\not=$ |
-| 不小于 | $$ \not&lt; $$| $\not&lt;$ |
+| 不小于 | $$ \not&lt; $$ | $\not&lt;$ |
 | 不包含 | $$ \not\supset $$ | $\not\supset$ |
 
 ## 对数运算符 {#对数运算符}
@@ -127,7 +127,7 @@
 | 右箭头 | $$ \rightarrow $$ | $\rightarrow$ |
 | 长箭头 | $$ \longrightarrow $$ | $\longrightarrow$ |
 | 上箭头 | $$ \uparrow $$ | $\uparrow$ |
-| 下箭头 | $$ \downarrow $$| $\downarrow$ |
+| 下箭头 | $$ \downarrow $$ | $\downarrow$ |
 
 
 
