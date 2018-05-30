@@ -13,3 +13,6 @@
       2. Task，一个Stage包含一到多个Task，通过多个Task实现并行运行的功能。
       3. DAGScheduler，实现将Spark作业分解成一到多个Stage，每个Stage根据RDD的Partition个数决定Task的个数，然后生成相应的TaskSet放到TaskScheduler中。
 ### 基于Standalone模式的Spark架构{#基于Standalone模式的Spark架构}
+&nbsp;　　在Standalone模式下有两种运行方式：**以Driver运行在Worker上** 和**以Driver运行在客户端**，在图中给出了Standalone模式下两种运行方式的架构。默认是Client模式（即Driver运行在客户端）。集群启动Master与Worker进程，Master负责接收客户端提交的作业，管理Worker，并提供Web展示集群与作业信息。
+![](./img/sprk_stand_alone.png)
+
