@@ -15,7 +15,7 @@
 ### 基于Standalone模式的Spark架构{#基于Standalone模式的Spark架构}
 &nbsp;　　在Standalone模式下有两种运行方式：**以Driver运行在Worker上** 和**以Driver运行在客户端**，在图中给出了Standalone模式下两种运行方式的架构。默认是Client模式（即Driver运行在客户端）。集群启动Master与Worker进程，Master负责接收客户端提交的作业，管理Worker，并提供Web展示集群与作业信息。
 
-![](./img/sprk_stand_alone.png)
+![](./img/spark_standalone.png)
 
 &nbsp;　　在整个框架下，各种进程角色如下：
 * Master：主控节点，负责接受Client提交的作业，管理Worker，并命令Worker启动Driver和Executor。
@@ -24,6 +24,7 @@
 * Driver：一个Spark作业运行时包括一个Driver进程，也是作业的主进程，负责DAG图的构建、Stage的划分、Task的管理和调度以及生成ShedulerBackend用于Akka通信。主要组件包括DAGScheduler、TaskScheduler及SchedulerBackend。
 * Executor：执行作业的地方。每个Application一般会对应多个Worker，但是一个Application在每个Worker上只会产生一个Executor进程，每隔Executor接收Driver的命令LanuchTask，一个Executor可以执行一到多个Task。
 * 提交一个任务到集群，以Standalone为例，首先启动Master，然后启动Worker，启动Worker时要向Master注册。Standalone作业执行流程如下：
+
 ![](./img/standalone_liucheng.png)
 
 &nbsp;　　作业执行流程详细描述：
