@@ -15,7 +15,7 @@
 ### 基于Standalone模式的Spark架构{#基于Standalone模式的Spark架构}
 &nbsp;　　在Standalone模式下有两种运行方式：**以Driver运行在Worker上** 和**以Driver运行在客户端**，在图中给出了Standalone模式下两种运行方式的架构。默认是Client模式（即Driver运行在客户端）。集群启动Master与Worker进程，Master负责接收客户端提交的作业，管理Worker，并提供Web展示集群与作业信息。
 
-![](./img/spark_standalone.png)
+![](./img/spark_stand_alone.png)
 
 &nbsp;　　在整个框架下，各种进程角色如下：
 * Master：主控节点，负责接受Client提交的作业，管理Worker，并命令Worker启动Driver和Executor。
