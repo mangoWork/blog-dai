@@ -3,12 +3,52 @@
 &nbsp;　　jstat工具特别强大，有众多的可选项，详细查看堆内各个部分的使用量，以及加载类的数量。使用时，需加上查看进程的进程id，和所选参数。参考格式如下：
 > jstat -options 
 
-&nbsp;　　可以列出当前JVM版本支持的选项，常见的有
-l  class (类加载器)、compiler(JIT) 、gc(GC堆状态)、gccapacity(各区大小)、gccause (最近一次GC统计和原因)、 gcnew (新区统计)、gcnewcapacity (新区大小)、 gcold(老区统计)、gcoldcapacity (老区大小)、 gcpermcapacity(永久区大小)、 gcutil(GC统计汇总)、printcompilation (HotSpot编译统计)、printcompilation(HotSpot编译统计)
+&nbsp;　　可以列出当前JVM版本支持的选项，常见的有class(类加载器)、compiler(JIT) 、gc(GC堆状态)、gccapacity(各区大小)、gccause(最近一次GC统计和原因)、 gcnew(新区统计)、gcnewcapacity (新区大小)、 gcold(老区统计)、gcoldcapacity(老区大小)、 gcpermcapacity(永久区大小)、 gcutil(GC统计汇总)、printcompilation(HotSpot编译统计)、printcompilation(HotSpot编译统计)
 
+&nbsp;　　jstat –class<pid> : 显示加载class的数量，及所占空间等信息。
+
+|显示列名|具体描述|
+|:------|:------|
+|Loaded|装载的类的数量|
+|Bytes|装载类所占用的字节数|
+|Unloaded|卸载类的数量|
+|Bytes|卸载类的字节数|
+|Time|装载和卸载类所花费的时间|
+
+&nbsp;　　jstat -compiler <pid>显示VM实时编译的数量等信息。
+
+|显示列名|具体描述|
+|:------|:------|
+|Compiled|编译任务执行数量|
+|Failed|编译任务执行失败数量|
+|Invalid|编译任务执行失效数量|
+|Time|编译任务消耗时间|
+|FailedType|最后一个编译失败任务的类型|
+|FailedMethod|最后一个编译失败任务所在的类及方法|
+
+&nbsp;　　jstat -gc <pid>: 可以显示gc的信息，查看gc的次数，及时间。
+
+|显示列名|具体描述|
+|:------|:------|
+|S0C|年轻代中第一个survivor（幸存区）的容量 (字节)|
+|S1C   |年轻代中第二个survivor（幸存区）的容量 (字节)|
+|S0U   |年轻代中第一个survivor（幸存区）目前已使用空间 (字节)|
+|S1U |年轻代中第二个survivor（幸存区）目前已使用空间 (字节)|
+|EC   |年轻代中Eden（伊甸园）的容量 (字节)|
+|EU|年轻代中Eden（伊甸园）目前已使用空间 (字节)|
+|OC   |Old代的容量 (字节)|
+|OU |Old代目前已使用空间 (字节)|
+|PC|Perm(持久代)的容量 (字节)|
+|PU|Perm(持久代)目前已使用空间 (字节)|
+|YGC |从应用程序启动到采样时年轻代中gc次数|
+|YGCT|从应用程序启动到采样时年轻代中gc所用时间(s)|
+|FGC   |从应用程序启动到采样时old代(全gc)gc次数|
+|FGCT    |从应用程序启动到采样时old代(全gc)gc所用时间(s)|
+|GCT|从应用程序启动到采样时gc用的总时间(s)|
 
 ### jmap
 &nbsp;　　jmap不仅能生成dump文件，还可以查询finalize执行队列、Java堆和永久代的详细信息，如当前使用率、当前使用的是哪种收集器等。用法如下所示：
+
 ```shell
 Usage:
     jmap [option] <pid>
