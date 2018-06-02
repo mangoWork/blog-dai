@@ -31,4 +31,48 @@
 &nbsp;　　客户端提交作业给Master，Master让一个Worker启动Driver(即SchedulerBackend)。Worker创建一个DriverRunner线程，DriverRunner启动SchedulerBackend进程。另外，Master还会让其余Worker启动Executor（即ExecutorBackend）。Worker创建一个ExecutorRunner线程，ExecutorRunner会启动ExecutorBackend进程。ExecutorBackend启动后会向Driver的SchedulerBackend注册。SchedulerBackend进程包含DAGScheduler，它会根据用户程序生成执行计划，并调度执行。对于每个Stage的Task，都会被存放到TaskScheduler中。ExecutorBackend向SchedulerBackend汇报时把TaskScheduler中的Task调度到ExecutorBackend执行，把所有Stage都完成后作业结束。
 &nbsp;　　程序执行过程中，由Worker节点向Master发送心跳，随时汇报Worker的健康状况。
 
+### 基于YARN模式下的Spark架构
+&nbsp;　　同样，在YARN模式下又两种运行方式：Driver运行在集群NodeManager和Driver运行在客户端。下图给出了YARN模式下Spark的Driver运行在客户端的架构。
+![](./img/spark_on_yarn.png)
+
+&nbsp;　　其中，SparkAppMaster相当于Standalone模式下的SchedulerBackend，Executor相当于Standalone模式下的ExecutorBackend，SparkAppMaster包括DAGScheduler和YARNClusterScheduler。
+&nbsp;　　基于YARN的Spark作业首先由客户端生成作业信息，提交给ResourceManager，ResourceManager在某一NodeManager汇报时，把AppMasetr分配给NodeManager，NodeManager启动SparkAppMaster，SparkAppMaster让NodeManager启动相应的SparkExecutor，SparkExecutor向SparkAppMaster汇报并完成相应的任务。此外，SparkClient还可以通过AppMaster获取作业运行状态。如下图所示：
+
+![](./img/sprk_yarn_job.png)
+
+
+## 运行时环境{#运行时环境}
+&nbsp;　　Spark中每个应用程序都维护着自己的一套运行时环境，该运行时环境在应用程序开始时构建，在运行结束时销毁。相对所有的应用程序开始构建，在运行结束时销毁。相对于所有应用程序公用一套运行时环境的方式，极大的缓解了应用程序之间的相互影响。对应的原理图如下所示：
+![](./img/spark_application.png)
+&nbsp;　　一个Spark运行时环境由四个阶段构成:
+      > 阶段一：构建应用程序运行时环境
+      > 阶段二：将应用程序转换为DAG图
+      > 阶段三：按照依赖关系调度执行DAG图
+      > 阶段四：销毁应用程序运行时环境
+
+### 构建应用程序运行时环境
+&nbsp;　　为了运行应用程序，Spark首先根据应用程序资源需求构建一个运行时环境(通过与西苑管理器交互获取)。一般存在两种方式的环境构建：粗粒度和细粒度。
+* 粗粒度：应用程序被提交到集群之后，并在正式运行任务之前，将应用程序所需的资源一次性凑齐，之后使用这些资源运行任务，整个运行过程不在申请资源。
+* 细粒度：应用程序被提交到集群之后，动态向集群申请资源，只要等到资源满足一个任务的运行，便开始运行该任务，而不必等待所有的资源全部到位。目前，基于Hadoop的MapReduce就是基于细粒度运行时环境构建方式。
+
+&nbsp;　　每个Executor会启动一个BlockManager，该服务采用了分布式的Master/Slave架构，其中，主控节点上启动Master服务BlockManagerMaster，它掌握了所有的RDD缓存位置，而从节点则启动Slave服务BlockManager，供客户端存取RDD使用。
+
+### 应用程序转换为DAG
+&nbsp;　　在应用程序转换为DAG的过程中，Spark的调度程序会检查依赖关系的类型，根据RDD的依赖关系将应用程序划分为若干个Stage，每个Stage启动一定的数目的任务进行并行处理。
+&nbsp;　　DAGScheduler将Stage划分完成后，提交实际上是通过把Stage转换为TaskSet，然后通过TaskScheduler将计算任务最终提交到集群。
+
+### 调度执行DAG图
+&nbsp;　　在该阶段，DAGScheduler将按照依赖关系调度执行每个Stage：优先选择哪些不依赖任何阶段的Stage，待这些阶段执行完成之后，在调度那些需要依赖的阶段已经运行完成的Stage。
+
+
+
+
+
+
+
+
+
+
+
+
 
