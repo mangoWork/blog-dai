@@ -9,12 +9,12 @@
 ### foreach
 > 对RDD的每个元素都使用f函数操作。不返回RDD和Array，而是返回Unit。
 
-![](./img/)
+![](./img/spark_api_foreach.png)
 
 ### flatMap
 > 将原来RDD中的每个元素通过函数f转换为新的元素，并将生成的RDD的每个集合中的元素合并为一个集合。内部创建为FlatMappedRDD(this, sc.clean(f))。
 
-![](./img/)
+![](./img/spark_api_flatmap.png)
 
 ```scala
 import org.apache.spark.{SparkConf, SparkContext}
@@ -44,7 +44,7 @@ result.foreach(println)
 ### map
 > 将原来RDD的每个数据项通过map中自定义函数f映射转变为一个新的元素。源码中的map算子相当于初始化一个RDD，新RDD叫做MappedRDD(this, sc.clean(f))
 
-![](./img/)
+![](./img/spark_api_map.png)
 
 ```scala
 import org.apache.spark.{SparkConf, SparkContext}
@@ -73,7 +73,7 @@ List(6)
 ### reduceByKey
 > 将两个值合并为一个值
 
-![](./img/sprk_api_reducebyke.png)
+![](./img/spark_api_reducebykey.png)
 
 ```scala
 import org.apache.spark.{SparkConf, SparkContext}
