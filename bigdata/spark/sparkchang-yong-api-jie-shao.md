@@ -6,8 +6,40 @@
 
 ![](./img/spark_scala_collect.png)
 
+### foreach
+> 对RDD的每个元素都使用f函数操作。不返回RDD和Array，而是返回Unit。
 
+![](./img/)
 
+### flatMao
+> 将原来RDD中的每个元素通过函数f转换为新的元素，并将生成的RDD的每个集合中的元素合并为一个集合。内部创建为FlatMappedRDD(this, sc.clean(f))。
+
+![](./img/)
+
+```scala
+import org.apache.spark.{SparkConf, SparkContext}
+
+object WordCount
+{
+def main(args: Array[String])
+{
+//SparkContext 的初始化需要一个 SparkConf 对象， SparkConf 包含了Spark集群配置的各种参数（比如主节点的URL）
+val sc = new SparkContext("local", "testRDD") //Spark 程序的编写都是从 SparkContext 开始的。
+var arr = sc.parallelize(Array(1, 2, 3, 4, 5)) //创建数据集
+var result = arr.flatMap(x => List(x+1)).collect() //将整个数组转化为列表，列表中的内容为x+1
+result.foreach(println)
+}
+}
+```
+
+运行结果为：
+```
+2
+3
+4
+5
+6
+```
 
 ### reduceByKey
 > 将两个值合并为一个值
