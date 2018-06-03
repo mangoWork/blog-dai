@@ -72,6 +72,8 @@ spark应用(Application)执行过程中各个组件的概念：
 |DAGScheduler|根据job构建基于stage的DAG，并提交stage给TaskScheduler|
 |TaskScheduler|将Taskset提交给Worker Node集群运行并返回结果|
 
+Spark基本概念之间的依赖关系：
+![](./img/spark_concept.png)
 
 ### RDD介绍
 #### RDD特征
