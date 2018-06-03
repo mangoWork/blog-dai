@@ -11,6 +11,28 @@
 
 ### reduceByKey
 
+```scala
+import org.apache.spark.{SparkConf, SparkContext}
+
+object WordCount
+{
+    def main(args: Array[String])
+    {
+          //SparkContext 的初始化需要一个 SparkConf 对象， SparkConf 包含了Spark集群配置的各种参数（比如主节点的URL）
+          val sc = new SparkContext("local", "testRDD")   //Spark 程序的编写都是从 SparkContext 开始的。
+          var arr = sc.parallelize(Array(1, 1, 2, 2, 3))  //创建数据集
+          var result = arr.map((_, 1)).reduceByKey(_+_).collect()  //将元素转化为列表，列表中的内容为x+1
+          result.foreach(println)
+    }
+}
+```
+
+运行结果如下所示：
+```
+(1,2)
+(3,1)
+(2,2)
+```
 
 ```scala
 import org.apache.spark.{SparkConf, SparkContext}
