@@ -14,4 +14,6 @@
     $$
     H(X) = \sum_{i=1}^n{p(x_i)I(x_i)} = - \sum_{i=1}^n{p(x_i)\log_b{p(x_i)}}
     $$
-    
+&nbsp;　　下图给出了二分类问题熵函数：
+
+![](./img/Binary_entropy_plot.png)
