@@ -110,7 +110,7 @@
       * [射线法](bigdata/algorithm/graphic_algorithm/she-xian-fa.md)
   * [词语解释](bigdata/ci-yu-jie-shi.md)
 * [机器学习](machine/README.md)
-  * [机器学习-周志华](bigdata/machine/.md)
+  * [机器学习-周志华](bigdata/machine/machine-zhou/README.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
