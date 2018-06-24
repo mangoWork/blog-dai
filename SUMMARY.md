@@ -109,7 +109,7 @@
     * [几何图形算法](bigdata/algorithm/graphic_algorithm/README.md)
       * [射线法](bigdata/algorithm/graphic_algorithm/she-xian-fa.md)
   * [词语解释](bigdata/ci-yu-jie-shi.md)
-  * [机器学习](bigdata/hadoop/.md)
+  * [机器学习](bigdata/machine/README.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
