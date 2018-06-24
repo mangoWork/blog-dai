@@ -113,6 +113,7 @@
   * [机器学习-周志华](machine/machine-zhou/README.md)
     * [第一章  绪论](machine/machine-zhou/chapter1/README.md)
       * [课后习题](machine/machine-zhou/chapter1/ke-hou-xi-ti.md)
+  * [数学符号大全](machine/shuxuefuhao.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
