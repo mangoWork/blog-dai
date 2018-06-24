@@ -82,7 +82,9 @@
 
 ### 双条件
 >  给定两个命题p和q,其复合命题p$$ \leftrightarrow  $$q称作双条件命题,读作“p当且仅当q”,当p和q的真值相同时, p$$ \leftrightarrow  $$q的真值为t,否则p$$ \leftrightarrow  $$q的真值为f.
+
 * 联结词“$$ \leftrightarrow  $$”的定义可如表1-2.5所示.
+
 |p|q|p$$ \leftrightarrow  $$q|
 |-|-|-|
 |t|t|t|
