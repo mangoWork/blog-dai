@@ -111,6 +111,7 @@
   * [词语解释](bigdata/ci-yu-jie-shi.md)
 * [机器学习](machine/README.md)
   * [机器学习-周志华](machine/machine-zhou/README.md)
+    * [第一章  绪论](machine/machine-zhou/chapter1/README.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
