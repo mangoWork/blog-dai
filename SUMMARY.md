@@ -115,7 +115,7 @@
       * [课后习题](machine/machine-zhou/chapter1/ke-hou-xi-ti.md)
   * [数学知识](machine/math/README.md)
     * [数学知识之离散数学](machine/math/li-san-math.md)
-  * [数学符号大全](machine/shuxuefuhao.md)
+    * [数学符号大全](machine/shuxuefuhao.md)
 * [搜索](./search/README.md)
   * [lucene](./search/lucene/README.md)
   * [elasticsearch](./search/elasticsearch/README.md)
