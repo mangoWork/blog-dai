@@ -25,5 +25,34 @@
 #### Hadoop
 &nbsp;　　使用HDFS进行存储，使用MapReduce进行计算。
 #### 驱动器：Driver
+&nbsp;　　**解析器：**将SQL字符串转换为抽象的语法树AST，这一步一般都用第三方工具库完成，比如antlr；对AST进行语法分析，比如表是否存在、字段 是否存在、SQL语义是否有误(比如select中被判定为聚合的字段在group by中是否出现)；
+&nbsp;　　**编译器：**将AST编译生成逻辑执行计划；
+&nbsp;　　**优化器：**对逻辑执行计划进行优化；
+&nbsp;　　**执行器：**把逻辑执行计划转换为可以运行的物理计划。对于Hive来说就是MR/TEZ/Spark;
+
+### Hive优点与使用场景
+#### 优点
+* 操作接口采用类SQL语法，提供快速开发能力(简单、容易上手)；
+* 避免了去写MapReduce，减少开发人员的学习成本；
+* 统一的元数据管理，可与impala/Spark共享元数据；
+* 易扩展(HDFS+MapReduce:可扩展集群规模；支持自定义函数)
+
+#### 使用场景
+* 数据的离线处理；比如：日志分析，海量结构化数据离线分析...
+* Hive的执行延迟比较高，因此Hive常用语数据分析的，对实时性要求不高的场合；
+* Hive优势在于处理大数据，对于处理小数据没有优势，因此Hive的执行延迟比较高。
+
+### Hive安装
+> 在安装的时候需要对hdfs中的hive仓库的目录进行权限的赋值：
+
+
+```shell
+ $ $HADOOP_HOME/bin/hadoop fs -mkdir       /tmp
+  $ $HADOOP_HOME/bin/hadoop fs -mkdir       /user/hive/warehouse
+  $ $HADOOP_HOME/bin/hadoop fs -chmod g+w   /tmp
+  $ $HADOOP_HOME/bin/hadoop fs -chmod g+w   /user/hive/warehouse
+```
+
+
 
 
