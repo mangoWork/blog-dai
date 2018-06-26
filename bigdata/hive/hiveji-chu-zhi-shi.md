@@ -88,7 +88,7 @@ hive.root.logger=INFO,DRFA
 * 编辑文件``$HIVE_HOME/conf/hive-site.xml``
 
 ```xml
-<property>
+		<property>
 			<name>hive.cli.print.header</name>
 			<value>true</value>
 			<description>Whether to print the names of the columns in query output.</description>
