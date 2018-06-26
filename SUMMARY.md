@@ -109,6 +109,7 @@
     * [几何图形算法](bigdata/algorithm/graphic_algorithm/README.md)
       * [射线法](bigdata/algorithm/graphic_algorithm/she-xian-fa.md)
   * [词语解释](bigdata/ci-yu-jie-shi.md)
+  * [Hive](bigdata/hive/README.md)
 * [机器学习](machine/README.md)
   * [机器学习-周志华](machine/machine-zhou/README.md)
     * [第一章  绪论](machine/machine-zhou/chapter1/README.md)
