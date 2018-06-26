@@ -68,6 +68,22 @@
   $ $HADOOP_HOME/bin/hadoop fs -chmod g+w   /user/hive/warehouse
 ```
 
+#### Hive运行日志的配置
+
+* 对应的日志文件路径的配置($HIVE_HOME/conf/hive-log4j.properties
+)
+
+```properties
+hive.log.dir=/opt/modules/hive-0.13.1/logs
+hive.log.file=hive.log
+```
+
+* 制定Hiv运行时现实log日志级别
+
+
+
+
+
 
 
 
