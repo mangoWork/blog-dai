@@ -107,8 +107,59 @@ hive.root.logger=INFO,DRFA
 $ bin/hive --hiveconf <property=value>
 ```
 
+####  查看当前所有的配置信息
+```shell
+	hive > set ;
+
+	hive (db_hive)> set system:user.name ;
+		system:user.name=beifeng
+	hive (db_hive)> set system:user.name=beifeng ;
+
+	此种方式，设置属性的值，仅仅在当前会话session生效
+```	
+
+#### Hive命令帮助
+
+```shell
+[beifeng@hadoop-senior hive-0.13.1]$ bin/hive -help
+usage: hive
+ -d,--define <key=value>          Variable subsitution to apply to hive
+                                  commands. e.g. -d A=B or --define A=B
+    --database <databasename>     Specify the database to use
+ -e <quoted-query-string>         SQL from command line
+ -f <filename>                    SQL from files
+ -H,--help                        Print help information
+ -h <hostname>                    connecting to Hive Server on remote host
+    --hiveconf <property=value>   Use value for given property
+    --hivevar <key=value>         Variable subsitution to apply to hive
+                                  commands. e.g. --hivevar A=B
+ -i <filename>                    Initialization SQL file
+ -p <port>                        connecting to Hive Server on port number
+ -S,--silent                      Silent mode in interactive shell
+ -v,--verbose                     Verbose mode (echo executed SQL to the
+                                 console)
+
+* bin/hive -e <quoted-query-string>
+eg:
+	bin/hive -e "select * from db_hive.student ;"
+
+* bin/hive -f <filename>
+eg:
+	$ touch hivef.sql
+		select * from db_hive.student ;
+	$ bin/hive -f /opt/datas/hivef.sql 
+	$ bin/hive -f /opt/datas/hivef.sql > /opt/datas/hivef-res.txt
+```
 
 
+* bin/hive -i <filename>
+	与用户udf相互使用
+
+在hive cli命令窗口中如何查看hdfs文件系统
+	hive (default)> dfs -ls / ;  
+
+在hive cli命令窗口中如何查看本地文件系统
+	hive (default)> !ls /opt/datas ；
 
 
 
