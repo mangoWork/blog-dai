@@ -101,7 +101,11 @@ hive.root.logger=INFO,DRFA
 		</property>
 ```
 
+#### 在启动的时候配置属性信息
 
+```shell
+$ bin/hive --hiveconf <property=value>
+```
 
 
 
