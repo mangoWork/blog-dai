@@ -43,7 +43,22 @@
 * Hive优势在于处理大数据，对于处理小数据没有优势，因此Hive的执行延迟比较高。
 
 ### Hive安装
-> 在安装的时候需要对hdfs中的hive仓库的目录进行权限的赋值：
+
+#### 数据仓库位置的配置
+
+```xml
+	<!-- default
+		/user/hive/warehouse
+	注意事项
+		* 在仓库目录下，没有对默认的数据库default创建文件夹
+		* 如果某张表属于default数据库，直接在数据仓库目录下创建一个文件夹 -->
+	<property>
+		<name>hive.metastore.warehouse.dir</name>
+		<value>/user/hive/warehouse</value>
+	</property>
+```
+
+* 在安装的时候需要对hdfs中的hive仓库的目录进行权限的赋值：
 
 
 ```shell
@@ -52,6 +67,8 @@
   $ $HADOOP_HOME/bin/hadoop fs -chmod g+w   /tmp
   $ $HADOOP_HOME/bin/hadoop fs -chmod g+w   /user/hive/warehouse
 ```
+
+
 
 
 
