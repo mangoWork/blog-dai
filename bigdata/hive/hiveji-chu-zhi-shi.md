@@ -151,7 +151,6 @@ eg:
 	$ bin/hive -f /opt/datas/hivef.sql > /opt/datas/hivef-res.txt
 ```
 
-
 * bin/hive -i <filename> （与用户udf相互使用）
 
 * 在hive cli命令窗口中如何查看hdfs文件系统（hive (default)> dfs -ls / ） 
