@@ -152,14 +152,11 @@ eg:
 ```
 
 
-* bin/hive -i <filename>
-	与用户udf相互使用
+* bin/hive -i <filename> （与用户udf相互使用）
 
-在hive cli命令窗口中如何查看hdfs文件系统
-	hive (default)> dfs -ls / ;  
+* 在hive cli命令窗口中如何查看hdfs文件系统（hive (default)> dfs -ls / ） 
 
-在hive cli命令窗口中如何查看本地文件系统
-	hive (default)> !ls /opt/datas ；
+* 在hive cli命令窗口中如何查看本地文件系统(hive (default)> !ls /opt/datas)
 
 
 
