@@ -78,7 +78,29 @@ hive.log.dir=/opt/modules/hive-0.13.1/logs
 hive.log.file=hive.log
 ```
 
-* 制定Hiv运行时现实log日志级别
+* 制定Hiv运行时现实log日志级别($HIVE_HOME/conf/hive-log4j.properties)
+
+```properties
+hive.root.logger=INFO,DRFA
+```
+
+#### 在cli命令行上显示当前数据库，以及查询表的行头信息
+* 编辑文件``$HIVE_HOME/conf/hive-site.xml``
+
+```xml
+<property>
+			<name>hive.cli.print.header</name>
+			<value>true</value>
+			<description>Whether to print the names of the columns in query output.</description>
+		</property>
+
+		<property>
+			<name>hive.cli.print.current.db</name>
+			<value>true</value>
+			<description>Whether to include the current database in the Hive prompt.</description>
+		</property>
+```
+
 
 
 
