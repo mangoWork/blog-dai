@@ -61,6 +61,12 @@
     StrictHostKeyChecking no
     UserKnownHostsFile=/dev/null    # 防止远程主机公钥改变导致 SSH 连接失败
   ```
+  
+  
+### 目录用户权限配置
+
+* 修改目录的拥有者
+> chown -R user:group file_path
 
   ​
 
