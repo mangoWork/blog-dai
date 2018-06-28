@@ -130,4 +130,102 @@
 | 下箭头 | $$ \downarrow $$ | $\downarrow$ |
 
 
+## 总结
+
+|符号	|代码|	描述|
+|-|-|-|
+|∑|	$\sum$|	求和公式|
+|∑ni=0|	$\sum_{i=0}^n$	|求和上下标|
+|y={xα | $y =\begin{cases} x\\ \alpha	\end{cases}$|	大括号|
+|×	|$\times$|	乘号|
+|±|	$\pm$	|正负号|
+|÷|	$\div$	|除号|
+|∣|	$\mid$	|竖线|
+|⋅|	$\cdot$	|点|
+|∘|	$\circ$|	圈|
+|∗|	$\ast $|	星号|
+|⨂|	$\bigotimes$	|克罗内克积|
+|⨁|	$\bigoplus$	|异或|
+|≤|	$\leq$	|小于等于|
+|≥|	$\geq$	|大于等于|
+|≠|	$\neq$|	不等于|
+|≈|	$\approx$	|约等于|
+|∏	|$\prod$|	N元乘积|
+|∐	|$\coprod$	|N元余积|
+|⋯	|$\cdots$	|省略号|
+|∫	|$\int$	|积分|
+|∬	|$\iint$|	双重积分|
+|∮|	$\oint$|	曲线积分
+|∞	|$\infty$	|无穷|
+|∇	|$\nabla$	|梯度
+|∵	|$\because$	|因为
+|∴	|$\therefore$|	所以|
+|∀	|$\forall$|	任意|
+|∃	|$\exists$|	存在|
+|≠	|$\not=$	|不等于|
+|≯	|$\not>$|	不大于|
+|≤|	$\leq$|	小于等于|
+|≥|	$\geq$|	大于等于|
+|⊄   |	$\not\subset$|	不属于|
+|∅|	$\emptyset$|	空集|
+|∈|	$\in$|	属于|
+|∉|	$\notin$	|不属于|
+|⊂|	$\subset$|	子集|
+|⊆|	$\subseteq$|	真子集|
+|⋃|	$\bigcup$|	并集|
+|⋂|	$\bigcap$|	交集|
+|⋁|	$\bigvee$|	逻辑或|
+|⋀|	$\bigwedge$|	逻辑与|
+|⨄|	$\biguplus$|	多重集|
+|⨆|	$\bigsqcup$	|
+|y^|	$\hat{y}$|	期望值|
+|yˇ|	$\check{y}$	
+|y˘|	$\breve{y}$|	
+|$$\overline{a+b+c+d}$$|	$\overline{a+b+c+d}$|	平均值|
+|$$\underline{a+b+c+d}$$ |$\underline{a+b+c+d}$	|
+|$$\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}$$|\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}	|
+|↑|	$\uparrow$	|向上|
+|↓|	$\downarrow$	|向下|
+|⇑|	$\Uparrow$	|
+|⇓|	$\Downarrow$	|
+|→|	$\rightarrow$	|向右|
+|←|	$\leftarrow$	|向左|
+|⇒|	$\Rightarrow$	|向右箭头|
+|⟸|	$\Longleftarrow$	|向左长箭头|
+|⟵|	$\longleftarrow$	|向左单箭头|
+|⟶|	$\longrightarrow$|	向右长箭头|
+|⟹|	$\Longrightarrow$|	向右箭头|
+|α|	$\alpha$	|
+|β|	$\beta$	|
+|γ|	$\gamma$|	
+|Γ|	$\Gamma$|	
+|δ|	$\delta$|	
+|Δ|	$\Delta$|	
+|ϵ|	$\epsilon$	|
+|ε|	$\varepsilon$	|
+|ζ|	$\zeta$	|
+|η|	$\eta$	|
+|θ|	$\theta$	|
+|Θ|	$\Theta$|
+|ϑ|	$\vartheta$	|
+|ι|	$\iota$	|
+|π|	$\pi$	|
+|ϕ|	$\phi$	|
+|ψ|	$\psi$	|
+|Ψ|	$\Psi$	|
+|ω|	$\omega$	|
+|Ω|	$\Omega$|
+|χ|	\chi	|
+|ρ|	$\rho$	|
+|ο|	$\omicron$	|
+|σ|	$\sigma$	|
+|Σ|	$\Sigma$	|
+|ν|	$\nu$	|
+|ξ|	$\xi$	|
+|τ|	$\tau$	|
+|λ|	$\lambda$	|
+|Λ|	$\Lambda$	|
+|μ|	\mu	|
+|∂|	$\partial$	|
+
 
