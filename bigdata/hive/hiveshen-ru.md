@@ -226,3 +226,19 @@ insert into table default.emp_ci select * from default.emp ;
 5. 创建表的时候通过location指定加载
 
 
+#### 导出查询的结果 ：
+
+```shell
+insert overwrite local directory '/opt/datas/hive_exp_emp'
+select * from default.emp ;
+
+insert overwrite local directory '/opt/datas/hive_exp_emp2'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' COLLECTION ITEMS TERMINATED BY '\n'
+select * from default.emp ;
+
+bin/hive -e "select * from default.emp ;" > /opt/datas/exp_res.txt
+
+insert overwrite directory '/user/beifeng/hive/hive_exp_emp' select * from default.emp ;
+```
+
+#### 
