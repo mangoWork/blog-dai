@@ -140,3 +140,89 @@ constraint_specification:
 ```
 
 
+* **EXTERNAL** 的作用
+> 当删除表的时候,会删除数据库中表的元数据,但是不会删除HDFS中的数据.
+
+* **location**
+> 设置数据存储在HDFS中的位置
+
+* 分区表
+  * 分区表在HDFS中的对对应的存储的目录如下所示：
+  
+  ```shell
+    	/user/hive/warehouse/bf_log/
+		/20150911/
+			20150911.log
+		/20150912/
+			20150912.log
+  ```
+  
+  * 相关案例如下所示：
+  
+  ```shell
+  create EXTERNAL table IF NOT EXISTS default.emp_partition(
+      empno int,
+      ename string,
+      job string,
+      mgr int,
+      hiredate string,
+      sal double,
+      comm double,
+      deptno int
+    )
+    partitioned by (month string,day string)
+    ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' ;
+    
+  load data local inpath '/opt/datas/emp.txt' into table default.emp_partition partition (month='201509',day='13') ;
+  
+  select * from emp_partition where month = '201509' and day = '13' ;
+  
+  ```
+
+* 通过导入数据到HDFS使得在Hive中生效：
+  * 方式一
+  
+  ```shell
+  dfs -mkdir -p /user/hive/warehouse/dept_part/day=20150913 ;
+  dfs -put /opt/datas/dept.txt /user/hive/warehouse/dept_part/day=20150913 ;
+
+  hive (default)> msck repair table dept_part ;
+  ```
+  
+  * 方式二
+  
+  ```shell
+  dfs -mkdir -p /user/hive/warehouse/dept_part/day=20150914 ;
+  dfs -put /opt/datas/dept.txt /user/hive/warehouse/dept_part/day=20150914 ;
+  
+  alter table dept_part add partition(day='20150914');
+  ```
+  
+#### 加载数据到Hive中
+
+* 使用方式 
+> load data [local] inpath 'filepath' [overwrite] into table tablename [partition (partcol1=val1,...)];
+
+* 原始文件存储的位置
+	* 本地 local
+	* hdfs
+* 对表的数据是否覆盖
+	* 覆盖 overwrite
+	* 追加
+* 分区表加载，特殊性
+	partition (partcol1=val1,...)
+
+#### 加载数据的五种方式 
+
+1. 加载本地文件到hive表
+load data local inpath '/opt/datas/emp.txt' into table default.emp ;
+2. 加载hdfs文件到hive中
+load data inpath '/user/beifeng/hive/datas/emp.txt' overwrite into table default.emp ;
+3. 加载数据覆盖表中已有的数据
+load data inpath '/user/beifeng/hive/datas/emp.txt' into table default.emp ;
+4. 创建表是通过insert加载
+create table default.emp_ci like emp ;
+insert into table default.emp_ci select * from default.emp ;
+5. 创建表的时候通过location指定加载
+
+
