@@ -322,8 +322,8 @@ bin/hive -e "select * from default.emp ;" > /opt/datas/exp_res.txt
 
 #### UDF编程
 编程步骤：
-1、继承org.apache.hadoop.hive.ql.UDF
-2、需要实现evaluate函数；evaluate函数支持重载；
+&nbsp;　　1、继承org.apache.hadoop.hive.ql.UDF
+&nbsp;　　2、需要实现evaluate函数；evaluate函数支持重载；
 注意事项：
-1、UDF必须要有返回类型，可以返回null,但是返回类型不能为void；
-2、UDF中常用Text/LongWritable等类型，不推荐使用java类型
+&nbsp;　　1、UDF必须要有返回类型，可以返回null,但是返回类型不能为void；
+&nbsp;　　2、UDF中常用Text/LongWritable等类型，不推荐使用java类型
