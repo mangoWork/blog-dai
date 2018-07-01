@@ -139,10 +139,47 @@ constraint_specification:
     [, CONSTRAINT constraint_name FOREIGN KEY (col_name, ...) REFERENCES table_name(col_name, ...) DISABLE NOVALIDATE 
 ```
 
+* 实例
+  * 简单的创建表
+    ```shell
+    create table mango.emp(
+      empno int,
+      ename string,
+      job string,
+      mgr int,
+      hiredate string,
+      sal double,
+      comm double,
+      deptno int
+      )
+      row format delimited fields terminated by '\t';
+    ```
+  * 通过**as select**创建表
+    ```shell
+      CREATE TABLE new_key_value_store
+         ROW FORMAT SERDE "org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe"
+         STORED AS RCFile
+         AS
+      SELECT (key % 1024) new_key, concat(key, value) key_value_pair
+      FROM key_value_store
+      SORT BY new_key, key_value_pair;
+    ```
 
-* **EXTERNAL** 的作用
-> 当删除表的时候,会删除数据库中表的元数据,但是不会删除HDFS中的数据.
-
+  * 通过**Like**创建表
+  ```shell
+    CREATE TABLE empty_key_value_store
+  LIKE key_value_store [TBLPROPERTIES (property_name=property_value, ...)];
+  ```
+  
+  
+* **EXTERNAL** 
+  * 内部表也称之为MANAGED_TABLE；
+    * 默认存储在/user/hive/warehouse下，也可以通过location指定
+    * 删除表时，会删除表数据以及元数据
+  * 外部表称之为EXTERNAL_TABLE；
+    * 在创建表时可以自己指定目录位置(LOCATION)；
+    * 删除表时，只会删除元数据不会删除表数据
+    
 * **location**
 > 设置数据存储在HDFS中的位置
 
