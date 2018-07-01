@@ -311,5 +311,19 @@ bin/hive -e "select * from default.emp ;" > /opt/datas/exp_res.txt
 * join
 
 ##### 排序(Sort)
+* Order By
+  * 全局排序，一个Reduce
+* Sort By
+  * 每个reduce内部进行排序，全局不是排序
+* Distribute By
+  *  类似MR中partition，进行分区，结合sort by使用
+* Cluster By
+  * 当distribute和sort字段相同时使用
 
-
+#### UDF编程
+编程步骤：
+1、继承org.apache.hadoop.hive.ql.UDF
+2、需要实现evaluate函数；evaluate函数支持重载；
+注意事项：
+1、UDF必须要有返回类型，可以返回null,但是返回类型不能为void；
+2、UDF中常用Text/LongWritable等类型，不推荐使用java类型
