@@ -112,3 +112,48 @@
  	* Sort-Merge-BUCKET Join
 
 #### Hive使用案例
+
+##### UDF编写
+
+
+##### 使用python脚本
+* 创建表
+
+```shell
+CREATE TABLE u_data_new (
+  userid INT,
+  movieid INT,
+  rating INT,
+  weekday INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+```
+
+* 编写python脚本
+
+```python
+import sys
+import datetime
+
+for line in sys.stdin:
+  line = line.strip()
+  userid, movieid, rating, unixtime = line.split('\t')
+  weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()
+  print '\t'.join([userid, movieid, rating, str(weekday)])
+```
+
+*  加载数据
+
+```shell
+INSERT OVERWRITE TABLE u_data_new
+SELECT
+  TRANSFORM (userid, movieid, rating, unixtime)
+  USING 'python weekday_mapper.py'
+  AS (userid, movieid, rating, weekday)
+FROM u_data;
+```
+
+* 查询
+
+```shell
+SELECT weekday, COUNT(1) cnt FROM u_data_new GROUP BY weekday order by cnt desc;
+```
