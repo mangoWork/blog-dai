@@ -184,8 +184,13 @@ constraint_specification:
 > 设置数据存储在HDFS中的位置
 
 * 分区表
+  * 分区表实际上就是对应一个HDFS文件系统上的独立的文件夹，该文件夹
+下是该分区所有的数据文件。Hive中的分区就是分目录，把一个大的数据
+集根据业务需要分割成更小的数据集。
+  * 在查询时通过WHERE子句中的表达式来选择查询所需要的指定的分区，
+这样的查询效率会提高很多。
   * 分区表在HDFS中的对对应的存储的目录如下所示：
-  
+
   ```shell
     	/user/hive/warehouse/bf_log/
 		/20150911/
@@ -261,6 +266,7 @@ load data inpath '/user/beifeng/hive/datas/emp.txt' into table default.emp ;
 create table default.emp_ci like emp ;
 insert into table default.emp_ci select * from default.emp ;
 5. 创建表的时候通过location指定加载
+5. 创建表的时候通过select加载
 
 
 #### 导出查询的结果 ：
