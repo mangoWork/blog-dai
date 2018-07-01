@@ -114,6 +114,77 @@
 #### Hive使用案例
 
 ##### UDF编写
+* 编写UDF函数
+
+```java
+package com.beifeng.senior.hive.udf;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import org.apache.hadoop.hive.ql.exec.UDF;
+import org.apache.hadoop.io.Text;
+
+/**
+ * 1. Implement one or more methods named "evaluate" which will be called by Hive.
+ * 2. "evaluate" should never be a void method. However it can return "null" if needed
+ *
+ */
+public class DateTransformUDF extends UDF {
+
+	private final SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss", Locale.ENGLISH);
+	private final SimpleDateFormat outputFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+	/**
+	 * 31/Aug/2015:00:04:37 +0800
+	 * 2015083100043
+	 * @param str
+	 * @return
+	 */
+	public Text evaluate(Text input) {
+		Text output = new Text();
+		// validate
+		if (null == input) {
+			return null;
+		}
+		String inputDate = input.toString().trim();
+		if(null == inputDate){
+			return null ;
+		}
+		try{
+			// parse
+			Date parseDate = inputFormat.parse(inputDate);
+			//transform
+			String outputDate = outputFormat.format(parseDate)
+			// set
+			output.set(outputDate);		
+		}catch(Exception e){
+			e.printStackTrace();
+			return output ;
+		}
+		
+		return output;
+	}	 
+}
+
+```
+
+* 打包成jar包
+* 添加jar
+    * add jar /opt/datas/hiveudf2.jar ;
+* 创建函数
+    * create temporary function my_removequotes as "com.beifeng.senior.hive.udf.RemoveQuotesUDF" ;
+* 加载数据
+
+    ```shell
+    insert overwrite table default.bf_log_comm 
+        select 
+            my_removequotes(remote_addr), 
+            my_removequotes(time_local), 
+            my_removequotes(request), 
+            my_removequotes(http_referer) 
+        from    
+    default.bf_log_src ;
+    ```
 
 
 ##### 使用python脚本
