@@ -76,8 +76,39 @@
     * rcfile 存储空间最小，查询的效率最高 ，需要通过text文件转化来加载，加载的速度最低
 
 #### Hive的优化
+* 通过配置FetchTask
+* 通过*EXPLAIN*查看执行计划
+* 大表拆分
+* 大表【拆分】
+    * 子表
+* 外部表、分区表
+    * 结合使用
+    * 多级分区
+* 数据
+    * 存储格式（textfile、orcfile、parquet）
+    * 数据压缩（snappy）
+* SQL
+    * 优化SQL语句
+    * join，filter
+* MapReduce
+    * Reduce Number
+    * JVM重用
+    * 推测执行
 
+* Join
+    * Common/Shuffle/Reduce Join
+ 	* 连接发生的阶段，发生在 Reduce Task
+ 	* 大表对大表
+ 	* 每个表的数据都是从文件中读取的
 
+    * Map Join
+ 	* 连接发生的阶段，发生在 Map Task
+ 	* 小表对大表
+ 	* 大表的数据放从文件中读取 cid
+ 	* 小表的数据内存中 id
+ 	* DistributedCache
 
+    * SMB Join
+ 	* Sort-Merge-BUCKET Join
 
 #### Hive使用案例
