@@ -289,4 +289,27 @@ bin/hive -e "select * from default.emp ;" > /opt/datas/exp_res.txt
 ```
 
 #### Hive中常见的查询
+* 查询语句模版
+  
+  ```shell
+  SELECT [ALL | DISTINCT] select_expr, select_expr, ...
+    FROM table_reference
+    [WHERE where_condition]
+    [GROUP BY col_list]
+    [CLUSTER BY col_list
+    | [DISTRIBUTE BY col_list] [SORT BY col_list]
+    ]
+    [LIMIT number]
+  ```
+
+##### 基本的查询
+* 全表查询、指定字段查询
+* = >= <= between and  limit
+* （not） in / is (not) null
+* max/min/count/sum/avg
+* group by/having（是针对分组结果进行筛选）
+* join
+
+##### 排序(Sort)
+
 
