@@ -181,9 +181,8 @@
 |y^|	$\hat{y}$|	期望值|
 |yˇ|	$\check{y}$	
 |y˘|	$\breve{y}$|	
-|$$\overline{a+b+c+d}$$|	$\overline{a+b+c+d}$|	平均值|
-|$$\underline{a+b+c+d}$$ |$\underline{a+b+c+d}$	|
-|$$\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}$$|\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}	|
+|$$ \overline{a+b+c+d}$$|	$\overline{a+b+c+d}$|	平均值|
+|$$ \underline{a+b+c+d}$$ |$\underline{a+b+c+d}$	|
 |↑|	$\uparrow$	|向上|
 |↓|	$\downarrow$	|向下|
 |⇑|	$\Uparrow$	|

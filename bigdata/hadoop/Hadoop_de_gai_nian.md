@@ -112,12 +112,12 @@
      3. Secondary NameNode接收到把edits文件和fsimage文件合并，形成一个新的fsimage文件。
      4. NameNode从Secondary NameNode接收新的fsimage文件，并且替代旧的fsimage文件，同时将edits文件中的内容替换成步骤1中创建的edit.new文件的内容。
      5. 更新fstime文件来记录发生的检查点操作。
-
-     | 文件名  | 描述                                                       |
+     
+     | 文件名  | 描述|
      | ------- | ---------------------------------------------------------- |
-     | fsimage | 保存最近一次检查点的HDFS系统元数据的持久化状态信息         |
+     | fsimage | 保存最近一次检查点的HDFS系统元数据的持久化状态信息  |
      | edits   | 保存最近一次检查点之后到现在的HDFS系统元数据的状态变化信息 |
-     | fstime  | 保存了最近一次检查点的时间戳                               |
+     | fstime  | 保存了最近一次检查点的时间戳|
 
 * TaskTracker(任务跟踪器)
 
