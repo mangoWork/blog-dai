@@ -114,6 +114,7 @@
     * [Hive基础知识](bigdata/hive/hiveji-chu-zhi-shi.md)
     * [Hive深入](bigdata/hive/hiveshen-ru.md)
     * [Hive高级知识点](bigdata/hive/hivegao-ji-zhi-shi-dian.md)
+  * HBase
 * [机器学习](machine/README.md)
   * [机器学习-周志华](machine/machine-zhou/README.md)
     * [第一章  绪论](machine/machine-zhou/chapter1/README.md)
