@@ -37,6 +37,7 @@ ssh-keygen是用于生产密钥的工具。
 ### 配置host
 
 ### 配置Ulimit
+配置资源访问
 
 ### iptables配置
 配置开放哪些端口，允许哪些ip访问
