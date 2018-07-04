@@ -31,6 +31,9 @@ ssh-keygen是用于生产密钥的工具。
 &nbsp;　　authorized_keys：保存已授权的客户端公钥
 &nbsp;　　known_hosts：保存已认证的远程主机公钥
 
+对应的关系如下所示：
+![](../img/ssh.png)
+
 ### 配置host
 
 ### 配置Ulimit
