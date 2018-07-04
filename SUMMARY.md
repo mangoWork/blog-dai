@@ -70,6 +70,7 @@
   * [操作系统](./os/linux/README.md)
     * [linux命令](./os/linux/linux_command.md)
     * [ubuntu命令](./os/linux/ubtuntu_command.md)
+    * [Linux集群的基本配置](os/linux/linuxji-qun-de-ji-ben-pei-zhi.md)
 * [协作工具](./collaborationTools/README.md)
   * [git](./collaborationTools/git/README.md)
     * [git基础命令](./collaborationTools/git/git_basic_command.md)
