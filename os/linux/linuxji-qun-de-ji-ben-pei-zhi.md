@@ -25,6 +25,12 @@ ssh-keygen是用于生产密钥的工具。
 &nbsp;　　-P：指定passphrase，用于确保私钥的安全
 &nbsp;　　-f：指定存放密钥的文件（公钥文件默认和私钥同目录下，不同的是，存放公钥的文件名需要加上后缀.pub）
 
+文件的说明：
+&nbsp;　　id_rsa：保存私钥
+&nbsp;　　id_rsa.pub：保存公钥
+&nbsp;　　authorized_keys：保存已授权的客户端公钥
+&nbsp;　　known_hosts：保存已认证的远程主机公钥
+
 ### 配置host
 
 ### 配置Ulimit
