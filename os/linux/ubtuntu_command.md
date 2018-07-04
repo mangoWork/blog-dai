@@ -16,6 +16,7 @@
   * ssh命令
   * ssh-keygen -t rsa
 
+
 ### 3.设置静态IP
 * 在对应的/etc/network/interfaces中添加如下代码
 
