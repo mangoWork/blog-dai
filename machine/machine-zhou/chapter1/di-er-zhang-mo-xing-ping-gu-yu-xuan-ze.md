@@ -20,7 +20,7 @@
 ##### 交叉验证法
 &nbsp;　　**交叉验证法**先将数据集$$D$$划分为$$k$$个大小相似的互斥子集，即$$D=D_1 \cup D_2 \cup ... \cup D_k, D_i \cap D_j= \emptyset (i \ne j)$$,每个子集$$D_i$$都尽可能保持数据分布一致性，即从$$D$$中通过分层采样得到。然后每次用$$k-1$$个自己的并集作为训练集，另外一个子集作为测试集。
 
-![img/10zhejiaocha.png](img/10zhejiaocha.png)
+![img/10zhejiaocha.png](./img/10zhejiaocha.png)
 
 
 ##### 自助法
