@@ -613,7 +613,7 @@ http://stackoverflow.com/questions/576169/understanding-python-super-with-init-m
 
 ## 30 range and xrange
 
-都在循环时使用，xrange内存性能更好。
+都在循环时使用，xrange内存性能更好
 for i in range(0, 20):
 for i in xrange(0, 20):
 What is the difference between range and xrange functions in Python 2.X?
