@@ -122,7 +122,7 @@
   * [机器学习-周志华](machine/machine-zhou/README.md)
     * [第一章  绪论](machine/machine-zhou/chapter1/README.md)
       * [课后习题](machine/machine-zhou/chapter1/ke-hou-xi-ti.md)
-    * [第二章  模型评估与选择](machine/machine-zhou/chapter1/di-er-zhang-mo-xing-ping-gu-yu-xuan-ze.md)
+    * [第二章  模型评估与选择](machine/machine-zhou/2.di-er-zhang-mo-xing-ping-gu-yu-xuan-ze.md)
   * [数学知识](machine/math/README.md)
     * [数学知识之离散数学](machine/math/li-san-math.md)
     * [数学符号大全](machine/shuxuefuhao.md)
@@ -145,4 +145,5 @@
   * [Token介绍](./other/token.md)
   * [markdown编辑语法说明](other/markdown/README.md)
     * [markdown公式语法](other/markdown/markdowngong-shi-yu-fa.md)
+  * [面试](other/Interview/README.md)
 
