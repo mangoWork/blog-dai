@@ -147,6 +147,7 @@
   * [Python](interview/python/README.md)
     * [Python基础知识点](interview/python/pythonji-chu-zhi-shi-dian.md)
   * [数据库](interview/database/README.md)
+    * [数据库面试基础知识点](interview/database/shu-ju-ku-mian-shi-ji-chu-zhi-shi-dian.md)
 * [其他](./other/README.md)
   * [开源协议](./other/agreement.md)
   * [Token介绍](./other/token.md)
