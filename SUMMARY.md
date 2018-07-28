@@ -145,6 +145,7 @@
     * [Java基础知识点](interview/java/java.md)
     * [JVM知识点](interview/java/jvmzhi-shi-dian.md)
   * [Python](interview/python/README.md)
+    * [Python基础知识点](interview/python/pythonji-chu-zhi-shi-dian.md)
   * [数据库](interview/database/README.md)
 * [其他](./other/README.md)
   * [开源协议](./other/agreement.md)
