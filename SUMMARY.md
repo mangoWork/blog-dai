@@ -143,6 +143,7 @@
 * [面试](interview/README.md)
   * [Java面试](interview/java/README.md)
     * [Java基础知识点](interview/java/java.md)
+    * [JVM知识点](interview/java/jvmzhi-shi-dian.md)
   * [Python](interview/python/README.md)
   * [数据库](interview/database/README.md)
 * [其他](./other/README.md)
