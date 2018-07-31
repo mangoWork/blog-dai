@@ -327,4 +327,58 @@ public class Test{
 &nbsp;　　1. 在构造函数内对一个final域的写入,与随后把这个被构造对象的引用赋值给一个引用变量,这两个操作之间不能重排序.
 &nbsp;　　2. 初次读一个包含final域的对象的引用,与随后初次读这个final域,这两个操作之间不能重排序.
 
+### 数据类型相关
+#### java中int char,long各占多少字节?
+
+| 类型    | 位数   | 字节数  |
+| ----- | ---- | ---- |
+| short | 2    | 16   |
+| int   | 4    | 32   |
+| long  | 8    | 64   |
+| float|4|32|
+|double|8|64|
+|char|2|16|
+
+#### 64位的JVM当中,int的长度是多少?
+&nbsp;　Java 中，int 类型变量的长度是一个固定值，与平台无关，都是 32 位。意思就是说，在 32 位 和 64 位 的Java 虚拟机中，int 类型的长度是相同的。
+
+#### int和Integer的区别
+&nbsp;　Integer是int的包装类型,在拆箱和装箱中,二者自动转换.int是基本类型，直接存数值，而integer是对象，用一个引用指向这个对象.
+
+#### int 和Integer谁占用的内存更多?
+&nbsp;　Integer 对象会占用更多的内存。Integer是一个对象，需要存储对象的元数据。但是 int 是一个原始类型的数据，所以占用的空间更少。
+
+#### 装箱和拆箱的实现过程
+
+&nbsp;　装箱的过程是通过调用包装器的valueOf实现的，而拆箱的过程是通过调用包装器的xxxValue方法实现的（xxx代表的是对应的基本数据类型）
+
+#### String,StringBuffer和StringBuilder区别
+&nbsp;　String是字符串常量,final修饰;StringBuffer字符串变量(线程安全);
+StringBuilder 字符串变量(线程不安全).
+
+
+#### String和StringBuffer
+&nbsp;　String和StringBuffer主要区别是性能:String是不可变对象,每次对String类型进行操作都等同于产生了一个新的String对象,然后指向新的String对象.所以尽量不在对String进行大量的拼接操作,否则会产生很多临时对象,导致GC开始工作,影响系统性能.
+
+&nbsp;　StringBuffer是对对象本身操作,而不是产生新的对象,因此在有大量拼接的情况下,我们建议使用StringBuffer.
+
+&nbsp;　但是需要注意现在JVM会对String拼接做一定的优化:
+&nbsp;　`String s=“This is only ”+”simple”+”test”`会被虚拟机直接优化成`String s=“This is only simple test”`,此时就不存在拼接过程.
+
+#### StringBuffer和StringBuilder
+&nbsp;　StringBuffer是线程安全的可变字符串,其内部实现是可变数组.StringBuilder是jdk 1.5新增的,其功能和StringBuffer类似,但是非线程安全.因此,在没有多线程问题的前提下,使用StringBuilder会取得更好的性能.
+
+#### 什么是编译器常量?使用它有什么风险?
+&nbsp;　公共静态不可变（public static final ）变量也就是我们所说的编译期常量，这里的 public 可选的。实际上这些变量在编译时会被替换掉，因为编译器知道这些变量的值，并且知道这些变量在运行时不能改变。这种方式存在的一个问题是你使用了一个内部的或第三方库中的公有编译时常量，但是这个值后面被其他人改变了，但是你的客户端仍然在使用老的值，甚至你已经部署了一个新的jar。为了避免这种情况，当你在更新依赖 JAR 文件时，确保重新编译你的程序。
+
+#### java当中使用什么类型表示价格比较好?
+&nbsp;　如果不是特别关心内存和性能的话，使用BigDecimal，否则使用预定义精度的 double 类型。
+
+#### 如何将byte转为String
+&nbsp;　可以使用 String 接收 byte[] 参数的构造器来进行转换，需要注意的点是要使用的正确的编码，否则会使用平台默认编码，这个编码可能跟原来的编码相同，也可能不同。
+
+
+#### 可以将int强转为byte类型么?会产生什么问题?
+&nbsp;　我们可以做强制转换，但是Java中int是32位的而byte是8 位的，所以,如果强制转化int类型的高24位将会被丢弃，byte 类型的范围是从-128到128
+
 
