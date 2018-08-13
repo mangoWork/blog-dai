@@ -89,17 +89,24 @@
 
 &nbsp;　　3.1 父类静态，子类静态、父类成员域、父类代码块、父类构造方法、子类成员域、子类代码块、子类构造方法
 
-双亲委派模型
+#### 双亲委派模型
 
-- 类加载器通过组合的方式建立的父子关系，称为双亲委派模型
-- 类加载器：
-  - Bootstrap ClassLoader:负责加载JAVA_HOME/lib目录，或者被XboostrapPath参数所指定的路径指定的类库。
-  - Extension ClassLoader:负责加载JAVA_HOME/lib/ext目录，或者被java.ext.dir系统变量所指定的路径所指定的类库。
-  - ApplicationClassLoader：是ClassLoader.getSystemClassLoader()方法的返回值，负责架子啊用户类路径上所指定的类库。
-- 工作过程：
-  - 一个类加载器收到类加载的请求，它首先不会尝试自己加载这个类而是把这个请求委托给父类去加载去完成。只有当父加载器反馈自己无法完成这个请求时，自加载器才会自己去加载。
-- 作用:
-  - Java随着它的类加载器一起具备了一种优先级的层级关系，比如Object这个类，无论哪个类加载器他最终都会委派到bootstrapClassLoader去加载。保证了Java程序的稳定执行。
+&nbsp;　1.类加载器通过组合的方式建立的父子关系，称为双亲委派模型
+
+&nbsp;　2.类加载器：
+&nbsp;　　2.1 Bootstrap ClassLoader:负责加载JAVA_HOME/lib目录，或者被XboostrapPath参数所指定的路径指定的类库。
+  
+&nbsp;　　2.2 Extension ClassLoader:负责加载JAVA_HOME/lib/ext目录，或者被java.ext.dir系统变量所指定的路径所指定的类库。
+  
+&nbsp;　　2.3 ApplicationClassLoader：是ClassLoader.getSystemClassLoader()方法的返回值，负责架子啊用户类路径上所指定的类库。
+
+&nbsp;　3.工作过程：
+
+&nbsp;　　3.1 一个类加载器收到类加载的请求，它首先不会尝试自己加载这个类而是把这个请求委托给父类去加载去完成。只有当父加载器反馈自己无法完成这个请求时，自加载器才会自己去加载。
+
+&nbsp;　4.作用:
+
+&nbsp;　　4.1 Java随着它的类加载器一起具备了一种优先级的层级关系，比如Object这个类，无论哪个类加载器他最终都会委派到bootstrapClassLoader去加载。保证了Java程序的稳定执行。
 
 静态分派与动态分派
 
