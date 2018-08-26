@@ -232,10 +232,6 @@ public void set(T value) {
     exec = Executors.newCachedThreadPool(new DaemonThreadFactory());
     ```
     
-    
-    
-    
-     ​
 
 ##  12  **java.util.concurrent.Lock**
 
