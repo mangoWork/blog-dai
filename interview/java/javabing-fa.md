@@ -172,10 +172,15 @@ public void set(T value) {
 &nbsp;　　**关闭Executor**
 
 &nbsp;　　　**ExecutorService**生命周期有3种状态：运行、关闭、终止
+
 &nbsp;　　　-shutdown():停止接受新的任务，等待已提交任务的完成
+
 &nbsp;　　　-shutdownNow():首先尝试关闭正在执行的任务，暂停处理正在等待的任务，返回等待执行的任务列表
+
 &nbsp;　　　-isShutdown():判断此执行程序是否已经关闭
+
 &nbsp;　　　-isTerminated():如果shutdown/shutdownNow之后所有任务都已经关闭返回true
+
 &nbsp;　　　-awaitTermination():等待executorService到达terminated状态
 
 &nbsp;　　**Callable、Future、FutureTask**
@@ -197,7 +202,7 @@ public void set(T value) {
 &nbsp;　　　-get(long timeout,TimeUnit unit)可以通过不断调用timeout为0个get来判断任务是否已经执行完毕。
 
 &nbsp;　　　显示地为某个任务指定的Runnable或Callable 实例化一个FutureTask。
-  
+
 &nbsp;　　　-executorService.newTaskFor(Callable<T> task)可以返回一个FutureTask对象，可以把它交给executorService执行
 
 &nbsp;　　**ThreadPollExecutor、饱和策略**
@@ -231,23 +236,26 @@ public void set(T value) {
     }
     exec = Executors.newCachedThreadPool(new DaemonThreadFactory());
     ```
-    
 
-##  12  **java.util.concurrent.Lock**
+##### 12  **java.util.concurrent.Lock**
 
-* 调节共享对象访问的机制：synchronized、volatile、ReentrantLock
+​        调节共享对象访问的机制：synchronized、volatile、ReentrantLock
 
-* **synchronized与ReentrantLock的异同：**
+​        **synchronized与ReentrantLock的异同：**
 
-  * 它们有相同的**互斥**和**内存可见性**保证。他们同样都具有**可重入性**。
-  * 当一线程因为等待获取内部锁而阻塞的时候将一直等待下去并且不能被中断。而ReentrantLock提供了相应的轮询与中断的方法。但是我们在使用显示锁的时候必须记得要在finally语句中释放。使用显式锁的的tryLock可以尝试同时获取多个锁，这样可以避免死锁。显示锁在线程数较多的情况下，性能稍好，但是未来性能的改进更倾向于synchronized，因为它是内置于JVM的。
+​              - 它们有相同的**互斥**和**内存可见性**保证。他们同样都具有**可重入性**。
 
-* **ReentrantLock  API**
+​              - 当一线程因为等待获取内部锁而阻塞的时候将一直等待下去并且不能被中断。而ReentrantLock提供了相应的轮询与中断的方法。但是我们在使用显示锁的时候必须记得要在finally语句中释放。使用显式锁的的tryLock可以尝试同时获取多个锁，这样可以避免死锁。显示锁在线程数较多的情况下，性能稍好，但是未来性能的改进更倾向于synchronized，因为它是内置于JVM的。
 
-  * **tryLock()**：如果获取了锁立即返回true，如果别的线程正持有锁，立即返回false；这个方法可以避免死锁：只有当对象要求的锁都能够获取的时候才执行操作，如果有一个不能获取就可以等待一段时间再来尝试获取。
-  * **tryLock(long timeout,TimeUnit unit)**：如果获取了锁定立即返回true，如果别的线程正持有锁，会等待参数给定的时间，在等待的过程中，如果获取了锁定，就返回true，如果等待超时，返回false；响应中断
-  * **lock()**：如果获取了锁立即返回，如果别的线程持有锁，当前线程则一直处于休眠状态，直到获取锁
-  * **lockInterruptibly**:如果获取了锁定立即返回，如果没有获取锁定，当前线程处于休眠状态，直到或者锁定，或者当前线程被别的线程中断（响应中断）
+​      **ReentrantLock  API**
+
+​           - **tryLock()**：如果获取了锁立即返回true，如果别的线程正持有锁，立即返回false；这个方法可以避免死锁：只有当对象要求的锁都能够获取的时候才执行操作，如果有一个不能获取就可以等待一段时间再来尝试获取。
+
+​           - **tryLock(long timeout,TimeUnit unit)**：如果获取了锁定立即返回true，如果别的线程正持有锁，会等待参数给定的时间，在等待的过程中，如果获取了锁定，就返回true，如果等待超时，返回false；响应中断
+
+​           - **lock()**：如果获取了锁立即返回，如果别的线程持有锁，当前线程则一直处于休眠状态，直到获取锁
+
+​           - **lockInterruptibly**:如果获取了锁定立即返回，如果没有获取锁定，当前线程处于休眠状态，直到或者锁定，或者当前线程被别的线程中断（响应中断）
 
 * **ReadWriteLock**
 
@@ -264,7 +272,7 @@ public void set(T value) {
 
   * **ReentrantReadWriteLock**为两个锁提供了可重进入的加锁语义。
 
-## 13. **实现一个线程的不同方式，并且说出区别？**
+##### 13. **实现一个线程的不同方式，并且说出区别？**
 
 * 实现**Runnable**接口重写**run()**方法定义一个任务类，通过Thread t = new Thread(Runnable r);来创建一个线程
 * 直接**extends Thread** 重写 **run()** 方法定义一个线程类
@@ -273,12 +281,12 @@ public void set(T value) {
   * extends方式编码简单
   * implements方式可以使多个线程共享一个target对象，所以非常适合多个线程用来处理同一份资源的情况，更符合面向对象的编程思想。
 
-## 14. **wait()与sleep()的区别**
+##### 14. **wait()与sleep()的区别**
 
 * sleep()方法（休眠）是线程类（Thread）的静态方法，调用此方法会让当前线程暂停执行指定的时间，将执行机会（CPU）让给其他线程，但是对象的锁依然保持，因此休眠时间结束后会自动恢复。
 * wait()是Object类的方法，调用对象的wait()方法导致当前线程放弃对象的锁（线程暂停执行），进入对象的等待池（wait pool），只有调用对象的notify()方法（或notifyAll()方法）时才能唤醒等待池中的线程进入等锁池（lock pool），如果线程重新获得对象的锁就可以进入就绪状态。
 
-##  15. **线程之间的通信机制**
+#####  15. **线程之间的通信机制**
 
 * 通过Object类中得三个方法wait()、notify()、notifyAll()来进行通信。它们都必须使用在synchronized方法或者synchronized语句块中。
 * 调用wait()后将释放对象锁，然后进入无限等待状态，直到线程接收到notify()或者notifyAll()信号才进入可执行状态。
@@ -290,15 +298,15 @@ public void set(T value) {
 - **线程**是进程的一个实体,是cpu调度和分派的基本单位,是比程序更小的能独立运行的基本单位.同一进程中的多个线程之间可以并发执行.
 - **协程**通过在线程中实现调度，避免了陷入内核级别的上下文切换造成的性能损失，进而突破了线程在IO上的性能瓶颈。
 
-## 17. 你了解守护线程吗?它和非守护线程有什么区别
+##### 17. 你了解守护线程吗?它和非守护线程有什么区别
 
 - 程序运行完毕,jvm会等待非守护线程(用户线程)完成后关闭,但是jvm不会等待守护线程.守护线程最典型的例子就是GC线程
 
-## 18. 什么是多线程上下文切换
+##### 18. 什么是多线程上下文切换
 
 多线程的上下文切换是指CPU控制权由一个已经正在运行的线程切换到另外一个就绪并等待获取CPU执行权的线程的过程。
 
-## 19. 创建两种线程的方式?他们有什么区别?
+##### 19. 创建两种线程的方式?他们有什么区别?
 
 通过实现java.lang.Runnable或者通过扩展java.lang.Thread类.相比扩展Thread,实现Runnable接口可能更优.原因有二:
 
@@ -307,21 +315,21 @@ public void set(T value) {
 2. 类可能只要求可执行即可,因此继承整个Thread类的开销过大.
 ```
 
-## 20. Thread类中的start()和run()方法有什么区别?
+##### 20. Thread类中的start()和run()方法有什么区别?
 
 start()方法被用来启动新创建的线程，而且start()内部调用了run()方法，这和直接调用run()方法的效果不一样。当你调用run()方法的时候，只会是在原来的线程中调用，没有新的线程启动，start()方法才会启动新线程。
 
-## 21. 怎么检测一个线程是否持有对象监视器
+##### 21. 怎么检测一个线程是否持有对象监视器
 
 Thread类提供了一个holdsLock(Object obj)方法，当且仅当对象obj的监视器被某条线程持有的时候才会返回true，注意这是一个static方法，这意味着"某条线程"指的是当前线程。
 
-## 22. Runnable和Callable的区别
+##### 22. Runnable和Callable的区别
 
 - Runnable接口中的run()方法的返回值是void，它做的事情只是纯粹地去执行run()方法中的代码而已；
 - Callable接口中的call()方法是有返回值的，是一个泛型，和Future、FutureTask配合可以用来获取异步执行的结果。
 - Callable+Future/FutureTask却可以方便获取多线程运行的结果，可以在等待时间太长没获取到需要的数据的情况下取消该线程的任务
 
-## 23. 什么导致线程阻塞
+##### 23. 什么导致线程阻塞
 
 阻塞指的是暂停一个线程的执行以等待某个条件发生（如某资源就绪），学过操作系统的同学对它一定已经很熟悉了。Java 提供了大量方法来支持阻塞，下面让我们逐一分析。
 
@@ -332,7 +340,7 @@ Thread类提供了一个holdsLock(Object obj)方法，当且仅当对象obj的�
 | yield()              | yield() 使当前线程放弃当前已经分得的CPU 时间，但不使当前线程阻塞，即线程仍处于可执行状态，随时可能再次分得 CPU 时间。调用 yield() 的效果等价于调度程序认为该线程已执行了足够的时间从而转到另一个线程 |
 | wait() 和 notify()    | 两个方法配套使用，wait() 使得线程进入阻塞状态，它有两种形式，一种允许 指定以毫秒为单位的一段时间作为参数，另一种没有参数，前者当对应的 notify() 被调用或者超出指定时间时线程重新进入可执行状态，后者则必须对应的 notify() 被调用. |
 
-## 24. wait(),notify()和suspend(),resume()之间的区别
+##### 24. wait(),notify()和suspend(),resume()之间的区别
 
 - suspend() 和 resume() 方法对没有什么分别，但是事实上它们是截然不同的。区别的核心在于，前面叙述的所有方法，阻塞时都不会释放占用的锁（如果占用了的话），而这一对方法则相反。上述的核心区别导致了一系列的细节上的区别。
 - 使用wait和notify必须配合synchronized关键字使用
@@ -349,29 +357,29 @@ wait() 和 notify() 方法的上述特性决定了它们经常和synchronized关
 
 第二：除了 notify()，还有一个方法 notifyAll() 也可起到类似作用，唯一的区别在于，调用 notifyAll() 方法将把因调用该对象的 wait() 方法而阻塞的所有线程一次性全部解除阻塞。当然，只有获得锁的那一个线程才能进入可执行状态。
 
-## 25. 产生死锁的条件
+##### 25. 产生死锁的条件
 
 1.互斥条件：一个资源每次只能被一个进程使用。  
 2.请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。  
 3.不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。  
 4.循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。
 
-## 26. 为什么wait()方法和notify()/notifyAll()方法要在同步块中被调用
+##### 26. 为什么wait()方法和notify()/notifyAll()方法要在同步块中被调用
 
 这是JDK强制的，wait()方法和notify()/notifyAll()方法在调用前都必须先获得对象的锁
 
 - wait 的作用是释放当前线程的锁并等待，notify的作用是通知锁上的线程重新获得对象锁。因此首先需要获取对象锁才能进行锁的操作，只有写在synchronized中才能调用该对象的wait方法。
 
-## 27. 竞态条件与临界区
+##### 27. 竞态条件与临界区
 
 - 当两个线程竞争同一资源时，如果对资源的访问顺序敏感，就称存在竞态条件。
 - 而竞态条件发生的代码区就称之为临界区。
 
-## 28. wait()方法和notify()/notifyAll()方法在放弃对象监视器时有什么区别
+##### 28. wait()方法和notify()/notifyAll()方法在放弃对象监视器时有什么区别
 
 wait()方法和notify()/notifyAll()方法在放弃对象监视器的时候的区别在于：wait()方法立即释放对象监视器，notify()/notifyAll()方法则会等待线程剩余代码执行完毕才会放弃对象监视器。
 
-## 29. wait()与sleep()的区别
+##### 29. wait()与sleep()的区别
 
  关于这两者已经在上面进行详细的说明,这里就做个概括好了:
 
@@ -379,19 +387,19 @@ wait()方法和notify()/notifyAll()方法在放弃对象监视器的时候的区
 - sleep()睡眠后不出让系统资源，wait让其他线程可以占用CPU
 - sleep(milliseconds)需要指定一个睡眠时间，时间一到会自动唤醒.而wait()需要配合notify()或者notifyAll()使用
 
-## 30. 为什么wait,nofity和nofityAll这些方法不放在Thread类当中
+##### 30. 为什么wait,nofity和nofityAll这些方法不放在Thread类当中
 
 一个很明显的原因是JAVA提供的锁是对象级的而不是线程级的，每个对象都有锁，通过线程获得。如果线程需要等待某些锁那么调用对象中的wait()方法就有意义了。如果wait()方法定义在Thread类中，线程正在等待的是哪个锁就不明显了。简单的说，由于wait，notify和notifyAll都是锁级别的操作，所以把他们定义在Object类中因为锁属于对象。
 
-## 31. 怎么唤醒一个阻塞的线程
+##### 31. 怎么唤醒一个阻塞的线程
 
 如果线程是因为调用了wait()、sleep()或者join()方法而导致的阻塞，可以中断线程，并且通过抛出InterruptedException来唤醒它；如果线程遇到了IO阻塞，无能为力，因为IO是操作系统实现的，Java代码并没有办法直接接触到操作系统。
 
-## 32. 什么是多线程的上下文切换
+##### 32. 什么是多线程的上下文切换
 
 多线程的上下文切换是指CPU控制权由一个已经正在运行的线程切换到另外一个就绪并等待获取CPU执行权的线程的过程。
 
-## 33. synchronized和ReentrantLock的区别
+##### 33. synchronized和ReentrantLock的区别
 
 synchronized是和if、else、for、while一样的关键字，ReentrantLock是类，这是二者的本质区别。既然ReentrantLock是类，那么它就提供了比synchronized更多更灵活的特性，可以被继承、可以有方法、可以有各种各样的类变量，ReentrantLock比synchronized的扩展性体现在几点上：
 （1）ReentrantLock可以对获取锁的等待时间进行设置，这样就避免了死锁
@@ -399,15 +407,15 @@ synchronized是和if、else、for、while一样的关键字，ReentrantLock是�
 （3）ReentrantLock可以灵活地实现多路通知
 另外，二者的锁机制其实也是不一样的:ReentrantLock底层调用的是Unsafe的park方法加锁，synchronized操作的应该是对象头中mark word.
 
-## 34. FutureTask是什么
+##### 34. FutureTask是什么
 
 这个其实前面有提到过，FutureTask表示一个异步运算的任务。FutureTask里面可以传入一个Callable的具体实现类，可以对这个异步运算的任务的结果进行等待获取、判断是否已经完成、取消任务等操作。当然，由于FutureTask也是Runnable接口的实现类，所以FutureTask也可以放入线程池中。
 
-## 35. 一个线程如果出现了运行时异常怎么办?
+##### 35. 一个线程如果出现了运行时异常怎么办?
 
 如果这个异常没有被捕获的话，这个线程就停止执行了。另外重要的一点是：如果这个线程持有某个某个对象的监视器，那么这个对象监视器会被立即释放
 
-## 36. Java当中有哪几种锁
+##### 36. Java当中有哪几种锁
 
 1. 自旋锁: 自旋锁在JDK1.6之后就默认开启了。基于之前的观察，共享数据的锁定状态只会持续很短的时间，为了这一小段时间而去挂起和恢复线程有点浪费，所以这里就做了一个处理，让后面请求锁的那个线程在稍等一会，但是不放弃处理器的执行时间，看看持有锁的线程能否快速释放。为了让线程等待，所以需要让线程执行一个忙循环也就是自旋操作。在jdk6之后，引入了自适应的自旋锁，也就是等待的时间不再固定了，而是由上一次在同一个锁上的自旋时间及锁的拥有者状态来决定
 2. 偏向锁: 在JDK1.之后引入的一项锁优化，目的是消除数据在无竞争情况下的同步原语。进一步提升程序的运行性能。 偏向锁就是偏心的偏，意思是这个锁会偏向第一个获得他的线程，如果接下来的执行过程中，改锁没有被其他线程获取，则持有偏向锁的线程将永远不需要再进行同步。偏向锁可以提高带有同步但无竞争的程序性能，也就是说他并不一定总是对程序运行有利，如果程序中大多数的锁都是被多个不同的线程访问，那偏向模式就是多余的，在具体问题具体分析的前提下，可以考虑是否使用偏向锁。
@@ -415,11 +423,11 @@ synchronized是和if、else、for、while一样的关键字，ReentrantLock是�
 4. 乐观锁：是一种乐观思想，即认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间有没有去更新这个数据，采取写时先读出当前版本号，然后加锁的操作（比较上一次版本号，如果一样则更新），如果失败则要重复读-比较-写的操作。
 5. 悲观锁：以一种悲观思想，即认为写多，遇到并发写的可能性比较高，每次拿数据的时候都认为别人会修改，所以每次在读写数据的时候都会上锁，这样别人想读写这个数据的时候就会阻塞直到拿到锁。java中的悲观思想就是synchronized。
 
-## 37. 如何在两个线程间共享数据
+##### 37. 如何在两个线程间共享数据
 
 通过在线程之间共享对象就可以了，然后通过wait/notify/notifyAll、await/signal/signalAll进行唤起和等待，比方说阻塞队列BlockingQueue就是为线程之间共享数据而设计的
 
-## 38. 如何正确的使用wait()?使用if还是while?
+##### 38. 如何正确的使用wait()?使用if还是while?
 
 wait() 方法应该在循环调用，因为当线程获取到 CPU 开始执行的时候，其他条件可能还没有满足，所以在处理前，循环检测条件是否满足会更好。下面是一段标准的使用 wait 和 notify 方法的代码：
 
@@ -431,21 +439,21 @@ wait() 方法应该在循环调用，因为当线程获取到 CPU 开始执行�
  }
 ```
 
-## 39. 什么是线程局部变量ThreadLocal
+##### 39. 什么是线程局部变量ThreadLocal
 
 线程局部变量是局限于线程内部的变量，属于线程自身所有，不在多个线程间共享。Java提供ThreadLocal类来支持线程局部变量，是一种实现线程安全的方式。但是在管理环境下（如 web 服务器）使用线程局部变量的时候要特别小心，在这种情况下，工作线程的生命周期比任何应用变量的生命周期都要长。任何线程局部变量一旦在工作完成后没有释放，Java 应用就存在内存泄露的风险。
 
-## 40. ThreadLoal的作用是什么?
+##### 40. ThreadLoal的作用是什么?
 
 简单说ThreadLocal就是一种以空间换时间的做法在每个Thread里面维护了一个ThreadLocal.ThreadLocalMap把数据进行隔离，数据不共享，自然就没有线程安全方面的问题了.
 
-## 41. 生产者消费者模型的作用是什么?
+##### 41. 生产者消费者模型的作用是什么?
 
 （1）通过平衡生产者的生产能力和消费者的消费能力来提升整个系统的运行效率，这是生产者消费者模型最重要的作用
 （2）解耦，这是生产者消费者模型附带的作用，解耦意味着生产者和消费者之间的联系少，联系越少越可以独自发展而不需要收到相互的制约
 
 
-## 42. 写一个生产者-消费者队列
+##### 42. 写一个生产者-消费者队列
 
 可以通过阻塞队列实现,也可以通过wait-notify来实现.
 
@@ -520,59 +528,59 @@ public class Main {
 }
 ```
 
-### 使用wait-notify来实现
+###### 使用wait-notify来实现
 
 该种方式应该最经典,这里就不做说明了
 
-## 43. 如果你提交任务时，线程池队列已满，这时会发生什么
+##### 43. 如果你提交任务时，线程池队列已满，这时会发生什么
 
 如果你使用的LinkedBlockingQueue，也就是无界队列的话，没关系，继续添加任务到阻塞队列中等待执行，因为LinkedBlockingQueue可以近乎认为是一个无穷大的队列，可以无限存放任务；如果你使用的是有界队列比方说ArrayBlockingQueue的话，任务首先会被添加到ArrayBlockingQueue中，ArrayBlockingQueue满了，则会使用拒绝策略RejectedExecutionHandler处理满了的任务，默认是AbortPolicy。
 
-## 44. 为什么要使用线程池
+##### 44. 为什么要使用线程池
 
 避免频繁地创建和销毁线程，达到线程对象的重用。另外，使用线程池还可以根据项目灵活地控制并发的数目。
 
-## 45. java中用到的线程调度算法是什么
+##### 45. java中用到的线程调度算法是什么
 
 抢占式。一个线程用完CPU之后，操作系统会根据线程优先级、线程饥饿情况等数据算出一个总的优先级并分配下一个时间片给某个线程执行。
 
-## 46. Thread.sleep(0)的作用是什么
+##### 46. Thread.sleep(0)的作用是什么
 
 由于Java采用抢占式的线程调度算法，因此可能会出现某条线程常常获取到CPU控制权的情况，为了让某些优先级比较低的线程也能获取到CPU控制权，可以使用Thread.sleep(0)手动触发一次操作系统分配时间片的操作，这也是平衡CPU控制权的一种操作。
 
-## 47. 什么是CAS
+##### 47. 什么是CAS
 
 CAS，全称为Compare and Swap，即比较-替换。假设有三个操作数：内存值V、旧的预期值A、要修改的值B，当且仅当预期值A和内存值V相同时，才会将内存值修改为B并返回true，否则什么都不做并返回false。当然CAS一定要volatile变量配合，这样才能保证每次拿到的变量是主内存中最新的那个值，否则旧的预期值A对某条线程来说，永远是一个不会变的值A，只要某次CAS操作失败，永远都不可能成功
 
-## 48. 什么是乐观锁和悲观锁
+##### 48. 什么是乐观锁和悲观锁
 
 乐观锁：乐观锁认为竞争不总是会发生，因此它不需要持有锁，将比较-替换这两个动作作为一个原子操作尝试去修改内存中的变量，如果失败则表示发生冲突，那么就应该有相应的重试逻辑。
 
 悲观锁：悲观锁认为竞争总是会发生，因此每次对某资源进行操作时，都会持有一个独占的锁，就像synchronized，不管三七二十一，直接上了锁就操作资源了。
 
-## 49. ConcurrentHashMap的并发度是什么?
+##### 49. ConcurrentHashMap的并发度是什么?
 
 ConcurrentHashMap的并发度就是segment的大小，默认为16，这意味着最多同时可以有16条线程操作ConcurrentHashMap，这也是ConcurrentHashMap对Hashtable的最大优势，任何情况下，Hashtable能同时有两条线程获取Hashtable中的数据吗？
 
-## 50. Hashtable能同时有两条线程获取Hashtable中的数据吗？
+##### 50. Hashtable能同时有两条线程获取Hashtable中的数据吗？
 
 - 不能，HashTable容器使用的是synchronized来保证线程安全，在线程竞争比较激烈的情况下效率比较低下，因为当一个线程访问HashTable的同步方法时，其他线程访问HashTable的同步方法时，可能会进入阻塞或轮询状态。
 
-## 51. ConcurrentHashMap的工作原理
+##### 51. ConcurrentHashMap的工作原理
 
 ConcurrentHashMap在jdk 1.6和jdk 1.8实现原理是不同的.
 
-### jdk 1.6:
+###### jdk 1.6:
 
 ConcurrentHashMap是线程安全的，但是与Hashtablea相比，实现线程安全的方式不同。Hashtable是通过对hash表结构进行锁定，是阻塞式的，当一个线程占有这个锁时，其他线程必须阻塞等待其释放锁。ConcurrentHashMap是采用分离锁的方式，它并没有对整个hash表进行锁定，而是局部锁定，也就是说当一个线程占有这个局部锁时，不影响其他线程对hash表其他地方的访问。
 具体实现:ConcurrentHashMap内部有一个Segment<K,V>数组,该Segment对象可以充当锁。Segment对象内部有一个HashEntry<K,V>数组，于是每个Segment可以守护若干个桶(HashEntry),每个桶又有可能是一个HashEntry连接起来的链表，存储发生碰撞的元素。
 每个ConcurrentHashMap在默认并发级下会创建包含16个Segment对象的数组，每个数组有若干个桶，当我们进行put方法时，通过hash方法对key进行计算，得到hash值，找到对应的segment，然后对该segment进行加锁，然后调用segment的put方法进行存储操作，此时其他线程就不能访问当前的segment，但可以访问其他的segment对象，不会发生阻塞等待。
 
-### jdk 1.8
+###### jdk 1.8
 
 在jdk 8中，ConcurrentHashMap不再使用Segment分离锁，而是采用一种乐观锁CAS算法来实现同步问题，但其底层还是“数组+链表->红黑树”的实现。
 
-## 52. CyclicBarrier和CountDownLatch区别
+##### 52. CyclicBarrier和CountDownLatch区别
 
 这两个类非常类似，都在java.util.concurrent下，都可以用来表示代码运行到某个点上，二者的区别在于：
 
@@ -580,11 +588,11 @@ ConcurrentHashMap是线程安全的，但是与Hashtablea相比，实现线程�
 - CyclicBarrier只能唤起一个任务，CountDownLatch可以唤起多个任务
 - CyclicBarrier可重用，CountDownLatch不可重用，计数值为0该CountDownLatch就不可再用了
 
-## 53. java中的++操作符线程安全么?
+##### 53. java中的++操作符线程安全么?
 
 不是线程安全的操作。它涉及到多个指令，如读取变量值，增加，然后存储回内存，这个过程可能会出现多个线程交差
 
-## 54. 你有哪些多线程开发良好的实践?
+##### 54. 你有哪些多线程开发良好的实践?
 
 1. 给线程命名
 2. 最小化同步范围
@@ -593,15 +601,15 @@ ConcurrentHashMap是线程安全的，但是与Hashtablea相比，实现线程�
 5. 优先使用并发容器而非同步容器.
 6. 考虑使用线程池
 
-## 55. 可以创建Volatile数组吗?
+##### 55. 可以创建Volatile数组吗?
 
 Java 中可以创建 volatile类型数组，不过只是一个指向数组的引用，而不是整个数组。如果改变引用指向的数组，将会受到volatile 的保护，但是如果多个线程同时改变数组的元素，volatile标示符就不能起到之前的保护作用了
 
-## 56. volatile能使得一个非原子操作变成原子操作吗?
+##### 56. volatile能使得一个非原子操作变成原子操作吗?
 
 - volatile 修饰 long 和 double 变量，使其能按原子类型来读写。volatile 修复符的另一个作用是提供内存屏障（memory barrier），例如在分布式框架中的应用。简单的说，就是当你写一个 volatile 变量之前，Java 内存模型会插入一个写屏障（write barrier），读一个 volatile 变量之前，会插入一个读屏障（read barrier）。意思就是说，在你写一个 volatile 域时，能保证任何线程都能看到你写的值，同时，在写之前，也能保证任何数值的更新对所有线程是可见的，因为内存屏障会将其他所有写的值更新到缓存。
 
-## 57. volatile类型变量提供什么保证?
+##### 57. volatile类型变量提供什么保证?
 
 volatile 主要有两方面的作用:1.避免指令重排2.可见性保证.例如，JVM 或者 JIT为了获得更好的性能会对语句重排序，但是 volatile 类型变量即使在没有同步块的情况下赋值也不会与其他语句重排序。 volatile 提供 happens-before 的保证，确保一个线程的修改能对其他线程是可见的。某些情况下，volatile 还能提供原子性，如读 64 位数据类型，像 long 和 double 都不是原子的(低32位和高32位)，但 volatile 类型的 double 和 long 就是原子的.
 
