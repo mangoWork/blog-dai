@@ -107,39 +107,50 @@ public void set(T value) {
 
 ##### 9. **HashTable、HashMap、ConcurrentHashMap的区别**
 
-* 主要区别
-  * **直观使用上：**HashTable不接受key为null, HashMap接受key为null
-  * **哈希冲突的概率不同**：根据Hash值计算数组下标的算法不同，HashTable直接使用对象的hashCode，hashMap做了重新计算，HashTable的冲突几率比HashMap高
-  * hashTable默认的数组大小为11，hashMap默认数组大小为16，他们的默认负载因子都是0.75，HashTable扩展为2*size+1, HashMap扩展为2*size
-  * **线程安全：**HashTable是线程安全的，HashMap则不是线程安全的, 但是仅仅是Hashtable仅仅是对每个方法进行了synchronized同步，首先这样的**效率**会比较低；其次它**本身的同步**并不能保证程序在并发操作下的正确性（虽然每个方法都是同步的，但客户端调用可能在一个操作中调用多个方法，就不能保证操作原子性了），需要高层次的并发保护。
-* ConcurrentHashMap改进：
-  * 并发效率问题：Hashtable和Collections.synchronizedMap通过同步每个方法获得线程安全。即当一个线程执行一个Map方法时，无论其他线程要对Map进行什么样操作，都不能执行，直到第一个线程结束才可以。对比来说，**ConcurrentHashMap**所使用的**锁分段技术**，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。从而可以有效提高并发效率。
-  * 迭代问题：ConcurrentHashMap返回的iterator是弱一致性的，并不会抛出ConcurrentModifiedException。弱一致性的迭代器可以容许并发修改，迭代器可以感应到迭代器在被创建后，对容器的修改。
-  * 增加了常见的原子操作API：它的API中包含一些原子形式的“putIfAbsent()、相等便移除、相等便替换”这些在HashTable中非原子操作
+&nbsp;　　主要区别
+&nbsp;　　　-**直观使用上：**HashTable不接受key为null, HashMap接受key为null
+
+&nbsp;　　　-**哈希冲突的概率不同**：根据Hash值计算数组下标的算法不同，HashTable直接使用对象的hashCode，hashMap做了重新计算，HashTable的冲突几率比HashMap高
+
+&nbsp;　　　-hashTable默认的数组大小为11，hashMap默认数组大小为16，他们的默认负载因子都是0.75，HashTable扩展为2*size+1, HashMap扩展为2*size
+
+&nbsp;　　　- **线程安全：**HashTable是线程安全的，HashMap则不是线程安全的, 但是仅仅是Hashtable仅仅是对每个方法进行了synchronized同步，首先这样的**效率**会比较低；其次它**本身的同步**并不能保证程序在并发操作下的正确性（虽然每个方法都是同步的，但客户端调用可能在一个操作中调用多个方法，就不能保证操作原子性了），需要高层次的并发保护。
+
+&nbsp;　　ConcurrentHashMap改进：
+&nbsp;　　　- 并发效率问题：Hashtable和Collections.synchronizedMap通过同步每个方法获得线程安全。即当一个线程执行一个Map方法时，无论其他线程要对Map进行什么样操作，都不能执行，直到第一个线程结束才可以。对比来说，**ConcurrentHashMap**所使用的**锁分段技术**，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。从而可以有效提高并发效率。
+
+&nbsp;　　　- 迭代问题：ConcurrentHashMap返回的iterator是弱一致性的，并不会抛出ConcurrentModifiedException。弱一致性的迭代器可以容许并发修改，迭代器可以感应到迭代器在被创建后，对容器的修改。
+
+&nbsp;　　　- 增加了常见的原子操作API：它的API中包含一些原子形式的“putIfAbsent()、相等便移除、相等便替换”这些在HashTable中非原子操作
 
 #####  10 生产者消费者与阻塞队列
 
-* 常用阻塞队列的实现：
-  * FIFO队列：LinkedBlockingQueue、ArrayListBlockingQueue
-  * 优先级队列：PriorityBlockingQueue
-  * 其中提供了阻塞的take()和put()方法：如果队列是空的，take()将一直阻塞到队列中有内容，如果队列满了put()将阻塞到队列有空闲位置。他们响应中断，当收到中断请求的时候会抛出InterruptedException，提前结束阻塞状态。
-  * **SynchronousQueue**：并不是一个真正的队列，直接将任务移交给工作者线程。
+&nbsp;　　常用阻塞队列的实现：
+&nbsp;　　　-  FIFO队列：LinkedBlockingQueue、ArrayListBlockingQueue
+
+&nbsp;　　　- 优先级队列：PriorityBlockingQueue
+
+&nbsp;　　　- 其中提供了阻塞的take()和put()方法：如果队列是空的，take()将一直阻塞到队列中有内容，如果队列满了put()将阻塞到队列有空闲位置。他们响应中断，当收到中断请求的时候会抛出InterruptedException，提前结束阻塞状态。
+
+&nbsp;　　　- **SynchronousQueue**：并不是一个真正的队列，直接将任务移交给工作者线程。
 
 ##### 11 Executor框架、线程池
 
-* 为什么要使用线程池？
+&nbsp;　　为什么要使用线程池？
 
-  * **资源方面（内存、CPU）**：创建新的线程需要消耗相当一部分内存，增大垃圾回收的压力；
-  * **时间方面**：创建线程需要消耗一定时间，带来请求处理的延迟并且需要在JVM与操作系统之间切换进行相应处理。
-  * 通过调整线程池中的线程数，可以强制超出限制的线程等待，直到有线程可以处理它，他们等待时所消耗的资源要比额外线程所消耗的资源少，可以防止资源崩溃。
+&nbsp;　　　-  **资源方面（内存、CPU）**：创建新的线程需要消耗相当一部分内存，增大垃圾回收的压力；
 
-* ThreadPool类别
+&nbsp;　　　- **时间方面**：创建线程需要消耗一定时间，带来请求处理的延迟并且需要在JVM与操作系统之间切换进行相应处理。
 
-  * Executor：执行任务的对象，提供一种将任务提交与任务运行分离开的方法--execute()方法。
+&nbsp;　　　-  通过调整线程池中的线程数，可以强制超出限制的线程等待，直到有线程可以处理它，他们等待时所消耗的资源要比额外线程所消耗的资源少，可以防止资源崩溃。
 
-  * **ExecutorService**：extends Executor,对Executor的扩展，管理生命周期
+&nbsp;　　ThreadPool类别
 
-  * **Executors:**是Executor、Callable的工厂
+&nbsp;　　　- Executor：执行任务的对象，提供一种将任务提交与任务运行分离开的方法--execute()方法。
+
+&nbsp;　　　- **ExecutorService**：extends Executor,对Executor的扩展，管理生命周期
+
+&nbsp;　　　- **Executors:**是Executor、Callable的工厂
 
     ```java
     ExecutorService exec = Executors.newCachedThreadPool();//创建一个可根据需要创建新线程的线程池（最大为Integer.MAXVALUE）闲置 60 秒的线程将终止并从缓存中删除。【等待队列】，因为池是无限的，所以使用了SynchronousQueue，任务直接提交给工作线程提高了效率。
@@ -148,9 +159,9 @@ public void set(T value) {
     exec.execute(new LiftOff());        //LitOff十一个Runnable类
     ```
 
-  * **【使用场景】：**只有当任务彼此独立的时候才能使用有限池，否则可能引发饥饿死锁。
+&nbsp;　　**【使用场景】：**只有当任务彼此独立的时候才能使用有限池，否则可能引发饥饿死锁。
 
-  * **创建周期任务**
+&nbsp;　　**创建周期任务**
 
     ```java
     ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
@@ -158,31 +169,40 @@ public void set(T value) {
     service.scheduleWithFixedDelay(new ScheduledExecutorTest("job2"), initialDelay2,delay2, TimeUnit.SECONDS); // 从现在开始initialDelay2秒钟之后第一个线程开始，每个线程结束之后间隔delay2秒钟执行一次job2，每次执行时间为上一次任务结束后向后推一个时间间隔
     ```
 
-* **关闭Executor**
+&nbsp;　　**关闭Executor**
 
-  * **ExecutorService**生命周期有3种状态：运行、关闭、终止
-  * shutdown():停止接受新的任务，等待已提交任务的完成
-  * shutdownNow():首先尝试关闭正在执行的任务，暂停处理正在等待的任务，返回等待执行的任务列表
-  * isShutdown():判断此执行程序是否已经关闭
-  * isTerminated():如果shutdown/shutdownNow之后所有任务都已经关闭返回true
-  * awaitTermination():等待executorService到达terminated状态
+&nbsp;　　　**ExecutorService**生命周期有3种状态：运行、关闭、终止
+&nbsp;　　　-shutdown():停止接受新的任务，等待已提交任务的完成
+&nbsp;　　　-shutdownNow():首先尝试关闭正在执行的任务，暂停处理正在等待的任务，返回等待执行的任务列表
+&nbsp;　　　-isShutdown():判断此执行程序是否已经关闭
+&nbsp;　　　-isTerminated():如果shutdown/shutdownNow之后所有任务都已经关闭返回true
+&nbsp;　　　-awaitTermination():等待executorService到达terminated状态
 
-* **Callable、Future、FutureTask**
+&nbsp;　　**Callable、Future、FutureTask**
 
-  * Runnable中的run()方法没有返回值并且不能抛出CheckedException
-  * **Callable**是可以返回结果并且可以抛出异常的任务。
-  * **Executor**执行**任务的生命周期**有4个阶段：创建、提交、开始和完成。**Future**描述了任务的生命周期
-  * **a.**ExectorService.submit(Callable/Runnable)方法会返回一个Future对象
-    * **Future对象API:**
-    * cancel(boolean mayInterruptIfRunning)：试图取消对此任务的执行，如果任务已经启动，则根据参数判断是否可以中断任务。此方法返回后，对 isDone() 的后续调用将始终返回 true。如果此方法返回 true，则对 isCancelled() 的后续调用将始终返回 true。
-    * get()：如果任务已完成则立即返回或抛出异常，如果任务没有完成，会一直阻塞到任务完成。
-    * get(long timeout,TimeUnit unit)可以通过不断调用timeout为0个get来判断任务是否已经执行完毕。
-  * 显示地为某个任务指定的Runnable或Callable 实例化一个FutureTask。
-    * executorService.newTaskFor(Callable<T> task)可以返回一个FutureTask对象，可以把它交给executorService执行
+&nbsp;　　　- Runnable中的run()方法没有返回值并且不能抛出CheckedException
 
-* **ThreadPollExecutor、饱和策略**
+&nbsp;　　　- **Callable**是可以返回结果并且可以抛出异常的任务。
 
-  * 当Executors提供的几种线程池不能满足我们的需求时，可以通过ThreadPollExecutor的构造方法来定制线程池。
+&nbsp;　　　-**Executor**执行**任务的生命周期**有4个阶段：创建、提交、开始和完成。**Future**描述了任务的生命周期
+
+&nbsp;　　　- **a.**ExectorService.submit(Callable/Runnable)方法会返回一个Future对象
+
+&nbsp;　　**Future对象API:**
+
+&nbsp;　　　-cancel(boolean mayInterruptIfRunning)：试图取消对此任务的执行，如果任务已经启动，则根据参数判断是否可以中断任务。此方法返回后，对 isDone() 的后续调用将始终返回 true。如果此方法返回 true，则对 isCancelled() 的后续调用将始终返回 true。
+
+&nbsp;　　　-get()：如果任务已完成则立即返回或抛出异常，如果任务没有完成，会一直阻塞到任务完成。
+
+&nbsp;　　　-get(long timeout,TimeUnit unit)可以通过不断调用timeout为0个get来判断任务是否已经执行完毕。
+
+&nbsp;　　　显示地为某个任务指定的Runnable或Callable 实例化一个FutureTask。
+  
+&nbsp;　　　-executorService.newTaskFor(Callable<T> task)可以返回一个FutureTask对象，可以把它交给executorService执行
+
+&nbsp;　　**ThreadPollExecutor、饱和策略**
+
+&nbsp;　　当Executors提供的几种线程池不能满足我们的需求时，可以通过ThreadPollExecutor的构造方法来定制线程池。
 
     ```java
     public ThreadPoolExecutor(int corePoolSize, //核心池大小
@@ -194,11 +214,11 @@ public void set(T value) {
          RejectedExecutionHandler handler) //饱和策略
     ```
 
-  * **饱和策略**：当一个队列充满后或者任务提交到了一个已经被关闭的Executor时，将会用到饱和策略。可以通过`RejectedExecutionHandler`或者调用`setRejectedExecutionHandler()`方法来修改
+&nbsp;　　**饱和策略**：当一个队列充满后或者任务提交到了一个已经被关闭的Executor时，将会用到饱和策略。可以通过`RejectedExecutionHandler`或者调用`setRejectedExecutionHandler()`方法来修改
 
-* **ThreadFactory**
+&nbsp;　　**ThreadFactory**
 
-  * ThreadFactory是一个工厂接口，只有一个方法newThread(Runnable r), 通过编写定制的ThreadFactory可以定制由Executor创建的线程的属性（后台、优先级、名称）.
+&nbsp;　　　-ThreadFactory是一个工厂接口，只有一个方法newThread(Runnable r), 通过编写定制的ThreadFactory可以定制由Executor创建的线程的属性（后台、优先级、名称）.
 
     ```java
     public class DaemonThreadFactory implements ThreadFactory{
