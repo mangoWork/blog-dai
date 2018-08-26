@@ -2,41 +2,46 @@
 
 ##### 1. Java线程的几种状态
 
-* JDK从1.5开始在Thread类中增添了State枚举 **NEW(新建)**、**RUNNABLE(当线程正在运行或者已经就绪正等待CPU时间片)**、**BLOCKED(阻塞)**、**WAITING(无期限等待)**、**TIMED_WAITING(限期等待)**、**TERMINATED(死亡)**六种.
+&nbsp;　　JDK从1.5开始在Thread类中增添了State枚举 **NEW(新建)**、**RUNNABLE(当线程正在运行或者已经就绪正等待CPU时间片)**、**BLOCKED(阻塞)**、**WAITING(无期限等待)**、**TIMED_WAITING(限期等待)**、**TERMINATED(死亡)**六种.
 
-* **阻塞**线程在等待获取对象同步锁时
+&nbsp;　　 **阻塞**线程在等待获取对象同步锁时
 
-* **Waiting**：调用不带超时的wait()或者不带超时的join()
+&nbsp;　　 **Waiting**：调用不带超时的wait()或者不带超时的join()
 
-* **TIMED_WAITING**：调用sleep(xx)、或者带超时的wait、join
+&nbsp;　　 **TIMED_WAITING**：调用sleep(xx)、或者带超时的wait、join
 
   ![](../img/java/thread_status.png)
 
 
 ##### 2. 线程安全
 
-* **线程安全:**当多个线程访问同一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或在调用方法时进行任何其他协调，调用对象都能得到正确结果，那么就成这个对象是线程安全的。（这属于绝对线程安全）
-* 线程安全可以分为5类：**不可变、绝对线程安全、相对线程安全、线程兼容和线程对立**
-* **不可变:**永远也不会改变，根本不存在线程安全问题。
-  * Jdk种不可变得对象有：String、Long/Double等包装类、BigInteger、BigDecimal等大数据类型。AtomicInteger和AtomicLong不是不可变对象
-* **绝对线程安全：**
-* **相对线程安全：** Vector、HashTable、Collections.synchronizedCollection()
-* **线程兼容：**对象本身并非线程安全，但是可以通过外部调用的同步保证线程安全：ArrayList、HashMap等大部分类
-* **线程对立：**调用端无论是否采取同步措施都不是线程安全的System.setIn和System.setOut。
-* 五个特性：**共享性、互斥性、原子性、可见性、有序性**
-* **线程安全的实现方法：**
-  * **互斥/阻塞同步：（悲观锁）**
-    * **synchronized**：编译后在同步代码段的前后加上monitorenter、monitorexit两个指令；对同一线程来说是可重入的。因为java线程是映射到操作系统的原生线程之上的，阻塞或唤醒一个线程都需要从用户态切换到核心态，状态转换的时间可能比执行同步代码的时间还要长，所以synchronized是一个重量级的操作。
-    * ReentrantLock(**重入锁**)**：**也是一个重量级的操作，在语义上与synchronized相同，但是可以进行更精细的控制：等待可中断（可以尝试获取锁）、公平锁（当多个线程都等待同一个锁时必须按照时间顺序获得锁）、锁绑定多个条件（可以同时绑定多个Condition对象）
-  * 非阻塞同步：（乐观锁）
-    * 先进性操作，如果没有其他线程争用共享数据就操作成功了，如果有就尝产生了冲突，然后在采取其他措施补偿（最常见的就是不断尝试，直到成功）**CAS指令** **例如**:AtomicInteger.incrementAndGet()方法的原子性
-  * 无同步方案
-    * **可重入代码**：不依赖存储在堆上的数据和公用的系统资源，用到的状态量都由参数传入、不调用非可重入的方法 
+&nbsp;　　**线程安全:**当多个线程访问同一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或在调用方法时进行任何其他协调，调用对象都能得到正确结果，那么就成这个对象是线程安全的。（这属于绝对线程安全）
+&nbsp;　　线程安全可以分为5类：**不可变、绝对线程安全、相对线程安全、线程兼容和线程对立**
+&nbsp;　　- **不可变:**永远也不会改变，根本不存在线程安全问题。Jdk种不可变得对象有：String、Long/Double等包装类、BigInteger、BigDecimal等大数据类型。AtomicInteger和AtomicLong不是不可变对象
+&nbsp;　　- **绝对线程安全：**
+&nbsp;　　- **相对线程安全：** Vector、HashTable、Collections.synchronizedCollection()
+&nbsp;　　- **线程兼容：**对象本身并非线程安全，但是可以通过外部调用的同步保证线程安全：ArrayList、HashMap等大部分类
+&nbsp;　　- **线程对立：**调用端无论是否采取同步措施都不是线程安全的System.setIn和System.setOut。
+
+&nbsp;　　五个特性：**共享性、互斥性、原子性、可见性、有序性**
+
+&nbsp;　　**线程安全的实现方法：**
+&nbsp;　　- **互斥/阻塞同步：（悲观锁）**
+&nbsp;　　　**synchronized**：编译后在同步代码段的前后加上monitorenter、monitorexit两个指令；对同一线程来说是可重入的。因为java线程是映射到操作系统的原生线程之上的，阻塞或唤醒一个线程都需要从用户态切换到核心态，状态转换的时间可能比执行同步代码的时间还要长，所以synchronized是一个重量级的操作。
+
+&nbsp;　　　ReentrantLock(**重入锁**)**：**也是一个重量级的操作，在语义上与synchronized相同，但是可以进行更精细的控制：等待可中断（可以尝试获取锁）、公平锁（当多个线程都等待同一个锁时必须按照时间顺序获得锁）、锁绑定多个条件（可以同时绑定多个Condition对象）
+    
+&nbsp;　　-  非阻塞同步（乐观锁）：
+&nbsp;　　　先进性操作，如果没有其他线程争用共享数据就操作成功了，如果有就尝产生了冲突，然后在采取其他措施补偿（最常见的就是不断尝试，直到成功）**CAS指令** **例如**:AtomicInteger.incrementAndGet()方法的原子性
+
+&nbsp;　　-  无同步方案
+&nbsp;　　　**可重入代码**：不依赖存储在堆上的数据和公用的系统资源，用到的状态量都由参数传入、不调用非可重入的方法 
 
 ##### 3.  **ThreadLocal的设计理念与作用**
 
-* 线程局部变量，是一种维护线程限制的方法。通常定义为private static类型。它提供了get与set访问器，为每个使用该变量的线程维护一份单独的拷贝，get总是返回当前线程通过set设置的最新的值。
-* 当我们在一个类的多个方法中想使用某个变量，但这个变量仅反映当前线程的状态时可以通过方法传参的形式，但是ThreadLocal更优雅。比如DAO的单例实现，它的属性Connection就不是线程安全的，这种情况就可以会用ThreadLocal，这样每次返回的都是同一个连接的副本。
+&nbsp;　　线程局部变量，是一种维护线程限制的方法。通常定义为private static类型。它提供了get与set访问器，为每个使用该变量的线程维护一份单独的拷贝，get总是返回当前线程通过set设置的最新的值。
+
+&nbsp;　　当我们在一个类的多个方法中想使用某个变量，但这个变量仅反映当前线程的状态时可以通过方法传参的形式，但是ThreadLocal更优雅。比如DAO的单例实现，它的属性Connection就不是线程安全的，这种情况就可以会用ThreadLocal，这样每次返回的都是同一个连接的副本。
 
 ```java
 public void set(T value) {
@@ -49,32 +54,38 @@ public void set(T value) {
 }
 ```
 
-* **实现机制：**
-* 每个Thread对象内部都有一个ThreadLocalMap,可以存放若干个以ThreadLocal为key的Entry对象;ThreadLocal对象就是当前线程ThreadLocalMap的访问入口
-* 当我们调用get方法时，现获取当前线程，然后获取当前线程的ThreadLocalMap, **ThreadLocalMap** **是使用** **ThreadLocal** **的弱引用作为** **Key** **的**，如果不为空就以当前ThreadLocal对象为key获取对应的value，如果为空就调用setInitialValue()方法（内部调用了initialValue方法产生value）
-* **ThreadLocal可能产生内存泄漏吗？**
-* ThreadLocalMap使用ThreadLocal的弱引用作为key，如果一个ThreadLocal没有外部强引用来引用它，那么系统 GC 的时候，这个ThreadLocal势必会被回收。这样一来，ThreadLocalMap中就会出现key为null的Entry，就没有办法访问这些key为null的Entry的value，如果当前线程再迟迟不结束的话，这些key为null的Entry的value就会一直存在一条强引用链：Thread Ref -> Thread -> ThreaLocalMap -> Entry -> value永远无法回收，造成内存泄漏。Jdk已经考虑到这点，它在每次get和set的时候都会清除Map中key为null的entry。但是当我们结合线程池使用的时候就不能避免了。因为线程在结束之后不会被GC回收而是放回池内待重用。
+&nbsp;　　**实现机制：**
+&nbsp;　　- 每个Thread对象内部都有一个ThreadLocalMap,可以存放若干个以ThreadLocal为key的Entry对象;ThreadLocal对象就是当前线程ThreadLocalMap的访问入口
+
+&nbsp;　　- 当我们调用get方法时，现获取当前线程，然后获取当前线程的ThreadLocalMap, **ThreadLocalMap** **是使用** **ThreadLocal** **的弱引用作为** **Key** **的**，如果不为空就以当前ThreadLocal对象为key获取对应的value，如果为空就调用setInitialValue()方法（内部调用了initialValue方法产生value）
+
+&nbsp;　　**ThreadLocal可能产生内存泄漏吗？**
+&nbsp;　　- ThreadLocalMap使用ThreadLocal的弱引用作为key，如果一个ThreadLocal没有外部强引用来引用它，那么系统 GC 的时候，这个ThreadLocal势必会被回收。这样一来，ThreadLocalMap中就会出现key为null的Entry，就没有办法访问这些key为null的Entry的value，如果当前线程再迟迟不结束的话，这些key为null的Entry的value就会一直存在一条强引用链：Thread Ref -> Thread -> ThreaLocalMap -> Entry -> value永远无法回收，造成内存泄漏。Jdk已经考虑到这点，它在每次get和set的时候都会清除Map中key为null的entry。但是当我们结合线程池使用的时候就不能避免了。因为线程在结束之后不会被GC回收而是放回池内待重用。
 
 ##### 4. 共享对象
 
-* **指令重排**：CPU可能会对输入的代码进行乱序执行优化，处理器会在计算之后将乱序执行的结果重组以确保其与顺序执行的结果是一致的。JVM的即时编译期中也有类似的指令重排优化。使用**volatile**可以禁止指令重排。
-* **使用同步**可以保证原子性和可见性
-* **volatile****语义：仅**保证了可见性不能保证原子性、禁止指令重排（通过添加内存屏障）
-* 线程封闭技术（不共享变量）也可以保证线程安全，可以通过栈限制或[ThreadLocal]()两种方式实现。
-* 创建后状态就不能变的对象是不可变对象，不可变对象天生线程安全。
+&nbsp;　　**指令重排**：CPU可能会对输入的代码进行乱序执行优化，处理器会在计算之后将乱序执行的结果重组以确保其与顺序执行的结果是一致的。JVM的即时编译期中也有类似的指令重排优化。使用**volatile**可以禁止指令重排。
+&nbsp;　　**使用同步**可以保证原子性和可见性
+&nbsp;　　**volatile****语义：仅**保证了可见性不能保证原子性、禁止指令重排（通过添加内存屏障）
+&nbsp;　　线程封闭技术（不共享变量）也可以保证线程安全，可以通过栈限制或[ThreadLocal]()两种方式实现。
+&nbsp;　　创建后状态就不能变的对象是不可变对象，不可变对象天生线程安全。
 
 ##### 5. 可见性是什么？实现方式？
 
-* **可见性**：一个线程修改了对象的状态后，其它线程能够真正看到改变。**Synchronized**和volatile和final可以实现内存可见性
-* **synchronized**：是通过“在unlock之前必须把变量值同步会主内存”这条规则实现
-* **final**是指被final修饰的字段在构造器中一旦初始化完成，并且构造器中没有this引用逃逸，那么在其他线程中就能看见final字段的值。
-* **volatile**的特殊规则：新值立即同步到主内存中，每次使用前都从主内存中刷新。
-* 一个类只有get/set方法都设为synchronized才能保证这个类是线程安全的，只将set方法设为synchronized并不能保证可见性，因为在调用非synchronized的get方法时并不能保证工作内存从主内存刷新数据，所以可能读到脏数据。
+&nbsp;　　**可见性**：一个线程修改了对象的状态后，其它线程能够真正看到改变。**Synchronized**和volatile和final可以实现内存可见性
+
+&nbsp;　　**synchronized**：是通过“在unlock之前必须把变量值同步会主内存”这条规则实现
+
+&nbsp;　　**final**是指被final修饰的字段在构造器中一旦初始化完成，并且构造器中没有this引用逃逸，那么在其他线程中就能看见final字段的值。
+
+&nbsp;　　**volatile**的特殊规则：新值立即同步到主内存中，每次使用前都从主内存中刷新。
+
+&nbsp;　　一个类只有get/set方法都设为synchronized才能保证这个类是线程安全的，只将set方法设为synchronized并不能保证可见性，因为在调用非synchronized的get方法时并不能保证工作内存从主内存刷新数据，所以可能读到脏数据。
 
 ##### 6. **Volatile的作用以及实现方式**
 
-* **作用：**内存可见性、禁止指令重排
-* **实现：**内存可见性是通过新值立即同步到主内存，以及每次使用前立即从主内存刷新；禁止指令重排是通过添加内存屏障的方式，即重排序时不能把后面的指令放到内存屏障之前。
+&nbsp;　　**作用：**内存可见性、禁止指令重排
+&nbsp;　　**实现：**内存可见性是通过新值立即同步到主内存，以及每次使用前立即从主内存刷新；禁止指令重排是通过添加内存屏障的方式，即重排序时不能把后面的指令放到内存屏障之前。
 
 ##### 7. this引用逃逸
 
@@ -415,4 +426,165 @@ wait() 方法应该在循环调用，因为当线程获取到 CPU 开始执行�
 
 （1）通过平衡生产者的生产能力和消费者的消费能力来提升整个系统的运行效率，这是生产者消费者模型最重要的作用
 （2）解耦，这是生产者消费者模型附带的作用，解耦意味着生产者和消费者之间的联系少，联系越少越可以独自发展而不需要收到相互的制约
+
+
+## 42. 写一个生产者-消费者队列
+
+可以通过阻塞队列实现,也可以通过wait-notify来实现.
+
+### 使用阻塞队列来实现
+
+```
+//消费者
+public class Producer implements Runnable{
+    private final BlockingQueue<Integer> queue;
+
+    public Producer(BlockingQueue q){
+        this.queue=q;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true){
+                Thread.sleep(1000);//模拟耗时
+                queue.put(produce());
+            }
+        }catch (InterruptedException e){
+
+        }
+    }
+
+    private int produce() {
+        int n=new Random().nextInt(10000);
+        System.out.println("Thread:" + Thread.currentThread().getId() + " produce:" + n);
+        return n;
+    }
+}
+//消费者
+public class Consumer implements Runnable {
+    private final BlockingQueue<Integer> queue;
+
+    public Consumer(BlockingQueue q){
+        this.queue=q;
+    }
+
+    @Override
+    public void run() {
+        while (true){
+            try {
+                Thread.sleep(2000);//模拟耗时
+                consume(queue.take());
+            }catch (InterruptedException e){
+
+            }
+
+        }
+    }
+
+    private void consume(Integer n) {
+        System.out.println("Thread:" + Thread.currentThread().getId() + " consume:" + n);
+
+    }
+}
+//测试
+public class Main {
+
+    public static void main(String[] args) {
+        BlockingQueue<Integer> queue=new ArrayBlockingQueue<Integer>(100);
+        Producer p=new Producer(queue);
+        Consumer c1=new Consumer(queue);
+        Consumer c2=new Consumer(queue);
+
+        new Thread(p).start();
+        new Thread(c1).start();
+        new Thread(c2).start();
+    }
+}
+```
+
+### 使用wait-notify来实现
+
+该种方式应该最经典,这里就不做说明了
+
+## 43. 如果你提交任务时，线程池队列已满，这时会发生什么
+
+如果你使用的LinkedBlockingQueue，也就是无界队列的话，没关系，继续添加任务到阻塞队列中等待执行，因为LinkedBlockingQueue可以近乎认为是一个无穷大的队列，可以无限存放任务；如果你使用的是有界队列比方说ArrayBlockingQueue的话，任务首先会被添加到ArrayBlockingQueue中，ArrayBlockingQueue满了，则会使用拒绝策略RejectedExecutionHandler处理满了的任务，默认是AbortPolicy。
+
+## 44. 为什么要使用线程池
+
+避免频繁地创建和销毁线程，达到线程对象的重用。另外，使用线程池还可以根据项目灵活地控制并发的数目。
+
+## 45. java中用到的线程调度算法是什么
+
+抢占式。一个线程用完CPU之后，操作系统会根据线程优先级、线程饥饿情况等数据算出一个总的优先级并分配下一个时间片给某个线程执行。
+
+## 46. Thread.sleep(0)的作用是什么
+
+由于Java采用抢占式的线程调度算法，因此可能会出现某条线程常常获取到CPU控制权的情况，为了让某些优先级比较低的线程也能获取到CPU控制权，可以使用Thread.sleep(0)手动触发一次操作系统分配时间片的操作，这也是平衡CPU控制权的一种操作。
+
+## 47. 什么是CAS
+
+CAS，全称为Compare and Swap，即比较-替换。假设有三个操作数：内存值V、旧的预期值A、要修改的值B，当且仅当预期值A和内存值V相同时，才会将内存值修改为B并返回true，否则什么都不做并返回false。当然CAS一定要volatile变量配合，这样才能保证每次拿到的变量是主内存中最新的那个值，否则旧的预期值A对某条线程来说，永远是一个不会变的值A，只要某次CAS操作失败，永远都不可能成功
+
+## 48. 什么是乐观锁和悲观锁
+
+乐观锁：乐观锁认为竞争不总是会发生，因此它不需要持有锁，将比较-替换这两个动作作为一个原子操作尝试去修改内存中的变量，如果失败则表示发生冲突，那么就应该有相应的重试逻辑。
+
+悲观锁：悲观锁认为竞争总是会发生，因此每次对某资源进行操作时，都会持有一个独占的锁，就像synchronized，不管三七二十一，直接上了锁就操作资源了。
+
+## 49. ConcurrentHashMap的并发度是什么?
+
+ConcurrentHashMap的并发度就是segment的大小，默认为16，这意味着最多同时可以有16条线程操作ConcurrentHashMap，这也是ConcurrentHashMap对Hashtable的最大优势，任何情况下，Hashtable能同时有两条线程获取Hashtable中的数据吗？
+
+## 50. Hashtable能同时有两条线程获取Hashtable中的数据吗？
+
+- 不能，HashTable容器使用的是synchronized来保证线程安全，在线程竞争比较激烈的情况下效率比较低下，因为当一个线程访问HashTable的同步方法时，其他线程访问HashTable的同步方法时，可能会进入阻塞或轮询状态。
+
+## 51. ConcurrentHashMap的工作原理
+
+ConcurrentHashMap在jdk 1.6和jdk 1.8实现原理是不同的.
+
+### jdk 1.6:
+
+ConcurrentHashMap是线程安全的，但是与Hashtablea相比，实现线程安全的方式不同。Hashtable是通过对hash表结构进行锁定，是阻塞式的，当一个线程占有这个锁时，其他线程必须阻塞等待其释放锁。ConcurrentHashMap是采用分离锁的方式，它并没有对整个hash表进行锁定，而是局部锁定，也就是说当一个线程占有这个局部锁时，不影响其他线程对hash表其他地方的访问。
+具体实现:ConcurrentHashMap内部有一个Segment<K,V>数组,该Segment对象可以充当锁。Segment对象内部有一个HashEntry<K,V>数组，于是每个Segment可以守护若干个桶(HashEntry),每个桶又有可能是一个HashEntry连接起来的链表，存储发生碰撞的元素。
+每个ConcurrentHashMap在默认并发级下会创建包含16个Segment对象的数组，每个数组有若干个桶，当我们进行put方法时，通过hash方法对key进行计算，得到hash值，找到对应的segment，然后对该segment进行加锁，然后调用segment的put方法进行存储操作，此时其他线程就不能访问当前的segment，但可以访问其他的segment对象，不会发生阻塞等待。
+
+### jdk 1.8
+
+在jdk 8中，ConcurrentHashMap不再使用Segment分离锁，而是采用一种乐观锁CAS算法来实现同步问题，但其底层还是“数组+链表->红黑树”的实现。
+
+## 52. CyclicBarrier和CountDownLatch区别
+
+这两个类非常类似，都在java.util.concurrent下，都可以用来表示代码运行到某个点上，二者的区别在于：
+
+- CyclicBarrier的某个线程运行到某个点上之后，该线程即停止运行，直到所有的线程都到达了这个点，所有线程才重新运行；CountDownLatch则不是，某线程运行到某个点上之后，只是给某个数值-1而已，该线程继续运行
+- CyclicBarrier只能唤起一个任务，CountDownLatch可以唤起多个任务
+- CyclicBarrier可重用，CountDownLatch不可重用，计数值为0该CountDownLatch就不可再用了
+
+## 53. java中的++操作符线程安全么?
+
+不是线程安全的操作。它涉及到多个指令，如读取变量值，增加，然后存储回内存，这个过程可能会出现多个线程交差
+
+## 54. 你有哪些多线程开发良好的实践?
+
+1. 给线程命名
+2. 最小化同步范围
+3. 优先使用volatile
+4. 尽可能使用更高层次的并发工具而非wait和notify()来实现线程通信,如BlockingQueue,Semeaphore
+5. 优先使用并发容器而非同步容器.
+6. 考虑使用线程池
+
+## 55. 可以创建Volatile数组吗?
+
+Java 中可以创建 volatile类型数组，不过只是一个指向数组的引用，而不是整个数组。如果改变引用指向的数组，将会受到volatile 的保护，但是如果多个线程同时改变数组的元素，volatile标示符就不能起到之前的保护作用了
+
+## 56. volatile能使得一个非原子操作变成原子操作吗?
+
+- volatile 修饰 long 和 double 变量，使其能按原子类型来读写。volatile 修复符的另一个作用是提供内存屏障（memory barrier），例如在分布式框架中的应用。简单的说，就是当你写一个 volatile 变量之前，Java 内存模型会插入一个写屏障（write barrier），读一个 volatile 变量之前，会插入一个读屏障（read barrier）。意思就是说，在你写一个 volatile 域时，能保证任何线程都能看到你写的值，同时，在写之前，也能保证任何数值的更新对所有线程是可见的，因为内存屏障会将其他所有写的值更新到缓存。
+
+## 57. volatile类型变量提供什么保证?
+
+volatile 主要有两方面的作用:1.避免指令重排2.可见性保证.例如，JVM 或者 JIT为了获得更好的性能会对语句重排序，但是 volatile 类型变量即使在没有同步块的情况下赋值也不会与其他语句重排序。 volatile 提供 happens-before 的保证，确保一个线程的修改能对其他线程是可见的。某些情况下，volatile 还能提供原子性，如读 64 位数据类型，像 long 和 double 都不是原子的(低32位和高32位)，但 volatile 类型的 double 和 long 就是原子的.
 
