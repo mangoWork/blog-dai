@@ -89,20 +89,21 @@ public void set(T value) {
 
 ##### 7. this引用逃逸
 
-* 是指在构造函数返回之前其他线程就持有该对象的引用。通常发生在以内部类的形式在构造函数中启动一个线程或者注册监听器。
-* **改进：**我们可以在构造方法中创建一个线程但是不要启动它。所以我们可以创建一个private的构造方法，然后创建一个工厂方法。
+&nbsp;　　是指在构造函数返回之前其他线程就持有该对象的引用。通常发生在以内部类的形式在构造函数中启动一个线程或者注册监听器。
+
+&nbsp;　　**改进：**我们可以在构造方法中创建一个线程但是不要启动它。所以我们可以创建一个private的构造方法，然后创建一个工厂方法。
 
 ##### 8.同步容器
 
-* HashMap、HashSet、ArrayList都不是线程安全的，Vector、HashTable是线程安全的。通过Collections.synchronizedList/Set/Map/SortedSet/SortedMap可以返回一个同步的对应集合
+&nbsp;　　HashMap、HashSet、ArrayList都不是线程安全的，Vector、HashTable是线程安全的。通过Collections.synchronizedList/Set/Map/SortedSet/SortedMap可以返回一个同步的对应集合
 
-* 使用Vector或者同步的List，返回的Iterator迭代器都是fail-fast的，这意味着如果在迭代过程中，任何其他线程修改List，都会失败，抛出上异常，若想避免该异常则必须在迭代期间对容器加锁。
+&nbsp;　　使用Vector或者同步的List，返回的Iterator迭代器都是fail-fast的，这意味着如果在迭代过程中，任何其他线程修改List，都会失败，抛出上异常，若想避免该异常则必须在迭代期间对容器加锁。
 
-* **以下类在迭代期间都无需对容器加锁**
+&nbsp;　　**以下类在迭代期间都无需对容器加锁**
 
-  CopyOnWriteArrayList、CopyOnWriteArraySet、[ConcurrentHashMap]()、ConcurrentLinkedQueue、ConcurrentSkipListMap(替代SortedMap)、ConcurrentSkipListSet(替代SortedSet)
+&nbsp;　　　- CopyOnWriteArrayList、CopyOnWriteArraySet、[ConcurrentHashMap]()、ConcurrentLinkedQueue、ConcurrentSkipListMap(替代SortedMap)、ConcurrentSkipListSet(替代SortedSet)
 
-* **CopyOnWriteArrayList**：底层维护一个volatile的基础数组，某线程在对容器修改的时候先显示获取锁（只能有一个线程修改），然后复制基础数组（保证了其他读线程不会出错），最后更新原数组（因为是volatile的，所以对其他读线程立即可见）。因为复制数组开销较大，所以适合元素少，修改操作少的情况。
+&nbsp;　　　- **CopyOnWriteArrayList**：底层维护一个volatile的基础数组，某线程在对容器修改的时候先显示获取锁（只能有一个线程修改），然后复制基础数组（保证了其他读线程不会出错），最后更新原数组（因为是volatile的，所以对其他读线程立即可见）。因为复制数组开销较大，所以适合元素少，修改操作少的情况。
 
 ##### 9. **HashTable、HashMap、ConcurrentHashMap的区别**
 
