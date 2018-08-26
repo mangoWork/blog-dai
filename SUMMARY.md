@@ -144,6 +144,7 @@
   * [Java面试](interview/java/README.md)
     * [Java基础知识点](interview/java/java.md)
     * [JVM知识点](interview/java/jvmzhi-shi-dian.md)
+    * [Java并发](interview/java/javabing-fa.md)
   * [Python](interview/python/README.md)
     * [Python基础知识点](interview/python/pythonji-chu-zhi-shi-dian.md)
   * [数据库](interview/database/README.md)
