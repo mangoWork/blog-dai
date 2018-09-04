@@ -290,7 +290,9 @@ class FlatSpec extends FlatSpecLike ...
 trait FlatSpecLike extends Suite with ShouldVerb with MustVerb with CanVerb with Informing …
 ```
 
-     小粒度的trait既有利于重用，同时还有利于对业务逻辑进行单元测试，尤其是当一部分逻辑需要依赖外部环境时，可以运用“关注点分离”的原则，将不依赖于外部环境的逻辑分离到单独的trait中。
+```
+ 小粒度的trait既有利于重用，同时还有利于对业务逻辑进行单元测试，尤其是当一部分逻辑需要依赖外部环境时，可以运用“关注点分离”的原则，将不依赖于外部环境的逻辑分离到单独的trait中。
+```
 
 14\) 优先使用不可变集合。如果确定要使用可变集合，应明确的引用可变集合的命名空间。不要用使用import scala.collection.mutable.\_；然后引用 Set，应该用下面的方式替代：
 
@@ -314,7 +316,9 @@ val orderedVotes = votes
    .reverse
 ```
 
-    上面的代码简洁并且正确，但几乎每个读者都不好理解作者的原本意图。一个策略是声明中间结果和参数：
+```
+上面的代码简洁并且正确，但几乎每个读者都不好理解作者的原本意图。一个策略是声明中间结果和参数：
+```
 
 ```scala
 val votes = Seq(("scala", 1), ("java", 4), ("scala", 10), ("scala", 1), ("python", 10))
@@ -327,6 +331,36 @@ val sumByLang = votesByLang.map {
 val orderedVotes = sumByLang.toSeq
   .sortBy { case (_, count) => count }
   .reverse
+```
+
+      代码也同样简洁，但更清晰的表达了转换的发生\(通过命名中间值\)，和正在操作的数据的结构\(通过命名参数\)。
+
+17\) 对于Options对象，如果getOrElse能够表达业务逻辑，就应避免对其使用模式匹配。许多集合的操作都提供了返回Options的方法。例如headOption等。
+
+```scala
+val x = list.headOption getOrElse 0
+```
+
+18\) 当需要对两个或两个以上的集合进行操作时，应优先考虑使用for表达式，而非map，flatMap等操作。此时，for comprehension会更简洁易读。例如，获取两个字符的所有排列，相同的字符不能出现两次。使用flatMap的代码为：
+
+```scala
+val chars = 'a' to 'z'
+ val perms = chars flatMap { a =>
+   chars flatMap { b =>
+     if (a != b) Seq("%c%c".format(a, b))
+     else Seq()
+   }
+ }
+```
+
+    使用for comprehension会更易懂：
+
+```scala
+ val perms = for {
+   a <- chars
+   b <- chars
+   if a != b
+ } yield "%c%c".format(a, b)
 ```
 
 
