@@ -333,7 +333,9 @@ val orderedVotes = sumByLang.toSeq
   .reverse
 ```
 
-      代码也同样简洁，但更清晰的表达了转换的发生\(通过命名中间值\)，和正在操作的数据的结构\(通过命名参数\)。
+```
+  代码也同样简洁，但更清晰的表达了转换的发生\(通过命名中间值\)，和正在操作的数据的结构\(通过命名参数\)。
+```
 
 17\) 对于Options对象，如果getOrElse能够表达业务逻辑，就应避免对其使用模式匹配。许多集合的操作都提供了返回Options的方法。例如headOption等。
 
@@ -353,7 +355,9 @@ val chars = 'a' to 'z'
  }
 ```
 
-    使用for comprehension会更易懂：
+```
+使用for comprehension会更易懂：
+```
 
 ```scala
  val perms = for {
