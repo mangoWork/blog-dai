@@ -18,7 +18,9 @@
 import jxl.write.{WritableCell, Number, Label}
 ```
 
-      当引入超过6个包的时候，应该使用通配符**\_**
+```
+  当引入超过6个包的时候，应该使用通配符**\_**
+```
 
 ```scala
 import org.scalatest.events._
@@ -37,11 +39,13 @@ import org.scalatest.events._
 
 5\) 集合的命名规范
 
-      xs, ys, as, bs等作为某种Sequence对象的名称；
+```
+  xs, ys, as, bs等作为某种Sequence对象的名称；
 
-      x, y, z, a, b作为sequence元素的名称。
+  x, y, z, a, b作为sequence元素的名称。
 
-     h作为head的名称，t作为tail的名称。
+ h作为head的名称，t作为tail的名称。
+```
 
 6）避免对简单的表达式采用花括号
 
@@ -57,8 +61,10 @@ def square(x: Int) = {
 
 7\) 泛型类型参数的命名虽然没有限制，但建议遵循如下规则：
 
-      A 代表一个简单的类型，例如List\[A\]  
-      B, C, D 用于第2、第3、第4等类型。例如：
+```
+  A 代表一个简单的类型，例如List\[A\]  
+  B, C, D 用于第2、第3、第4等类型。例如：
+```
 
 ```scala
  class List[A] {
@@ -89,7 +95,9 @@ list map {
 }
 ```
 
-        它很清晰的表达了 list中的元素都被映射，间接的方式让人不容易明白。此时，传入map的函数实则为partial function。
+```
+    它很清晰的表达了 list中的元素都被映射，间接的方式让人不容易明白。此时，传入map的函数实则为partial function。
+```
 
 2）避免使用null，而应该使用Option的None。
 
@@ -113,10 +121,12 @@ object CopyBytes extends App {
           if (in.isDefined) in.get.close
           if (out.isDefined) out.get.close
      }
-} 
+}
 ```
 
-      方法的返回值也要避免返回Null。应考虑返回Option，Either，或者Try。例如：
+```
+  方法的返回值也要避免返回Null。应考虑返回Option，Either，或者Try。例如：
+```
 
 ```scala
 import scala.util.{Try, Success, Failure} 
@@ -223,6 +233,51 @@ sealed trait Message
 case class GetCustomers extends Message
 case class GetOrders extends Message
 // 注：这里的sealed，表示trait的所有实现都必须声明在定义trait的文件中。
+```
+
+10\) 考虑使用renaming clause来简化代码。例如，替换被频繁使用的长名称方法：
+
+```scala
+import System.out.{println => p}
+
+p("hallo scala")
+p("input") 
+```
+
+11\) 在遍历Map对象或者Tuple的List时，且需要访问map的key和value值时，优先考虑采用Partial Function，而非使用\_1和\_2的形式。例如：
+
+```scala
+al dollar = Map("China" -> "CNY", "US" -> "DOL")
+
+//perfer
+dollar.foreach {
+     case (country, currency) => println(s"$country -> $currency")
+}
+
+//avoid
+dollar.foreach ( x => println(s"$x._1 -> $x._2") )
+```
+
+    或者，考虑使用for comprehension：
+
+```scala
+for ((country, currency) <- dollar) println(s"$country -> $currency")
+```
+
+12\) 遍历集合对象时，如果需要获得并操作集合对象的下标，不要使用如下方式：
+
+```scala
+val l = List("zero", "one", "two", "three")
+
+for (i <- 0 until l.length) yield (i, l(i))
+```
+
+而应该使用zipWithIndex方法：
+
+```scala
+for ((number, index) <- l.zipWithIndex) yield (index, number)
+// 或者
+l.zipWithIndex.map(x => (x._2, x._1))
 ```
 
 
