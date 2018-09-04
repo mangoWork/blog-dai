@@ -241,7 +241,7 @@ case class GetOrders extends Message
 import System.out.{println => p}
 
 p("hallo scala")
-p("input") 
+p("input")
 ```
 
 11\) 在遍历Map对象或者Tuple的List时，且需要访问map的key和value值时，优先考虑采用Partial Function，而非使用\_1和\_2的形式。例如：
@@ -258,7 +258,9 @@ dollar.foreach {
 dollar.foreach ( x => println(s"$x._1 -> $x._2") )
 ```
 
-    或者，考虑使用for comprehension：
+```
+或者，考虑使用for comprehension：
+```
 
 ```scala
 for ((country, currency) <- dollar) println(s"$country -> $currency")
@@ -278,6 +280,53 @@ for (i <- 0 until l.length) yield (i, l(i))
 for ((number, index) <- l.zipWithIndex) yield (index, number)
 // 或者
 l.zipWithIndex.map(x => (x._2, x._1))
+```
+
+13\) 应尽量定义小粒度的trait，然后再以混入的方式继承多个trait。例如ScalaTest中的FlatSpec：
+
+```scala
+class FlatSpec extends FlatSpecLike ...
+
+trait FlatSpecLike extends Suite with ShouldVerb with MustVerb with CanVerb with Informing …
+```
+
+     小粒度的trait既有利于重用，同时还有利于对业务逻辑进行单元测试，尤其是当一部分逻辑需要依赖外部环境时，可以运用“关注点分离”的原则，将不依赖于外部环境的逻辑分离到单独的trait中。
+
+14\) 优先使用不可变集合。如果确定要使用可变集合，应明确的引用可变集合的命名空间。不要用使用import scala.collection.mutable.\_；然后引用 Set，应该用下面的方式替代：
+
+```scala
+import scala.collections.mutable
+val set = mutable.Set() //这样更明确在使用一个可变集合。
+```
+
+15\) 在自己定义的方法和构造函数里，应适当的接受最宽泛的集合类型。通常可以归结为一个: Iterable, Seq, Set, 或 Map。如果你的方法需要一个 sequence，使用 Seq\[T\]，而不是List\[T\]。这样可以分离集合与它的实现，从而达成更好的可扩展性。
+
+16\) 应谨慎使用流水线转换的形式。当流水线转换的逻辑比较复杂时，应充分考虑代码的可读性，准确地表达开发者的意图，而不过分追求函数式编程的流水线转换风格。例如，我们想要从一组投票结果\(语言，票数\)中统计不同程序语言的票数并按照得票的顺序显示：
+
+```scala
+val votes = Seq(("scala", 1), ("java", 4), ("scala", 10), ("scala", 1), ("python", 10))
+val orderedVotes = votes
+   .groupBy(_._1)
+   .map { case (which, counts) =>
+     (which, counts.foldLeft(0)(_ + _._2))
+   }.toSeq
+   .sortBy(_._2)
+   .reverse
+```
+
+    上面的代码简洁并且正确，但几乎每个读者都不好理解作者的原本意图。一个策略是声明中间结果和参数：
+
+```scala
+val votes = Seq(("scala", 1), ("java", 4), ("scala", 10), ("scala", 1), ("python", 10))
+val votesByLang = votes.groupBy { case (lang, _) => lang }
+val sumByLang = votesByLang.map {
+        case (lang, counts) =>
+                val countsOnly = counts.map { case (_, count) => count }
+                (lang, countsOnly.sum)
+}
+val orderedVotes = sumByLang.toSeq
+  .sortBy { case (_, count) => count }
+  .reverse
 ```
 
 
