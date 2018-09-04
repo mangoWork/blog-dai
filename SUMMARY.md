@@ -154,4 +154,6 @@
   * [markdown编辑语法说明](other/markdown/README.md)
     * [markdown公式语法](other/markdown/markdowngong-shi-yu-fa.md)
   * [面试](other/Interview/README.md)
+  * [编码规范](other/coderole/README.md)
+    * [Scala编码规范](other/coderole/scalabian-ma-gui-fan.md)
 
