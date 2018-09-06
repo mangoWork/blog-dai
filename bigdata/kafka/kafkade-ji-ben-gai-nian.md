@@ -32,3 +32,5 @@ Topic是发布的消息的类别。对于每一个Topic，Kafka集群维护着�
 
 ![](/bigdata/kafka/img/topic1.png)
 
+
+
