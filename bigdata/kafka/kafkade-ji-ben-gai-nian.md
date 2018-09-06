@@ -59,3 +59,29 @@
 
 &nbsp;　　2个kafka集群托管4个分区（P0-P3），2个消费者组，消费组A有2个消费者实例，消费组B有4个
 
+
+作者：半兽人
+链接：http://orchome.com/5
+来源：OrcHome
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+&nbsp;　　Kafka获取消息采用了一种分而治之的策略：**分区**。 因为Topic分区中消息只能由消费者组中的唯一一个消费者处理，所以消息肯定是按照先后顺序进行处理的。但是它也仅仅是保证Topic的一个分区顺序处理，不能保证跨分区的消息先后处理顺序。 所以，如果你想要顺序的处理Topic的所有消息，那就只提供一个分区。
+
+##### Kafka的保证
+
+&nbsp;　　生产者发送到一个特定的Topic的分区上，消息将会按照它们发送的顺序依次加入，也就是说，如果一个消息M1和M2使用相同的producer发送，M1先发送，那么M1将比M2的offset低，并且优先的出现在日志中。
+&nbsp;　　消费者收到的消息也是此顺序。
+&nbsp;　　如果一个Topic配置了复制因子（replication factor）为N， 那么可以允许N-1服务器宕机而不丢失任何已经提交（committed）的消息。
+
+
+##### kafka的优
+&nbsp;　　可扩展。Kafka集群可以透明的扩展，增加新的服务器进集群。
+&nbsp;　　高性能。Kafka性能远超过传统的ActiveMQ、RabbitMQ等，Kafka支持Batch操作。
+&nbsp;　　容错性。Kafka每个Partition数据会复制到几台服务器，当某个Broker失效时，Zookeeper将通知生产者和消费者从而使用其他的Broker。
+
+##### kafka缺点：
+
+&nbsp;　　重复消息。Kafka保证每条消息至少送达一次，虽然几率很小，但一条消息可能被送达多次。
+&nbsp;　　消息乱序。Kafka某一个固定的Partition内部的消息是保证有序的，如果一个Topic有多个Partition，partition之间的消息送达不保证有序。
+&nbsp;　　复杂性。Kafka需要Zookeeper的支持，Topic一般需要人工创建，部署和维护比一般MQ成本更高。
+
