@@ -119,6 +119,7 @@
     * HBase深入了解
     * HBase高级应用
   * [Kafka](bigdata/kafka/README.md)
+    * [Kafka的基本概念](bigdata/kafka/kafkade-ji-ben-gai-nian.md)
 * [机器学习](machine/README.md)
   * [机器学习-周志华](machine/machine-zhou/README.md)
     * [第一章  绪论](machine/machine-zhou/chapter1/README.md)
