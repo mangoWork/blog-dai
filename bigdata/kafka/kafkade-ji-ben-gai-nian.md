@@ -30,5 +30,5 @@
 
 Topic是发布的消息的类别。对于每一个Topic，Kafka集群维护着一个分区的log，如下图所示：
 
-!\[\]\(./img/topic1.png\)
+![](/bigdata/kafka/img/topic1.png)
 
