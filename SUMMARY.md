@@ -98,6 +98,7 @@
     * [Hadoop集群安装](bigdata/hadoop/hadoopji-qun-an-zhuang.md)
     * [Hadoop中的概念](bigdata/hadoop/Hadoop_de_gai_nian.md)
   * [Storm](./bigdata/storm/README.md)
+    * [storm基本概念](bigdata/storm/stormji-ben-gai-nian.md)
   * [Spark](./bigdata/spark/README.md)
     * [Spakr基础知识](bigdata/spark/spakrji-chu-zhi-shi.md)
     * [Spark编程](bigdata/spark/spark.md)
