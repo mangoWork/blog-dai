@@ -82,4 +82,51 @@
 
 &nbsp;　　如果您无法执行这些操作，可能会使已提交的偏移超过消耗的位置，从而导致缺少记录。 使用手动偏移控制的优点是，您可以直接控制记录何时被视为“已消耗”。
 
-&nbsp;　　注意：使用自动提交也可以“至少一次”。但是要求你必须下次调用poll（long）之前或关闭消费者之前，处理完所有返回的数据。如果操作失败，这将会导致已提交的offset超过消费的位置，从而导致丢失消息。使用手动控制offset的有点是，你可以直接控制消息何时提交。、
+&nbsp;　　注意：使用自动提交也可以“至少一次”。但是要求你必须下次调用poll（long）之前或关闭消费者之前，处理完所有返回的数据。如果操作失败，这将会导致已提交的offset超过消费的位置，从而导致丢失消息。使用手动控制offset的有点是，你可以直接控制消息何时提交。
+
+#### 订阅指定分区
+
+```java
+     String topic = "foo";
+     TopicPartition partition0 = new TopicPartition(topic, 0);
+     TopicPartition partition1 = new TopicPartition(topic, 1);
+     consumer.assign(Arrays.asList(partition0, partition1));
+```
+
+&nbsp;　　一旦手动分配分区，你可以在循环中调用poll（跟前面的例子一样）。消费者分组仍需要提交offset，只是现在分区的设置只能通过调用assign修改，因为手动分配不会进行分组协调，因此消费者故障不会引发分区重新平衡。每一个消费者是独立工作的（即使和其他的消费者共享GroupId）。为了避免offset提交冲突，通常你需要确认每一个consumer实例的gorupId都是唯一的。
+
+&nbsp;　　注意，手动分配分区（即，assgin）和动态分区分配的订阅topic模式（即，subcribe）不能混合使用。
+
+#### offset存储在其他地方
+
+&nbsp;　　每个消息都有自己的offset，所以要管理自己的偏移，你只需要做到以下几点：
+
+&nbsp;　　　　配置 enable.auto.commit=false
+
+&nbsp;　　　　使用提供的 ConsumerRecord 来保存你的位置。
+
+&nbsp;　　在重启时用 seek(TopicPartition, long) 恢复消费者的位置。
+
+&nbsp;　　当分区分配也是手动完成的（像上文搜索索引的情况），这种类型的使用是最简单的。 如果分区分配是自动完成的，需要特别小心处理分区分配变更的情况。可以通过调用subscribe（Collection，ConsumerRebalanceListener）和subscribe（Pattern，ConsumerRebalanceListener）中提供的ConsumerRebalanceListener实例来完成的。例如，当分区向消费者获取时，消费者将通过实现ConsumerRebalanceListener.onPartitionsRevoked（Collection）来给这些分区提交它们offset。当分区分配给消费者时，消费者通过ConsumerRebalanceListener.onPartitionsAssigned(Collection)为新的分区正确地将消费者初始化到该位置。
+
+&nbsp;　　ConsumerRebalanceListener的另一个常见用法是清除应用已移动到其他位置的分区的缓存。
+
+#### 控制消费者位置
+
+&nbsp;　　大多数情况下，消费者只是简单的从头到尾的消费消息，周期性的提交位置（自动或手动）。kafka也支持消费者去手动的控制消费的位置，可以消费之前的消息也可以跳过最近的消息。
+
+&nbsp;　　有几种情况，手动控制消费者的位置可能是有用的。
+
+&nbsp;　　　　一种场景是对于时间敏感的消费者处理程序，对足够落后的消费者，直接跳过，从最近的消费开始消费。
+
+&nbsp;　　　　另一个使用场景是本地状态存储系统（上一节说的）。在这样的系统中，消费者将要在启动时初始化它的位置（无论本地存储是否包含）。同样，如果本地状态已被破坏（假设因为磁盘丢失），则可以通过重新消费所有数据并重新创建状态（假设kafka保留了足够的历史）在新的机器上重新创建。
+
+&nbsp;　　kafka使用seek(TopicPartition, long)指定新的消费位置。用于查找服务器保留的最早和最新的offset的特殊的方法也可用（seekToBeginning(Collection) 和 seekToEnd(Collection)）。
+
+#### 消费者流量控制
+
+&nbsp;　　如果消费者分配了多个分区，并同时消费所有的分区，这些分区具有相同的优先级。在一些情况下，消费者需要首先消费一些指定的分区，当指定的分区有少量或者已经没有可消费的数据时，则开始消费其他分区。
+
+&nbsp;　　例如流处理，当处理器从2个topic获取消息并把这两个topic的消息合并，当其中一个topic长时间落后另一个，则暂停消费，以便落后的赶上来。
+
+&nbsp;　　kafka支持动态控制消费流量，分别在future的poll(long)中使用pause(Collection) 和 resume(Collection) 来暂停消费指定分配的分区，重新开始消费指定暂停的分区。
