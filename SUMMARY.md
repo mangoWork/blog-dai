@@ -122,6 +122,7 @@
     * [Kafka的基本概念](bigdata/kafka/kafkade-ji-ben-gai-nian.md)
     * [Kafka中的API的详解](bigdata/kafka/kafkazhong-de-api-de-xiang-jie.md)
     * [Kafka客户端基本概念](bigdata/kafka/kafkake-hu-duan-ji-ben-gai-nian.md)
+    * [Kafka中leader选举](bigdata/kafka/kafkazhong-leader-xuan-ju.md)
 * [机器学习](machine/README.md)
   * [机器学习-周志华](machine/machine-zhou/README.md)
     * [第一章  绪论](machine/machine-zhou/chapter1/README.md)
