@@ -1,3 +1,5 @@
+[toc]
+
 ### Kafka中的API介绍
 
 #### Kafka发送消息(Record)到集群
