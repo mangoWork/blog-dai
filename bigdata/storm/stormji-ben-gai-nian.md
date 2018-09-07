@@ -32,3 +32,4 @@ Reliability：可靠性。Storm 可以通过拓扑来确保每个发送的元组
 
 &nbsp;　　具体流程是怎么走，可以通过查看下面这张图来进行了解。示例图:
 
+![](./img/Topologyproccess.png)
