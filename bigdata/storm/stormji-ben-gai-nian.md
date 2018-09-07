@@ -34,3 +34,9 @@ Reliability：可靠性。Storm 可以通过拓扑来确保每个发送的元组
 
 ![](./img/Topologyproccess.png)
 
+&nbsp;　　图片有三种模式，解释如下:
+&nbsp;　　　第一种比较简单，就是由一个Spout获取数据，然后交给一个Bolt进行处理;
+&nbsp;　　　第二种稍微复杂点，由一个Spout获取数据，然后交给一个Bolt进行处理一部分，然后在交给下一个Bolt进行处理其他部分。
+&nbsp;　　　第三种则比较复杂，一个Spout可以同时发送数据到多个Bolt，而一个Bolt也可以接受多个Spout或多个Bolt，最终形成多个数据流。但是这种数据流必须是有方向的，有起点和终点，不然会造成死循环，数据永远也处理不完。就是Spout发给Bolt1，Bolt1发给Bolt2，Bolt2又发给了Bolt1,最终形成了一个环状。
+
+Storm 集群安装
