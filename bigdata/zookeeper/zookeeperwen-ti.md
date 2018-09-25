@@ -94,3 +94,22 @@
 create -s /NODE_NAME DATA    # -e参数为创建临时节点，如果不带参数则创建持久节点
 ```
 
+### Zookeeper的角色都有哪些以及作用？
+
+&nbsp;　　**观察者**：提交来自群首的提议。观察者不参选举过程。引入观察者的一个主要原因是提高读请求的可扩展性；
+
+
+
+**Follower:**
+
+&nbsp;　　Follower的逻辑就比较简单了。除了响应本服务器上的读请求外，follower还要处理leader的提议，并在leader提交该提议时在本地也进行提交。Follower处理提议的过程已经在ZAB一章中描述过了。
+
+&nbsp;　　另外需要注意的是，leader和follower构成ZooKeeper集群的法定人数，也就是说，只有他们才参与新leader的选举、响应leader的提议。
+
+**Observer:**
+
+&nbsp;　　如果ZooKeeper集群的读取负载很高，或者客户端多到跨机房，可以设置一些observer服务器，以提高读取的吞吐量。Observer和Follower比较相似，只有一些小区别：首先observer不属于法定人数，即不参加选举也不响应提议；其次是observer不需要将事务持久化到磁盘，一旦observer被重启，需要从leader重新同步整个名字空间。
+
+---------------------
+
+本文来自 damipingzi 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/mayp1/article/details/52026797?utm_source=copy  
