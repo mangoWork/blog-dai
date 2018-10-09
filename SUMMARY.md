@@ -105,6 +105,7 @@
     * [作业执行解析](bigdata/spark/zuoye-zhixing-jie-xi.md)
     * [Spark任务执行流程](bigdata/spark/Spark-task-progrese.md)
     * [Spark常用API介绍](bigdata/spark/sparkchang-yong-api-jie-shao.md)
+    * [Spark常见问题](bigdata/spark/sparkchang-jian-wen-ti.md)
   * [大数据算法](bigdata/algorithm/README.md)
     * [文本相似算法](bigdata/algorithm/txt_algorithm/README.md)
       * [余玄相似度算法](bigdata/algorithm/txt_algorithm/yu-xuan-xiang-si-du-suan-fa.md)
