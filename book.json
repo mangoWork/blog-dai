@@ -21,6 +21,16 @@
         "editlink": {
           "base": "https://github.com/mangoWork/blog-dai",
           "label": "编辑本页面"
-        },     
+        }, 
+        "pdf": {
+            "pageNumbers": true,
+            "fontSize": 13,
+            "margin": {
+              "right": 10,
+              "left": 10,
+              "top": 10,
+              "bottom": 15
+            }   
+        }
     }
 }
