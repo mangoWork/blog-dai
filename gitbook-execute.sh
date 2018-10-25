@@ -67,13 +67,8 @@ fi
 
 if [[ $v_flag -gt 0 ]]; then    
     gitbook build  --output=${dai_base}/blog-dai
-    # Generate a PDF file
     gitbook pdf ./ ${dai_base}/blog-dai/_book/mango.pdf
-     
-    # Generate an ePub file
     gitbook epub ./ ${dai_base}/blog-dai/_book/mango.epub
-     
-    # Generate a Mobi file
     gitbook mobi ./ ${dai_base}/blog-dai/_book/mango.mobi
     
 fi
