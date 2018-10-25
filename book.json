@@ -17,6 +17,10 @@
         },
         "theme-default": {
             "showLevel": true
-        }        
+        },
+        "editlink": {
+          "base": "https://github.com/webChatContact",
+          "label": "编辑本页面"
+        },     
     }
 }
