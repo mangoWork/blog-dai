@@ -23,6 +23,9 @@
           "base": "https://github.com/mangoWork/blog-dai",
           "label": "编辑本页面"
         }, 
+        "github": {
+            "url": "https://github.com/zhangjikai/gitbook-use"
+        },
         "pdf": {
             "pageNumbers": true,
             "fontSize": 13,
