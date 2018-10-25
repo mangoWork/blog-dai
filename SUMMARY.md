@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [书籍介绍](README.md)
 * [基础部分](./basic/README.md)
   * [常用词语解释](./basic/word_explain.md)
   * [计算机语言中的基本概念](./basic/computer_basic.md)
