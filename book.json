@@ -28,7 +28,7 @@
         },
         "pdf": {
             "pageNumbers": true,
-            "fontSize": 13,
+            "fontSize": 18,
             "margin": {
               "right": 10,
               "left": 10,
