@@ -60,9 +60,9 @@
 
 #### Spark如何读取文件？
 
-```java
-val file=sc.textFile（"hdfs：//xxx"）
-```
+    ```java
+    val file=sc.textFile（"hdfs：//xxx"）
+    ```
 
 
 -----------
