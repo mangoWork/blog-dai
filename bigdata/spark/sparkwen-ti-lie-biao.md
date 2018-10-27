@@ -152,6 +152,8 @@
     ```java
     val file=sc.textFile（"hdfs：//xxx"）
     ```
+#### 什么是广播变量？
+
 
 
 -----------
