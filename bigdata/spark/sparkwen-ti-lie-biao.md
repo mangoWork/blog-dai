@@ -55,6 +55,50 @@
 &nbsp;　Client提交应用，Master找到一个Worker启动Driver，Driver向Master或者资源管理器申请资源，之后将应用转化为RDD Graph，再由DAGScheduler将RDD Graph转化为Stage的有向无环图提交给TaskScheduler，由TaskScheduler提交任务给Executor执行。在任务执行的过程中，其他组件协同工作，确保整个应用顺利执行。
 
 
+#### 什么是RDD和RDD对象？
+
+&nbsp;　RDD就是弹性分布式数据集，它是逻辑集中的实体，在集群中的多台机器上进行了数据分区。
+
+&nbsp;　RDD对象实质上是一个元数据结构，存储着Block、Node等的映射关系，以及其他的元数据信息。一个RDD就是一组分区，在物理数据存储上，RDD的每个分区对应的就是一个Block，Block可以存储在内存，当内存不够时可以存储到磁盘上。
+
+&nbsp;　每个Block中存储着RDD所有数据项的一个子集，暴露给用户的可以是一个Block的迭代器（例如，用户可以通过mapPartitions获得分区迭代器进行操作），也可以就是一个数据项（例如，通过map函数对每个数据项并行计算）。
+
+#### RDD的两种创建方式？
+
+&nbsp;　从文件系统中读取文件创建
+
+&nbsp;　从父RDD中获取
+
+#### RDD的特征？
+
+&nbsp;　RDD有5个特征，其中分区、依赖和函数是RDD的基本特征，优先位置和分区策略是可选特征。
+
+&nbsp;　**分区：**计算一个分区列表，能够将数据进行切分，切分后的数据能够进行并行计算，是数据集的原子组成部分。
+
+&nbsp;　**依赖：**计算每个RDD对父RDD的依赖列表，源RDD没有依赖，通过依赖关系描述血统(lineage)。
+
+&nbsp;　**函数：**计算每个分区，得到一个可遍历的结果，用于说明在父RDD上执行何种计算。
+
+&nbsp;　**优先位置：**每一个分区对应的优先的计算位置(如：HDFS中对应的每个Block会优先计算)
+
+&nbsp;　**分区策略：**描述分区模式和数据存放的位置，键-值(key-value)的RDD根据Hash进行分区，类似于MapReduce的Partioner接口，根据key来决定分配的位置。
+
+#### Spark中的Transfomation和Action的区别？
+
+&nbsp;　Transfomation：是指该操作从已经存在的数据集上创建一个新的数据集，是数据集的逻辑操作，并没有计算。
+
+&nbsp;　Action：是指该方法提交一个与前一个Action之间的所有转换组成的Job进行计算，Spark会根据Action将作业且切分多个Job
+
+#### 算子的分类
+
+&nbsp;　1）Value数据类型的Transformation算子，这种变换并不触发提交作业，针对处理的数据项是Value型的数据。
+
+&nbsp;　2）Key-Value数据类型的Transfromation算子，这种变换并不触发提交作业，针对处理的数据项是Key-Value型的数据对。
+
+&nbsp;　3）Action算子，这类算子会触发SparkContext提交Job作业。
+
+
+#### 宽依赖和窄依赖的区别？
 
 ---------
 
