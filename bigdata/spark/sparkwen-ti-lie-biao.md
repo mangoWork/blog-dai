@@ -128,7 +128,7 @@
 
 &nbsp;　**2.输出文件和对象：**saveAsTextFile(函数将数据输出，存储到HDFS的指定目录)、saveAsObjectFile(将分区中的每10个元素组成一个Array，然后将这个Array序列化，映射为（Null，BytesWritable（Y））的元素，写入HDFS为SequenceFile的格式)
 
-&nbsp;　**3.Scala集合和数据类型：**collect(collect将分布式的RDD返回为一个单机的scala Array数组)、collectAsMap(collectAsMap对（K，V）型的RDD数据返回一个单机HashMap。对于重复K的RDD元素，后面的元素覆盖前面的元素)、reduceByKeyLocally(实现的是先reduce再collectAsMap的功能，先对RDD的整体进行reduce操作，然后再收集所有结果返回为一个HashMap)、lookup、count、top、reduce、fold、aggregate
+&nbsp;　**3.Scala集合和数据类型：**collect(collect将分布式的RDD返回为一个单机的scala Array数组)、collectAsMap(collectAsMap对（K，V）型的RDD数据返回一个单机HashMap。对于重复K的RDD元素，后面的元素覆盖前面的元素)、reduceByKeyLocally(实现的是先reduce再collectAsMap的功能，先对RDD的整体进行reduce操作，然后再收集所有结果返回为一个HashMap)、lookup(Lookup函数对（Key，Value）型的RDD操作，返回指定Key对应的元素形成的Seq)、count、top(返回最大的k个元素)、reduce、fold、aggregate
 
 
 
