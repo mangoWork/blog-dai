@@ -12,7 +12,25 @@
 
 3. 与HDFS等存储层兼容。Spark可以独立运行、可以运行在YARN上，可以读取HDFS中的数据。
 
+#### Spark各个组件的作用？
 
+1. ClusterManager：在Standalone模式中即为Master（主节点），控制整个集群，监控Worker。在YARN模式中为资源管理器。
+
+2. Worker：从节点，负责控制计算节点，启动Executor或Driver。在YARN模式中为NodeManager，负责计算节点的控制。
+
+3. Driver：运行Application的main（）函数并创建SparkContext。
+
+4. Executor：执行器，在worker node上执行任务的组件、用于启动线程池运行任务。每个Application拥有独立的一组Executors。
+
+5. SparkContext：整个应用的上下文，控制应用的生命周期。
+
+6. RDD：Spark的基本计算单元，一组RDD可形成执行的有向无环图RDD Graph。
+
+7. DAG Scheduler：根据作业（Job）构建基于Stage的DAG，并提交Stage给TaskScheduler。
+
+8. TaskScheduler：将任务（Task）分发给Executor执行。
+
+9. SparkEnv：线程级别的上下文，存储运行时的重要组件的引用。
 
 ---------
 
