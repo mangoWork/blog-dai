@@ -97,6 +97,43 @@
 
 &nbsp;　3）Action算子，这类算子会触发SparkContext提交Job作业。
 
+##### Value型Transformation算子
+
+&nbsp;　根据RDD变换算子的输入分区与输出分区的关系可以分为一下几类：
+
+&nbsp;　1. **输入分区与输出分区一对一型：**map(转变为一个新的元素)、flatMap(每个元素通过函数f转换为新的元素，并将生成的RDD的每个集合中的元素合并为一个集合)、mapPartitions(获取到每个分区的迭代器)、glom(将每个分区形成一个数组)
+
+&nbsp;　**2.输入分区与输出分区多对一型：**union(使用union函数时需要保证两个RDD元素的数据类型相同，返回的RDD数据类型和被合并的RDD元素数据类型相同，并不进行去重操作，保存所有元素)、cartesian(对两个RDD内的所有元素进行笛卡尔积操作)
+
+&nbsp;　**3.输入分区与输出分区多对多型：**groupBy(将元素通过函数生成相应的Key，数据就转化为Key-Value格式，之后将Key相同的元素分为一组)
+
+&nbsp;　**4.输出分区为输入分区子集型：**filter(对元素进行过滤，对每个元素应用f函数，返回值为true的元素在RDD中保留，返回为false的将过滤掉)、distinct(通过distinct函数，将数据去重)、subtract(集合的差操作，RDD 1去除RDD 1和RDD 2交集中的所有元素)、sample(将RDD这个集合内的元素进行采样，获取所有元素的子集。用户可以设定是否有放回的抽样、百分比、随机种子，进而决定采样方式)
+
+&nbsp;　**5.Cache型：**cache(cache将RDD元素从磁盘缓存到内存)、persist(对RDD进行缓存操作[可以缓存到内存、磁盘等])
+
+##### Key-Value型Transformation算子
+
+&nbsp;　**1.输入分区与输出分区一对一：**mapValues(针对（Key，Value）型数据中的Value进行Map操作，而不对Key进行处理)
+
+&nbsp;　**2.对单个RDD聚集：**combineByKey、reduceByKey、partitionBy
+
+&nbsp;　**3. 对两个RDD进行聚集：**cogroup(函数将两个RDD进行协同划分)
+&nbsp;　**4.连接：**join(join对两个需要连接的RDD进行cogroup函数操作)、leftOutJoin和rightOutJoin
+
+##### Actions算子
+
+&nbsp;　本质上在Actions算子中通过SparkContext执行提交作业的runJob操作，触发了RDD DAG的执行。
+
+&nbsp;　**1.无输出：**foreach
+
+&nbsp;　**2.输出文件和对象：**saveAsTextFile(函数将数据输出，存储到HDFS的指定目录)、saveAsObjectFile(将分区中的每10个元素组成一个Array，然后将这个Array序列化，映射为（Null，BytesWritable（Y））的元素，写入HDFS为SequenceFile的格式)
+
+&nbsp;　**3.Scala集合和数据类型：**collect(collect将分布式的RDD返回为一个单机的scala Array数组)、collectAsMap(collectAsMap对（K，V）型的RDD数据返回一个单机HashMap。对于重复K的RDD元素，后面的元素覆盖前面的元素)、reduceByKeyLocally(实现的是先reduce再collectAsMap的功能，先对RDD的整体进行reduce操作，然后再收集所有结果返回为一个HashMap)、lookup、count、top、reduce、fold、aggregate
+
+
+
+
+
 
 #### 宽依赖和窄依赖的区别？
 
