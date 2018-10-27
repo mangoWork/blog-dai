@@ -173,7 +173,10 @@
 &nbsp;　RDD的Action算子触发Job的提交，提交到Spark中的Job生成RDD DAG，由DAGScheduler转化为Stage DAG，每个Stage中产生相应的Task集合TaskScheduler将任务分发到Executor执行。每个任务对应相应的一个数据块，使用用户定义的函数处理数据块。
 
 
---------------
+#### Driver运行在worker的执行过程
+
+#### Driver运行在客户端的过程
+
 
 #### Spark应用执行机制
 
