@@ -12,6 +12,8 @@
 
 3. 与HDFS等存储层兼容。Spark可以独立运行、可以运行在YARN上，可以读取HDFS中的数据。
 
+
+
 #### Spark各个组件的作用？
 
 1. ClusterManager：在Standalone模式中即为Master（主节点），控制整个集群，监控Worker。在YARN模式中为资源管理器。
@@ -31,6 +33,20 @@
 8. TaskScheduler：将任务（Task）分发给Executor执行。
 
 9. SparkEnv：线程级别的上下文，存储运行时的重要组件的引用。
+
+#### worker、executor、stage、task、partition之间的关系？
+
+&nbsp;　一个物理节点可以拥有一个或者多个worker。
+
+&nbsp;　一个worker可以拥有一个或者多个executor；一个executor拥有多个cpu core和memory。
+
+&nbsp;　每个executor由若干个core，每个core只能执行一个task。
+
+&nbsp;　只有shuffle操作时才算作一个stage。
+
+&nbsp;　一个partition对应一个task。
+
+&nbsp;　**注意：**这里的core不是机器的物理cpu核数，可以理解为Executor的一个工作线程。
 
 ---------
 
