@@ -154,6 +154,15 @@
     ```
 #### 什么是广播变量？
 
+&nbsp;　broadcast就是将数据从一个节点发送到其他各个节点上去
+
+##### 为什么只能 broadcast只读的变量？
+
+&nbsp;　如果变量可以被更新，那么一旦变量被某个节点更新，其他节点要不要一块更新？如果多个节点同时在更新，更新顺序是什么？怎么做同步？还会涉及 fault-tolerance 的问题。为了避免维护数据一致性问题，Spark 目前只支持 broadcast 只读变量。
+
+##### broadcast到节点而不是 broadcast 到每个 task？
+
+&nbsp;　因为每个 task 是一个线程，而且同在一个进程运行 tasks 都属于同一个 application。因此每个节点（executor）上放一份就可以被所有 task 共享。
 
 
 -----------
