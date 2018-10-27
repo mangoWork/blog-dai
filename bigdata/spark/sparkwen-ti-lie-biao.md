@@ -48,6 +48,12 @@
 
 &nbsp;　**注意：**这里的core不是机器的物理cpu核数，可以理解为Executor的一个工作线程。
 
+#### Spark的整体流程？
+
+&nbsp;　Client提交应用，Master找到一个Worker启动Driver，Driver向Master或者资源管理器申请资源，之后将应用转化为RDD Graph，再由DAGScheduler将RDD Graph转化为Stage的有向无环图提交给TaskScheduler，由TaskScheduler提交任务给Executor执行。在任务执行的过程中，其他组件协同工作，确保整个应用顺利执行。
+
+
+
 ---------
 
 ### Spark工作机制详情问题
