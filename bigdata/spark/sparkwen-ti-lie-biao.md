@@ -164,7 +164,6 @@
 
 &nbsp;　因为每个 task 是一个线程，而且同在一个进程运行 tasks 都属于同一个 application。因此每个节点（executor）上放一份就可以被所有 task 共享。
 
-
 -----------
 
 ### Spark工作机制详情问题
