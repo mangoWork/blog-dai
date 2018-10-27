@@ -34,6 +34,8 @@
 
 9. SparkEnv：线程级别的上下文，存储运行时的重要组件的引用。
 
+10. Block-Manager: 负责存储管理、创建和查找块。
+
 #### worker、executor、stage、task、partition之间的关系？
 
 &nbsp;　一个物理节点可以拥有一个或者多个worker。
