@@ -58,6 +58,11 @@
 
 ### Spark计算模型问题
 
+#### Spark如何读取文件？
+
+```java
+val file=sc.textFile（"hdfs：//xxx"）
+```
 
 
 -----------
