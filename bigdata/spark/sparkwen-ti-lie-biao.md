@@ -173,6 +173,10 @@
 &nbsp;　RDD的Action算子触发Job的提交，提交到Spark中的Job生成RDD DAG，由DAGScheduler转化为Stage DAG，每个Stage中产生相应的Task集合TaskScheduler将任务分发到Executor执行。每个任务对应相应的一个数据块，使用用户定义的函数处理数据块。
 
 
+#### Spark的执行模式有哪些？
+
+&nbsp;　执行模式有Local、Standalone、YARN、Mesos。根据Spark Application的Driver Program是否在集群中运行，Spark应用的运行方式又可以分为Cluster模式和Client模式。
+
 #### Driver运行在worker的执行过程
 
 #### Driver运行在客户端的过程
