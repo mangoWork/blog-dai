@@ -377,53 +377,53 @@ public class Test{
 
 #### 64位的JVM当中,int的长度是多少?
 
-Java 中，int 类型变量的长度是一个固定值，与平台无关，都是 32 位。意思就是说，在 32 位 和 64 位 的Java 虚拟机中，int 类型的长度是相同的。
+&nbsp; Java 中，int 类型变量的长度是一个固定值，与平台无关，都是 32 位。意思就是说，在 32 位 和 64 位 的Java 虚拟机中，int 类型的长度是相同的。
 
 #### int和Integer的区别
 
-Integer是int的包装类型,在拆箱和装箱中,二者自动转换.int是基本类型，直接存数值，而integer是对象，用一个引用指向这个对象.
+&nbsp; Integer是int的包装类型,在拆箱和装箱中,二者自动转换.int是基本类型，直接存数值，而integer是对象，用一个引用指向这个对象.
 
 #### int 和Integer谁占用的内存更多?
 
-Integer 对象会占用更多的内存。Integer是一个对象，需要存储对象的元数据。但是 int 是一个原始类型的数据，所以占用的空间更少。
+&nbsp; Integer 对象会占用更多的内存。Integer是一个对象，需要存储对象的元数据。但是 int 是一个原始类型的数据，所以占用的空间更少。
 
 #### 装箱和拆箱的实现过程
 
-装箱的过程是通过调用包装器的valueOf实现的，而拆箱的过程是通过调用包装器的xxxValue方法实现的（xxx代表的是对应的基本数据类型）
+&nbsp; 装箱的过程是通过调用包装器的valueOf实现的，而拆箱的过程是通过调用包装器的xxxValue方法实现的（xxx代表的是对应的基本数据类型）
 
 #### String,StringBuffer和StringBuilder区别
 
-String是字符串常量,final修饰;StringBuffer字符串变量\(线程安全\);  
+&nbsp; String是字符串常量,final修饰;StringBuffer字符串变量\(线程安全\);  
 StringBuilder 字符串变量\(线程不安全\).
 
 #### String和StringBuffer
 
-String和StringBuffer主要区别是性能:String是不可变对象,每次对String类型进行操作都等同于产生了一个新的String对象,然后指向新的String对象.所以尽量不在对String进行大量的拼接操作,否则会产生很多临时对象,导致GC开始工作,影响系统性能.
+&nbsp; String和StringBuffer主要区别是性能:String是不可变对象,每次对String类型进行操作都等同于产生了一个新的String对象,然后指向新的String对象.所以尽量不在对String进行大量的拼接操作,否则会产生很多临时对象,导致GC开始工作,影响系统性能.
 
-StringBuffer是对对象本身操作,而不是产生新的对象,因此在有大量拼接的情况下,我们建议使用StringBuffer.
+&nbsp; StringBuffer是对对象本身操作,而不是产生新的对象,因此在有大量拼接的情况下,我们建议使用StringBuffer.
 
 但是需要注意现在JVM会对String拼接做一定的优化:  
  　`String s=“This is only ”+”simple”+”test”`会被虚拟机直接优化成`String s=“This is only simple test”`,此时就不存在拼接过程.
 
 #### StringBuffer和StringBuilder
 
-StringBuffer是线程安全的可变字符串,其内部实现是可变数组.StringBuilder是jdk 1.5新增的,其功能和StringBuffer类似,但是非线程安全.因此,在没有多线程问题的前提下,使用StringBuilder会取得更好的性能.
+&nbsp; StringBuffer是线程安全的可变字符串,其内部实现是可变数组.StringBuilder是jdk 1.5新增的,其功能和StringBuffer类似,但是非线程安全.因此,在没有多线程问题的前提下,使用StringBuilder会取得更好的性能.
 
 #### 什么是编译器常量?使用它有什么风险?
 
-公共静态不可变（public static final ）变量也就是我们所说的编译期常量，这里的 public 可选的。实际上这些变量在编译时会被替换掉，因为编译器知道这些变量的值，并且知道这些变量在运行时不能改变。这种方式存在的一个问题是你使用了一个内部的或第三方库中的公有编译时常量，但是这个值后面被其他人改变了，但是你的客户端仍然在使用老的值，甚至你已经部署了一个新的jar。为了避免这种情况，当你在更新依赖 JAR 文件时，确保重新编译你的程序。
+&nbsp; 公共静态不可变（public static final ）变量也就是我们所说的编译期常量，这里的 public 可选的。实际上这些变量在编译时会被替换掉，因为编译器知道这些变量的值，并且知道这些变量在运行时不能改变。这种方式存在的一个问题是你使用了一个内部的或第三方库中的公有编译时常量，但是这个值后面被其他人改变了，但是你的客户端仍然在使用老的值，甚至你已经部署了一个新的jar。为了避免这种情况，当你在更新依赖 JAR 文件时，确保重新编译你的程序。
 
 #### java当中使用什么类型表示价格比较好?
 
-如果不是特别关心内存和性能的话，使用BigDecimal，否则使用预定义精度的 double 类型。
+&nbsp; 如果不是特别关心内存和性能的话，使用BigDecimal，否则使用预定义精度的 double 类型。
 
 #### 如何将byte转为String
 
-可以使用 String 接收 byte\[\] 参数的构造器来进行转换，需要注意的点是要使用的正确的编码，否则会使用平台默认编码，这个编码可能跟原来的编码相同，也可能不同。
+&nbsp; 可以使用 String 接收 byte\[\] 参数的构造器来进行转换，需要注意的点是要使用的正确的编码，否则会使用平台默认编码，这个编码可能跟原来的编码相同，也可能不同。
 
 #### 可以将int强转为byte类型么?会产生什么问题?
 
-我们可以做强制转换，但是Java中int是32位的而byte是8 位的，所以,如果强制转化int类型的高24位将会被丢弃，byte 类型的范围是从-128到128
+&nbsp; 我们可以做强制转换，但是Java中int是32位的而byte是8 位的，所以,如果强制转化int类型的高24位将会被丢弃，byte 类型的范围是从-128到128
 
 ---
 
@@ -431,26 +431,26 @@ StringBuffer是线程安全的可变字符串,其内部实现是可变数组.Str
 
 #### Java中的集合及其继承关系
 
-关于集合的体系是每个人都应该烂熟于心的,尤其是对我们经常使用的List,Map的原理更该如此.这里我们看这张图即可:  
+&nbsp; 关于集合的体系是每个人都应该烂熟于心的,尤其是对我们经常使用的List,Map的原理更该如此.这里我们看这张图即可:  
 ![这里写图片描述](../img/java/collections.png)
 
 更多内容可见[集合类总结](http://write.blog.csdn.net/postedit/40826423)
 
 #### poll\(\)方法和remove\(\)方法区别?
 
-poll\(\) 和 remove\(\) 都是从队列中取出一个元素，但是 poll\(\) 在获取元素失败的时候会返回空，但是 remove\(\) 失败的时候会抛出异常。
+&nbsp; poll\(\) 和 remove\(\) 都是从队列中取出一个元素，但是 poll\(\) 在获取元素失败的时候会返回空，但是 remove\(\) 失败的时候会抛出异常。
 
 #### LinkedHashMap和PriorityQueue的区别
 
-PriorityQueue 是一个优先级队列,保证最高或者最低优先级的的元素总是在队列头部，但是 LinkedHashMap 维持的顺序是元素插入的顺序。当遍历一个 PriorityQueue 时，没有任何顺序保证，但是 LinkedHashMap 课保证遍历顺序是元素插入的顺序。
+&nbsp; PriorityQueue 是一个优先级队列,保证最高或者最低优先级的的元素总是在队列头部，但是 LinkedHashMap 维持的顺序是元素插入的顺序。当遍历一个 PriorityQueue 时，没有任何顺序保证，但是 LinkedHashMap 课保证遍历顺序是元素插入的顺序。
 
 #### WeakHashMap与HashMap的区别是什么?
 
-WeakHashMap 的工作与正常的 HashMap 类似，但是使用弱引用作为 key，意思就是当 key 对象没有任何引用时，key/value 将会被回收。
+&nbsp; WeakHashMap 的工作与正常的 HashMap 类似，但是使用弱引用作为 key，意思就是当 key 对象没有任何引用时，key/value 将会被回收。
 
 #### ArrayList和LinkedList的区别?
 
-最明显的区别是 ArrrayList底层的数据结构是数组，支持随机访问，而 LinkedList 的底层数据结构是双向循环链表，不支持随机访问。使用下标访问一个元素，ArrayList 的时间复杂度是 O\(1\)，而 LinkedList 是 O\(n\)。
+&nbsp; 最明显的区别是 ArrrayList底层的数据结构是数组，支持随机访问，而 LinkedList 的底层数据结构是双向循环链表，不支持随机访问。使用下标访问一个元素，ArrayList 的时间复杂度是 O\(1\)，而 LinkedList 是 O\(n\)。
 
 #### ArrayList和Array有什么区别?
 
@@ -459,7 +459,7 @@ WeakHashMap 的工作与正常的 HashMap 类似，但是使用弱引用作为 k
 
 #### ArrayList和HashMap默认大小?
 
-在 Java 7 中，ArrayList 的默认大小是 10 个元素，HashMap 的默认大小是16个元素（必须是2的幂）。这就是 Java 7 中 ArrayList 和 HashMap 类的代码片段
+&nbsp; 在 Java 7 中，ArrayList 的默认大小是 10 个元素，HashMap 的默认大小是16个元素（必须是2的幂）。这就是 Java 7 中 ArrayList 和 HashMap 类的代码片段
 
 ```java
 private static final int DEFAULT_CAPACITY = 10;
@@ -470,53 +470,53 @@ private static final int DEFAULT_CAPACITY = 10;
 
 #### Comparator和Comparable的区别?
 
-Comparable 接口用于定义对象的自然顺序，而 comparator 通常用于定义用户定制的顺序。Comparable 总是只有一个，但是可以有多个 comparator 来定义对象的顺序。
+&nbsp; Comparable 接口用于定义对象的自然顺序，而 comparator 通常用于定义用户定制的顺序。Comparable 总是只有一个，但是可以有多个 comparator 来定义对象的顺序。
 
 #### 如何实现集合排序?
 
-你可以使用有序集合，如 TreeSet 或 TreeMap，你也可以使用有顺序的的集合，如 list，然后通过 Collections.sort\(\) 来排序。
+&nbsp; 你可以使用有序集合，如 TreeSet 或 TreeMap，你也可以使用有顺序的的集合，如 list，然后通过 Collections.sort\(\) 来排序。
 
 #### 如何打印数组内容
 
-你可以使用 Arrays.toString\(\) 和 Arrays.deepToString\(\) 方法来打印数组。由于数组没有实现 toString\(\) 方法，所以如果将数组传递给 System.out.println\(\) 方法，将无法打印出数组的内容，但是 Arrays.toString\(\) 可以打印每个元素。
+&nbsp; 你可以使用 Arrays.toString\(\) 和 Arrays.deepToString\(\) 方法来打印数组。由于数组没有实现 toString\(\) 方法，所以如果将数组传递给 System.out.println\(\) 方法，将无法打印出数组的内容，但是 Arrays.toString\(\) 可以打印每个元素。
 
 #### LinkedList的是单向链表还是双向?
 
-双向循环列表,具体实现自行查阅源码.
+&nbsp; 双向循环列表,具体实现自行查阅源码.
 
 ## TreeMap是实现原理
 
-采用红黑树实现,具体实现自行查阅源码.
+&nbsp; 采用红黑树实现,具体实现自行查阅源码.
 
 #### 遍历ArrayList时如何正确移除一个元素
 
-该问题的关键在于面试者使用的是 ArrayList 的 remove\(\) 还是 Iterator 的 remove\(\)方法。这有一段示例代码，是使用正确的方式来实现在遍历的过程中移除元素，而不会出现 ConcurrentModificationException 异常的示例代码。
+&nbsp; 该问题的关键在于面试者使用的是 ArrayList 的 remove\(\) 还是 Iterator 的 remove\(\)方法。这有一段示例代码，是使用正确的方式来实现在遍历的过程中移除元素，而不会出现 ConcurrentModificationException 异常的示例代码。
 
 #### 什么是ArrayMap?它和HashMap有什么区别?
 
-ArrayMap是Android SDK中提供的,非Android开发者可以略过.  
+&nbsp; ArrayMap是Android SDK中提供的,非Android开发者可以略过.  
 ArrayMap是用两个数组来模拟map,更少的内存占用空间,更高的效率.  
 具体参考这篇文章:[ArrayMap VS HashMap](http://lvable.com/?p=217])
 
 #### HashMap的实现原理
 
-HashMap概述：  HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。
+&nbsp; HashMap概述：  HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。
 
-HashMap的数据结构： 在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。
+&nbsp; HashMap的数据结构： 在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。
 
-当我们往Hashmap中put元素时,首先根据key的hashcode重新计算hash值,根绝hash值得到这个元素在数组中的位置\(下标\),如果该数组在该位置上已经存放了其他元素,那么在这个位置上的元素将以链表的形式存放,新加入的放在链头,最先加入的放入链尾.如果数组中该位置没有元素,就直接将该元素放到数组的该位置上.
+&nbsp; 当我们往Hashmap中put元素时,首先根据key的hashcode重新计算hash值,根绝hash值得到这个元素在数组中的位置\(下标\),如果该数组在该位置上已经存放了其他元素,那么在这个位置上的元素将以链表的形式存放,新加入的放在链头,最先加入的放入链尾.如果数组中该位置没有元素,就直接将该元素放到数组的该位置上.
 
-需要注意Jdk 1.8中对HashMap的实现做了优化,当链表中的节点数据超过八个之后,该链表会转为红黑树来提高查询效率,从原来的O\(n\)到O\(logn\)
+&nbsp; 需要注意Jdk 1.8中对HashMap的实现做了优化,当链表中的节点数据超过八个之后,该链表会转为红黑树来提高查询效率,从原来的O\(n\)到O\(logn\)
 
 #### 你了解Fail-Fast机制吗
 
-Fail-Fast即我们常说的快速失败,更多内容参看[fail-fast机制](http://blog.csdn.net/chenssy/article/details/38151189)
+&nbsp; Fail-Fast即我们常说的快速失败,更多内容参看[fail-fast机制](http://blog.csdn.net/chenssy/article/details/38151189)
 
-产生Fail-Fast的原因在于程序对collection进行迭代的时候，某个线程对collection在结构上对其做了修改，这时，迭代器就会抛出ConcurrentModificationException异常，从而产生fail-fast。
+&nbsp; 产生Fail-Fast的原因在于程序对collection进行迭代的时候，某个线程对collection在结构上对其做了修改，这时，迭代器就会抛出ConcurrentModificationException异常，从而产生fail-fast。
 
 #### Fail-fast和Fail-safe有什么区别
 
-Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受到集合中任何改动的影响。Java.util包中的所有集合类都被设计为fail-&gt;fast的，而java.util.concurrent中的集合类都为fail-safe的。当检测到正在遍历的集合的结构被改变时，Fail-fast迭代器抛出ConcurrentModificationException，而fail-safe迭代器从不抛出ConcurrentModificationException。
+&nbsp; Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受到集合中任何改动的影响。Java.util包中的所有集合类都被设计为fail-&gt;fast的，而java.util.concurrent中的集合类都为fail-safe的。当检测到正在遍历的集合的结构被改变时，Fail-fast迭代器抛出ConcurrentModificationException，而fail-safe迭代器从不抛出ConcurrentModificationException。
 
 ---
 
@@ -524,11 +524,11 @@ Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受
 
 #### SimpleDateFormat是线程安全的吗?
 
-非常不幸，DateFormat 的所有实现，包括 SimpleDateFormat 都不是线程安全的，因此你不应该在多线程序中使用，除非是在对外线程安全的环境中使用，如 将 SimpleDateFormat 限制在 ThreadLocal 中。如果你不这么做，在解析或者格式化日期的时候，可能会获取到一个不正确的结果。因此，从日期、时间处理的所有实践来说，我强力推荐 joda-time 库。
+&nbsp; 非常不幸，DateFormat 的所有实现，包括 SimpleDateFormat 都不是线程安全的，因此你不应该在多线程序中使用，除非是在对外线程安全的环境中使用，如 将 SimpleDateFormat 限制在 ThreadLocal 中。如果你不这么做，在解析或者格式化日期的时候，可能会获取到一个不正确的结果。因此，从日期、时间处理的所有实践来说，我强力推荐 joda-time 库。
 
 #### 如何格式化日期?
 
-Java 中，可以使用 SimpleDateFormat 类或者 joda-time 库来格式日期。DateFormat 类允许你使用多种流行的格式来格式化日期。参见答案中的示例代码，代码中演示了将日期格式化成不同的格式，如 dd-MM-yyyy 或 ddMMyyyy。
+&nbsp; Java 中，可以使用 SimpleDateFormat 类或者 joda-time 库来格式日期。DateFormat 类允许你使用多种流行的格式来格式化日期。参见答案中的示例代码，代码中演示了将日期格式化成不同的格式，如 dd-MM-yyyy 或 ddMMyyyy。
 
 ---
 
@@ -536,31 +536,31 @@ Java 中，可以使用 SimpleDateFormat 类或者 joda-time 库来格式日期�
 
 #### 简单描述java异常体系
 
-Java语言将异常划分为两类：Error和Exception，如图所示：
+&nbsp; Java语言将异常划分为两类：Error和Exception，如图所示：
 
 ![](../img/java/throw.png)
 
-Throwable：有两个重要的子类：Exception（异常）和Error（错误），两者都包含了大量的异常处理类。
+&nbsp; Throwable：有两个重要的子类：Exception（异常）和Error（错误），两者都包含了大量的异常处理类。
 
-Error（错误）：是程序中无法处理的错误，表示运行应用程序中出现了严重的错误。此类错误一般表示代码运行时JVM出现问题。通常有Virtual MachineError（虚拟机运行错误）、NoClassDefFoundError（类定义错误）等。比如说当jvm耗完可用内存时，将出现OutOfMemoryError。此类错误发生时，JVM将终止线程。  
+&nbsp; Error（错误）：是程序中无法处理的错误，表示运行应用程序中出现了严重的错误。此类错误一般表示代码运行时JVM出现问题。通常有Virtual MachineError（虚拟机运行错误）、NoClassDefFoundError（类定义错误）等。比如说当jvm耗完可用内存时，将出现OutOfMemoryError。此类错误发生时，JVM将终止线程。  
  　Exception（异常）：程序本身可以捕获并且可以处理的异常。
 
-运行时异常\(不受检异常\)：RuntimeException类极其子类表示JVM在运行期间可能出现的错误。比如说试图使用空值对象的引用（NullPointerException）、数组下标越界（ArrayIndexOutBoundException）。此类异常属于不可查异常，一般是由程序逻辑错误引起的，在程序中可以选择捕获处理，也可以不处理。
+&nbsp; 运行时异常\(不受检异常\)：RuntimeException类极其子类表示JVM在运行期间可能出现的错误。比如说试图使用空值对象的引用（NullPointerException）、数组下标越界（ArrayIndexOutBoundException）。此类异常属于不可查异常，一般是由程序逻辑错误引起的，在程序中可以选择捕获处理，也可以不处理。
 
-编译异常\(受检异常\)：Exception中除RuntimeException极其子类之外的异常。如果程序中出现此类异常，比如说IOException，必须对该异常进行处理，否则编译不通过。在程序中，通常不会自定义该类异常，而是直接使用系统提供的异常类。
+&nbsp; 编译异常\(受检异常\)：Exception中除RuntimeException极其子类之外的异常。如果程序中出现此类异常，比如说IOException，必须对该异常进行处理，否则编译不通过。在程序中，通常不会自定义该类异常，而是直接使用系统提供的异常类。
 
 #### throw和throws的区别
 
-throw用于主动抛出java.lang.Throwable 类的一个实例化对象，意思是说你可以通过关键字 throw 抛出一个 Error 或者 一个Exception，如：`throw new IllegalArgumentException(“size must be multiple of 2″)`,  
+&nbsp; throw用于主动抛出java.lang.Throwable 类的一个实例化对象，意思是说你可以通过关键字 throw 抛出一个 Error 或者 一个Exception，如：`throw new IllegalArgumentException(“size must be multiple of 2″)`,  
 而throws 的作用是作为方法声明和签名的一部分，方法被抛出相应的异常以便调用者能处理。Java 中，任何未处理的受检查异常强制在 throws 子句中声明。
 
 #### 异常的继承
 
-如果超类方法没有声明一个异常，子类覆盖方法不能声明checked exception\(受检查异常\)。
+&nbsp; 如果超类方法没有声明一个异常，子类覆盖方法不能声明checked exception\(受检查异常\)。
 
-如果超类方法没有声明异常，子类覆盖方法不能声明checked exception，但可以声明unchecked exception（不受检查异常）
+&nbsp; 如果超类方法没有声明异常，子类覆盖方法不能声明checked exception，但可以声明unchecked exception（不受检查异常）
 
-如果超类方法声明一个异常，子类重写方法可以声明相同的异常，子类异常或不声明异常，但不能声明其他异常
+&nbsp; 如果超类方法声明一个异常，子类重写方法可以声明相同的异常，子类异常或不声明异常，但不能声明其他异常
 
 ---
 
@@ -568,5 +568,5 @@ throw用于主动抛出java.lang.Throwable 类的一个实例化对象，意思�
 
 #### Java 中，Serializable 与 Externalizable 的区别
 
-Serializable 接口是一个序列化 Java 类的接口，以便于它们可以在网络上传输或者可以将它们的状态保存在磁盘上，是 JVM 内嵌的默认序列化方式，成本高、脆弱而且不安全。Externalizable 允许你控制整个序列化过程，指定特定的二进制格式，增加安全机制。
+&nbsp; Serializable 接口是一个序列化 Java 类的接口，以便于它们可以在网络上传输或者可以将它们的状态保存在磁盘上，是 JVM 内嵌的默认序列化方式，成本高、脆弱而且不安全。Externalizable 允许你控制整个序列化过程，指定特定的二进制格式，增加安全机制。
 
