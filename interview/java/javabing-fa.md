@@ -2,9 +2,9 @@
 
 ##### 1. Java线程的几种状态
 
-&nbsp;　　JDK从1.5开始在Thread类中增添了State枚举 **NEW(新建)**、**RUNNABLE(当线程正在运行或者已经就绪正等待CPU时间片)**、**BLOCKED(阻塞)**、**WAITING(无期限等待)**、**TIMED_WAITING(限期等待)**、**TERMINATED(死亡)**六种.
+　　JDK从1.5开始在Thread类中增添了State枚举 **NEW(新建)**、**RUNNABLE(当线程正在运行或者已经就绪正等待CPU时间片)**、**BLOCKED(阻塞)**、**WAITING(无期限等待)**、**TIMED_WAITING(限期等待)**、**TERMINATED(死亡)**六种.
 
-&nbsp;　　 **阻塞**线程在等待获取对象同步锁时
+&nbsp;　　**阻塞**线程在等待获取对象同步锁时
 
 &nbsp;　　 **Waiting**：调用不带超时的wait()或者不带超时的join()
 
@@ -29,9 +29,9 @@
 &nbsp;　　- **互斥/阻塞同步：（悲观锁）**
 &nbsp;　　　**synchronized**：编译后在同步代码段的前后加上monitorenter、monitorexit两个指令；对同一线程来说是可重入的。因为java线程是映射到操作系统的原生线程之上的，阻塞或唤醒一个线程都需要从用户态切换到核心态，状态转换的时间可能比执行同步代码的时间还要长，所以synchronized是一个重量级的操作。
 
-&nbsp;　　　ReentrantLock(**重入锁**)**：**也是一个重量级的操作，在语义上与synchronized相同，但是可以进行更精细的控制：等待可中断（可以尝试获取锁）、公平锁（当多个线程都等待同一个锁时必须按照时间顺序获得锁）、锁绑定多个条件（可以同时绑定多个Condition对象）
-    
-&nbsp;　　-  非阻塞同步（乐观锁）：
+&nbsp;　　ReentrantLock(**重入锁**)**：**也是一个重量级的操作，在语义上与synchronized相同，但是可以进行更精细的控制：等待可中断（可以尝试获取锁）、公平锁（当多个线程都等待同一个锁时必须按照时间顺序获得锁）、锁绑定多个条件（可以同时绑定多个Condition对象）
+​  
+　　-  非阻塞同步（乐观锁）：
 &nbsp;　　　先进性操作，如果没有其他线程争用共享数据就操作成功了，如果有就尝产生了冲突，然后在采取其他措施补偿（最常见的就是不断尝试，直到成功）**CAS指令** **例如**:AtomicInteger.incrementAndGet()方法的原子性
 
 &nbsp;　　-  无同步方案
@@ -152,22 +152,22 @@ public void set(T value) {
 
 &nbsp;　　　- **Executors:**是Executor、Callable的工厂
 
-    ```java
+    ​```java
     ExecutorService exec = Executors.newCachedThreadPool();//创建一个可根据需要创建新线程的线程池（最大为Integer.MAXVALUE）闲置 60 秒的线程将终止并从缓存中删除。【等待队列】，因为池是无限的，所以使用了SynchronousQueue，任务直接提交给工作线程提高了效率。
     exec = Executors.newFixedThreadPool(5); //创一个可重用固定大小线程集合的线程池，每当提交一个任务就创建一个线程，直到最大长度。如果某线程因非预期的异常结束线程池将补充一个。【等待队列】默认使用一个无限的LinkedBlockingQueue，队列可能无限增加。
     exec = Executors.newSingleThreadPool(); //创建Executor，使其运行单一线程【等待队列】默认使用一个无限的LinkedBlockingQueue，队列可能无限增加。
     exec.execute(new LiftOff());        //LitOff十一个Runnable类
-    ```
+    ​```
 
 &nbsp;　　**【使用场景】：**只有当任务彼此独立的时候才能使用有限池，否则可能引发饥饿死锁。
 
 &nbsp;　　**创建周期任务**
 
-    ```java
+    ​```java
     ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
     service.scheduleAtFixedRate(new ScheduledExecutorTest("job1"), initialDelay1,period1, TimeUnit.SECONDS); //也就是第一个线程将在initialDelay1后开始执行，然后第二个在initialDelay1+period1后执行，接着第三个在initialDelay + 2 * period 后执行，依此类推。（是不管上一个线程有没有执行完的）
     service.scheduleWithFixedDelay(new ScheduledExecutorTest("job2"), initialDelay2,delay2, TimeUnit.SECONDS); // 从现在开始initialDelay2秒钟之后第一个线程开始，每个线程结束之后间隔delay2秒钟执行一次job2，每次执行时间为上一次任务结束后向后推一个时间间隔
-    ```
+    ​```
 
 &nbsp;　　**关闭Executor**
 
@@ -209,7 +209,7 @@ public void set(T value) {
 
 &nbsp;　　当Executors提供的几种线程池不能满足我们的需求时，可以通过ThreadPollExecutor的构造方法来定制线程池。
 
-    ```java
+    ​```java
     public ThreadPoolExecutor(int corePoolSize, //核心池大小
          int maximumPoolSize, //最大池大小
          long keepAliveTime, //存活时间
@@ -217,7 +217,7 @@ public void set(T value) {
          BlockingQueue<Runnable> workQueue, //任务队列
          ThreadFactory threadFactory, //线程工厂
          RejectedExecutionHandler handler) //饱和策略
-    ```
+    ​```
 
 &nbsp;　　**饱和策略**：当一个队列充满后或者任务提交到了一个已经被关闭的Executor时，将会用到饱和策略。可以通过`RejectedExecutionHandler`或者调用`setRejectedExecutionHandler()`方法来修改
 
@@ -225,7 +225,7 @@ public void set(T value) {
 
 &nbsp;　　　-ThreadFactory是一个工厂接口，只有一个方法newThread(Runnable r), 通过编写定制的ThreadFactory可以定制由Executor创建的线程的属性（后台、优先级、名称）.
 
-    ```java
+    ​```java
     public class DaemonThreadFactory implements ThreadFactory{
           @Override
           public Thread newThread(Runnable r) {
@@ -235,7 +235,7 @@ public void set(T value) {
           }
     }
     exec = Executors.newCachedThreadPool(new DaemonThreadFactory());
-    ```
+    ​```
 
 ##### 12  **java.util.concurrent.Lock**
 
